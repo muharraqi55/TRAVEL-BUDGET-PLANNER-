@@ -44,27 +44,16 @@
     position:relative;
   }
 
-  /* ============================================================
-     شارة حقوق الملكية - الزاوية العلوية
-  ============================================================ */
+  /* شارة حقوق الملكية */
   .copyright-badge{
-    position:fixed;
-    top:14px;
-    inset-inline-start:14px;
-    z-index:900;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
+    position:fixed;top:14px;inset-inline-start:14px;z-index:900;
+    display:inline-flex;align-items:center;gap:8px;
     padding:8px 14px 8px 12px;
     background:linear-gradient(135deg,rgba(15,23,42,.85),rgba(30,58,95,.85));
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:999px;
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.15);border-radius:999px;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.05) inset;
-    text-decoration:none;
-    transition:.25s;
-    cursor:default;
+    transition:.25s;cursor:default;
   }
   .copyright-badge:hover{
     transform:translateY(-1px);
@@ -72,172 +61,89 @@
     border-color:rgba(14,165,233,.4);
   }
   .copyright-badge .cb-icon{
-    width:22px;height:22px;
-    border-radius:50%;
+    width:22px;height:22px;border-radius:50%;
     background:linear-gradient(135deg,#0ea5e9,#14b8a6);
     display:flex;align-items:center;justify-content:center;
     color:#fff;font-size:11px;font-weight:900;
     box-shadow:0 0 12px rgba(14,165,233,.5);
   }
-  .copyright-badge .cb-text{
-    display:flex;flex-direction:column;line-height:1.1;
-  }
-  .copyright-badge .cb-text small{
-    font-size:9px;color:#94a3b8;
-    letter-spacing:1px;font-weight:700;text-transform:uppercase;
-  }
+  .copyright-badge .cb-text{display:flex;flex-direction:column;line-height:1.1}
+  .copyright-badge .cb-text small{font-size:9px;color:#94a3b8;letter-spacing:1px;font-weight:700;text-transform:uppercase}
   .copyright-badge .cb-text strong{
     font-size:13px;
     background:linear-gradient(135deg,#7dd3fc,#5eead4 50%,#a78bfa);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:transparent;
-    font-weight:900;
-    letter-spacing:.5px;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    font-weight:900;letter-spacing:.5px;
   }
-  body.dark .copyright-badge{
-    background:linear-gradient(135deg,rgba(5,8,16,.9),rgba(15,23,42,.9));
-  }
+  body.dark .copyright-badge{background:linear-gradient(135deg,rgba(5,8,16,.9),rgba(15,23,42,.9))}
   @media(max-width:640px){
-    .copyright-badge{
-      top:10px; inset-inline-start:10px;
-      padding:6px 10px 6px 9px;
-    }
+    .copyright-badge{top:10px;inset-inline-start:10px;padding:6px 10px 6px 9px}
     .copyright-badge .cb-text strong{font-size:11px}
     .copyright-badge .cb-icon{width:18px;height:18px;font-size:10px}
   }
 
-  /* ============================================================
-     تذييل حقوق الملكية - أسفل الصفحة
-  ============================================================ */
-  .site-footer{
-    max-width:1500px;
-    margin:48px auto 0;
-    padding:24px 20px;
-    text-align:center;
-    position:relative;
-  }
+  /* التذييل */
+  .site-footer{max-width:1500px;margin:48px auto 0;padding:24px 20px;text-align:center;position:relative}
   .site-footer::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:120px;
-    height:3px;
-    border-radius:3px;
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:120px;height:3px;border-radius:3px;
     background:linear-gradient(90deg,transparent,#0ea5e9,#14b8a6,#8b5cf6,transparent);
     opacity:.7;
   }
   .footer-inner{
-    display:inline-flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
+    display:inline-flex;flex-direction:column;align-items:center;gap:10px;
     padding:18px 40px;
     background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(30,58,95,.5));
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:20px;
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.12);border-radius:20px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
     box-shadow:0 20px 45px rgba(2,6,23,.4);
-    position:relative;
-    overflow:hidden;
+    position:relative;overflow:hidden;
   }
   .footer-inner::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    border-radius:20px;
+    content:"";position:absolute;inset:-2px;border-radius:20px;
     background:linear-gradient(135deg,#0ea5e9,#14b8a6,#8b5cf6,#0ea5e9);
     background-size:300% 300%;
     animation:gradientShift 8s ease infinite;
-    z-index:-1;
-    opacity:.35;
-    filter:blur(12px);
+    z-index:-1;opacity:.35;filter:blur(12px);
   }
-  @keyframes gradientShift{
-    0%,100%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-  }
+  @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
   .footer-logo{
-    width:56px;height:56px;
-    border-radius:16px;
+    width:56px;height:56px;border-radius:16px;
     background:linear-gradient(135deg,#0ea5e9,#14b8a6 50%,#8b5cf6);
     display:flex;align-items:center;justify-content:center;
-    font-size:22px;font-weight:900;
-    color:#fff;
+    font-size:22px;font-weight:900;color:#fff;
     box-shadow:0 10px 30px rgba(14,165,233,.45), inset 0 1px 0 rgba(255,255,255,.3);
-    letter-spacing:-1px;
-    position:relative;
+    letter-spacing:-1px;position:relative;
   }
   .footer-logo::after{
-    content:"";
-    position:absolute;inset:-3px;
-    border-radius:19px;
+    content:"";position:absolute;inset:-3px;border-radius:19px;
     background:linear-gradient(135deg,#0ea5e9,#14b8a6,#8b5cf6);
-    z-index:-1;
-    filter:blur(8px);
-    opacity:.6;
+    z-index:-1;filter:blur(8px);opacity:.6;
   }
   .footer-name{
-    font-size:26px;
-    font-weight:900;
-    letter-spacing:2px;
+    font-size:26px;font-weight:900;letter-spacing:2px;
     background:linear-gradient(135deg,#7dd3fc 0%,#5eead4 35%,#a78bfa 70%,#f0abfc 100%);
     background-size:200% 200%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:transparent;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
     animation:gradientShift 6s ease infinite;
-    line-height:1.1;
-    margin-top:2px;
+    line-height:1.1;margin-top:2px;
   }
-  .footer-tagline{
-    font-size:11.5px;
-    color:#94a3b8;
-    font-weight:600;
-    letter-spacing:2.5px;
-    text-transform:uppercase;
-    margin-top:1px;
-  }
-  .footer-divider{
-    width:60px;height:1px;
-    background:linear-gradient(90deg,transparent,rgba(148,163,184,.4),transparent);
-    margin:6px 0 2px;
-  }
+  .footer-tagline{font-size:11.5px;color:#94a3b8;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-top:1px}
+  .footer-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(148,163,184,.4),transparent);margin:6px 0 2px}
   .footer-copy{
-    font-size:11px;
-    color:#64748b;
-    font-weight:600;
-    display:flex;align-items:center;gap:6px;
-    flex-wrap:wrap;justify-content:center;
+    font-size:11px;color:#64748b;font-weight:600;
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;
   }
-  .footer-copy .heart{
-    color:#e11d48;
-    display:inline-block;
-    animation:heartbeat 1.6s ease-in-out infinite;
-  }
-  @keyframes heartbeat{
-    0%,100%{transform:scale(1)}
-    15%{transform:scale(1.2)}
-    30%{transform:scale(1)}
-    45%{transform:scale(1.15)}
-  }
+  .footer-copy .heart{color:#e11d48;display:inline-block;animation:heartbeat 1.6s ease-in-out infinite}
+  @keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
   .footer-year{
-    padding:1px 8px;
-    background:rgba(255,255,255,.08);
-    border-radius:6px;
-    border:1px solid rgba(255,255,255,.1);
-    font-weight:800;
-    color:#cbd5e1;
-    font-size:10.5px;
+    padding:1px 8px;background:rgba(255,255,255,.08);
+    border-radius:6px;border:1px solid rgba(255,255,255,.1);
+    font-weight:800;color:#cbd5e1;font-size:10.5px;
   }
-  body.dark .footer-inner{
-    background:linear-gradient(135deg,rgba(5,8,16,.7),rgba(15,23,42,.6));
-  }
+  body.dark .footer-inner{background:linear-gradient(135deg,rgba(5,8,16,.7),rgba(15,23,42,.6))}
   @media(max-width:640px){
     .footer-inner{padding:14px 24px}
     .footer-logo{width:46px;height:46px;font-size:18px;border-radius:13px}
@@ -245,7 +151,6 @@
     .footer-tagline{font-size:10px;letter-spacing:2px}
   }
 
-  /* باقي التنسيقات كما هي */
   .page-head{max-width:1500px;margin:0 auto 14px;text-align:center;color:#e2e8f0}
   .page-head h1{margin:0 0 4px;font-size:1.75em;letter-spacing:.2px}
   .page-head p{margin:0;color:#94a3b8;font-size:.95em}
@@ -273,16 +178,24 @@
   .tb-btn.primary:hover{filter:brightness(1.08)}
   .tb-btn.rates-btn{background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:transparent}
   .tb-btn.rates-btn:hover{filter:brightness(1.08)}
+  .tb-btn.help-btn{
+    background:linear-gradient(135deg,#f59e0b,#f97316);
+    border-color:transparent;
+    box-shadow:0 0 0 0 rgba(245,158,11,.6);
+    animation:helpPulse 2.4s ease-in-out infinite;
+  }
+  .tb-btn.help-btn:hover{filter:brightness(1.08)}
+  @keyframes helpPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5)}
+    50%{box-shadow:0 0 0 8px rgba(245,158,11,0)}
+  }
   .tb-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
 
   .rates-status{
     font-size:.78em;color:#94a3b8;font-weight:600;
     display:flex;align-items:center;gap:6px;
   }
-  .rates-status .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:#64748b;display:inline-block;
-  }
+  .rates-status .dot{width:8px;height:8px;border-radius:50%;background:#64748b;display:inline-block}
   .rates-status.ok .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
   .rates-status.err .dot{background:#e11d48}
 
@@ -407,11 +320,7 @@
     text-align:center;white-space:nowrap;
   }
   thead th:nth-child(3){text-align:right}
-  thead th .th-sub{
-    display:block;
-    font-size:.85em;font-weight:600;color:#94a3b8;
-    margin-top:1px;
-  }
+  thead th .th-sub{display:block;font-size:.85em;font-weight:600;color:#94a3b8;margin-top:1px}
   thead th.th-cur-in{color:#0369a1}
   thead th.th-cur-out{color:#7c3aed}
   body.dark thead th.th-cur-in{color:#7dd3fc}
@@ -460,13 +369,8 @@
   .cell-inp[type="number"]::-webkit-outer-spin-button,
   .cell-inp[type="number"]::-webkit-inner-spin-button,
   .perday-inp::-webkit-outer-spin-button,
-  .perday-inp::-webkit-inner-spin-button{
-    -webkit-appearance: none;margin: 0;
-  }
-  .cell-inp[type="number"],
-  .perday-inp[type="number"]{
-    -moz-appearance: textfield;
-  }
+  .perday-inp::-webkit-inner-spin-button{-webkit-appearance: none;margin: 0}
+  .cell-inp[type="number"], .perday-inp[type="number"]{-moz-appearance: textfield}
 
   @keyframes clampShake{
     0%,100% { transform: translateX(0); }
@@ -549,8 +453,7 @@
   .del-btn{
     background:rgba(225,29,72,.08);border:1.5px solid rgba(225,29,72,.25);
     cursor:pointer;font-size:.9em;line-height:1;
-    padding:6px 6px;border-radius:8px;
-    color:var(--red);
+    padding:6px 6px;border-radius:8px;color:var(--red);
   }
   .del-btn:hover{background:rgba(225,29,72,.15);transform:scale(1.08)}
 
@@ -631,9 +534,7 @@
   body.dark .stat.purple .s-value{color:#a78bfa}
 
   .totals-row{
-    display:grid;
-    gap:12px;
-    padding:0 15px 15px;
+    display:grid;gap:12px;padding:0 15px 15px;
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   }
   .currencies-card{
@@ -650,9 +551,7 @@
     font-size:.9em;font-weight:800;color:var(--ink);
     display:flex;align-items:center;gap:8px;
   }
-  .currencies-card .cc-update{
-    font-size:.75em;color:var(--muted);font-weight:600;
-  }
+  .currencies-card .cc-update{font-size:.75em;color:var(--muted);font-weight:600}
   .currencies-list{display:flex;flex-direction:column;gap:7px}
   .currency-item{
     display:flex;align-items:center;justify-content:space-between;
@@ -661,10 +560,7 @@
     border-radius:10px;font-size:.85em;flex-wrap:wrap;
   }
   .currency-item .ci-left{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--ink)}
-  .currency-item .ci-code{
-    color:#fff;padding:3px 9px;border-radius:7px;
-    font-size:.8em;letter-spacing:.5px;
-  }
+  .currency-item .ci-code{color:#fff;padding:3px 9px;border-radius:7px;font-size:.8em;letter-spacing:.5px}
   .ci-code.in-code{background:linear-gradient(135deg,#0ea5e9,#14b8a6)}
   .ci-code.out-code{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
   .currency-item .ci-name{color:var(--muted);font-weight:600;font-size:.88em}
@@ -740,6 +636,259 @@
     z-index:10000;pointer-events:none;display:flex;align-items:center;gap:8px}
   .toast.show{transform:translateX(-50%) translateY(0)}
 
+  /* ============================================================
+     نافذة التعليمات
+  ============================================================ */
+  .help-overlay{
+    position:fixed;inset:0;
+    background:rgba(2,6,23,.75);
+    z-index:9998;
+    display:none;
+    align-items:center;justify-content:center;
+    padding:20px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    animation:helpFadeIn .25s ease-out;
+    overflow-y:auto;
+  }
+  .help-overlay.show{display:flex}
+  @keyframes helpFadeIn{from{opacity:0}to{opacity:1}}
+
+  .help-modal{
+    background:var(--panel);
+    border-radius:22px;
+    width:100%;
+    max-width:820px;
+    max-height:calc(100vh - 40px);
+    display:flex;flex-direction:column;
+    box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08);
+    animation:helpSlideIn .35s cubic-bezier(.2,.9,.3,1.05);
+    overflow:hidden;
+    position:relative;
+  }
+  @keyframes helpSlideIn{
+    from{transform:translateY(30px) scale(.96);opacity:0}
+    to{transform:translateY(0) scale(1);opacity:1}
+  }
+
+  .help-head{
+    background:linear-gradient(135deg,#0f172a,#1e3a5f 50%,#4c1d95);
+    color:#fff;
+    padding:22px 26px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;
+    position:relative;overflow:hidden;
+  }
+  .help-head::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(circle at 20% 50%, rgba(14,165,233,.35), transparent 60%),
+               radial-gradient(circle at 80% 50%, rgba(139,92,246,.35), transparent 60%);
+    pointer-events:none;
+  }
+  .help-head-inner{
+    display:flex;align-items:center;gap:14px;
+    position:relative;z-index:1;
+  }
+  .help-icon-big{
+    width:52px;height:52px;border-radius:14px;
+    background:linear-gradient(135deg,#f59e0b,#f97316);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;
+    box-shadow:0 10px 30px rgba(245,158,11,.4), inset 0 1px 0 rgba(255,255,255,.3);
+    flex-shrink:0;
+  }
+  .help-head h2{
+    margin:0;font-size:1.35em;letter-spacing:.3px;
+    color:#fff;
+  }
+  .help-head .help-sub{
+    margin:4px 0 0;font-size:.85em;color:#cbd5e1;opacity:.85;
+  }
+  .help-close{
+    width:38px;height:38px;border-radius:10px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;cursor:pointer;
+    font-family:inherit;font-size:18px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    transition:.15s;
+    position:relative;z-index:1;
+    flex-shrink:0;
+  }
+  .help-close:hover{
+    background:rgba(225,29,72,.35);
+    border-color:rgba(225,29,72,.5);
+    transform:rotate(90deg);
+  }
+
+  .help-body{
+    padding:22px 26px 8px;
+    overflow-y:auto;
+    flex:1;
+    scrollbar-width:thin;
+    scrollbar-color: var(--line2) transparent;
+  }
+  .help-body::-webkit-scrollbar{width:8px}
+  .help-body::-webkit-scrollbar-track{background:transparent}
+  .help-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
+
+  .help-intro{
+    background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(139,92,246,.08));
+    border:1.5px solid rgba(14,165,233,.25);
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:20px;
+    font-size:.92em;
+    line-height:1.7;
+    color:var(--ink);
+  }
+  .help-intro strong{color:#0369a1}
+  body.dark .help-intro strong{color:#7dd3fc}
+
+  .help-section{
+    margin-bottom:22px;
+  }
+  .help-section-title{
+    display:flex;align-items:center;gap:10px;
+    font-size:1em;font-weight:900;
+    color:var(--ink);
+    margin-bottom:10px;
+    padding-bottom:8px;
+    border-bottom:2px dashed var(--line);
+  }
+  .help-section-title .num{
+    width:30px;height:30px;
+    border-radius:9px;
+    background:linear-gradient(135deg,#0ea5e9,#14b8a6);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.85em;font-weight:900;
+    box-shadow:0 4px 10px rgba(14,165,233,.35);
+    flex-shrink:0;
+  }
+  .help-section:nth-child(2) .help-section-title .num{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 4px 10px rgba(245,158,11,.35)}
+  .help-section:nth-child(3) .help-section-title .num{background:linear-gradient(135deg,#8b5cf6,#6366f1);box-shadow:0 4px 10px rgba(139,92,246,.35)}
+  .help-section:nth-child(4) .help-section-title .num{background:linear-gradient(135deg,#16a34a,#14b8a6);box-shadow:0 4px 10px rgba(22,163,74,.35)}
+  .help-section:nth-child(5) .help-section-title .num{background:linear-gradient(135deg,#e11d48,#be123c);box-shadow:0 4px 10px rgba(225,29,72,.35)}
+
+  .help-text{
+    font-size:.9em;
+    line-height:1.85;
+    color:var(--ink);
+    padding-inline-start:40px;
+  }
+  .help-text p{margin:0 0 8px}
+  .help-text ul{
+    margin:6px 0 10px;
+    padding-inline-start:20px;
+  }
+  .help-text li{margin-bottom:5px}
+  .help-text b, .help-text strong{color:#0369a1;font-weight:800}
+  body.dark .help-text b, body.dark .help-text strong{color:#7dd3fc}
+
+  .help-example{
+    background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.06));
+    border:1.5px solid rgba(245,158,11,.35);
+    border-radius:12px;
+    padding:14px 16px;
+    margin:12px 0 4px 40px;
+    font-size:.88em;
+    line-height:1.9;
+  }
+  .help-example .ex-title{
+    display:flex;align-items:center;gap:6px;
+    font-weight:900;color:#b45309;
+    margin-bottom:6px;
+    font-size:1.02em;
+  }
+  body.dark .help-example .ex-title{color:#fbbf24}
+  .help-example .ex-row{
+    display:flex;justify-content:space-between;
+    gap:10px;
+    padding:3px 0;
+    border-bottom:1px dashed rgba(245,158,11,.25);
+  }
+  .help-example .ex-row:last-child{border-bottom:0;font-weight:800;color:#b45309;padding-top:8px;margin-top:4px;border-top:2px solid rgba(245,158,11,.4);border-bottom:0}
+  body.dark .help-example .ex-row:last-child{color:#fbbf24}
+  .help-example .ex-row .ex-val{
+    font-weight:800;font-variant-numeric:tabular-nums;
+  }
+
+  .help-tip{
+    background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(20,184,166,.06));
+    border-inline-start:4px solid #16a34a;
+    border-radius:10px;
+    padding:12px 16px;
+    margin:12px 0 4px 40px;
+    font-size:.88em;
+    line-height:1.75;
+    color:var(--ink);
+  }
+  .help-tip .tip-title{
+    display:flex;align-items:center;gap:6px;
+    font-weight:900;color:#047857;
+    margin-bottom:4px;
+  }
+  body.dark .help-tip .tip-title{color:#34d399}
+
+  .help-foot{
+    padding:14px 26px 20px;
+    background:var(--soft);
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    gap:12px;flex-wrap:wrap;
+  }
+  .help-foot .hf-note{
+    font-size:.82em;
+    color:var(--muted);
+    font-weight:600;
+    display:flex;align-items:center;gap:8px;
+  }
+  .help-foot .hf-note .hf-icon{
+    width:22px;height:22px;border-radius:6px;
+    background:linear-gradient(135deg,#0ea5e9,#14b8a6);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:12px;font-weight:800;
+  }
+  .help-foot .hf-actions{
+    display:flex;gap:8px;flex-wrap:wrap;
+  }
+  .help-foot .hf-btn{
+    font-family:inherit;font-weight:800;font-size:.9em;
+    padding:10px 22px;border-radius:10px;cursor:pointer;border:0;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:.15s;
+  }
+  .help-foot .hf-btn.ok{
+    background:linear-gradient(135deg,#0ea5e9,#14b8a6);
+    color:#fff;
+    box-shadow:0 6px 16px rgba(14,165,233,.35);
+  }
+  .help-foot .hf-btn.ok:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  .help-foot .hf-btn.print-help{
+    background:transparent;
+    color:var(--muted);
+    border:1.5px solid var(--line2);
+  }
+  .help-foot .hf-btn.print-help:hover{background:var(--line)}
+
+  @media(max-width:640px){
+    .help-modal{max-height:calc(100vh - 20px);border-radius:16px}
+    .help-head{padding:16px 18px}
+    .help-head h2{font-size:1.05em}
+    .help-head .help-sub{font-size:.75em}
+    .help-icon-big{width:42px;height:42px;font-size:22px;border-radius:11px}
+    .help-close{width:32px;height:32px;font-size:16px}
+    .help-body{padding:16px 18px 6px}
+    .help-text{padding-inline-start:0;font-size:.85em}
+    .help-example,.help-tip{margin-inline-start:0}
+    .help-foot{padding:12px 18px 16px}
+    .help-section-title{font-size:.92em}
+    .help-foot .hf-btn{width:100%;justify-content:center}
+    .help-foot .hf-actions{width:100%}
+  }
+
   @media print {
     body{background:#fff !important; color:#000 !important; padding:0 !important; margin:0 !important; font-size:11px !important}
     body *{ visibility: hidden !important; }
@@ -794,14 +943,12 @@
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
     @page { margin: 12mm; size: A4 landscape; }
-    .copyright-badge,
-    .site-footer{ display: none !important; }
+    .copyright-badge, .site-footer{ display: none !important; }
   }
 </style>
 </head>
 <body>
 
-  <!-- ============ شارة حقوق الملكية ============ -->
   <div class="copyright-badge" title="حقوق الملكية © Muharraqi">
     <span class="cb-icon">©</span>
     <span class="cb-text">
@@ -825,6 +972,9 @@
     <button class="tb-btn" id="btnExport">📤 <span id="exportLabel">تصدير</span></button>
     <button class="tb-btn" id="btnImport">📥 <span id="importLabel">استيراد</span></button>
     <button class="tb-btn rates-btn" id="btnRefreshRates" title="تحديث أسعار الصرف">🔄 <span id="ratesLabel">تحديث الأسعار</span></button>
+    <button class="tb-btn help-btn" id="btnHelp" title="كيف أحسب أيام البرامج السياحية؟">
+      <span>📖</span> <span id="helpLabel">تعليمات</span>
+    </button>
     <span class="rates-status" id="ratesStatus"><span class="dot"></span><span id="ratesStatusText">…</span></span>
     <input type="file" id="importFile" accept=".json" style="display:none">
   </div>
@@ -850,7 +1000,6 @@
     <button class="btn-add-plan" id="btnAddPlan">➕ <span id="addPlanLabel">إضافة خطة جديدة</span></button>
   </div>
 
-  <!-- ============ تذييل حقوق الملكية ============ -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-logo">M</div>
@@ -864,6 +1013,36 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============================================================
+       نافذة التعليمات
+  ============================================================ -->
+  <div class="help-overlay" id="helpOverlay">
+    <div class="help-modal">
+      <div class="help-head">
+        <div class="help-head-inner">
+          <div class="help-icon-big">📖</div>
+          <div>
+            <h2 id="helpTitle">كيف تحسب أيام البرامج السياحية؟</h2>
+            <p class="help-sub" id="helpSubtitle">دليل مختصر لحساب ميزانية البرامج اليومية بدقة</p>
+          </div>
+        </div>
+        <button class="help-close" id="helpClose" title="إغلاق">✕</button>
+      </div>
+
+      <div class="help-body" id="helpBody"><!-- يُبنى ديناميكيًا حسب اللغة --></div>
+
+      <div class="help-foot">
+        <div class="hf-note">
+          <span class="hf-icon">💡</span>
+          <span id="helpFootNote">عدّل «عدد الأيام» في بطاقة «البرامج لكل يوم» ليصبح حسابه دقيقًا</span>
+        </div>
+        <div class="hf-actions">
+          <button class="hf-btn ok" id="helpOk">فهمت، شكرًا 👍</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal-overlay" id="modalOverlay" style="display:none">
     <div class="modal">
@@ -882,7 +1061,6 @@
 <script>
 "use strict";
 
-/* تحديث سنة حقوق الملكية تلقائيًا */
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
 /* ============================================================
@@ -911,9 +1089,6 @@ const CURRENCIES = {
   TRY: { ar:'ليرة تركية',     en:'Turkish Lira',     sym:'₺'   }
 };
 
-/* ============================================================
-   أسعار الصرف
-============================================================ */
 const RATES_API = 'https://open.er-api.com/v6/latest/BHD';
 const RATES_CACHE_KEY = 'travel_budget_rates_v1';
 const RATES_TTL_MS = 6 * 60 * 60 * 1000;
@@ -963,7 +1138,6 @@ async function fetchRatesFromInternet(){
     return false;
   }
 }
-
 function toBHD(amount, code){
   const r = RATES.rates[code];
   if (!isFinite(amount)) return 0;
@@ -982,7 +1156,141 @@ function convert(amount, fromCode, toCode){
 }
 
 /* ============================================================
-   الترجمات
+   محتوى التعليمات (عربي/إنجليزي)
+============================================================ */
+const HELP_CONTENT = {
+  ar: {
+    title: 'كيف تحسب أيام البرامج السياحية؟',
+    subtitle: 'دليل مختصر لحساب ميزانية البرامج اليومية بدقة',
+    intro: 'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية. بعض الأيام تكون مشغولة بالسفر أو الترتيب، وهذا <strong>يؤثر بشكل كبير</strong> على الميزانية اليومية المتاحة لك.',
+    sections: [
+      {
+        title: 'اليوم الأول والأخير — لا تُحسب كأيام برامج',
+        text: `<p>في العادة يكون اليوم الأول والأخير من الرحلة مشغولَين بـ:</p>
+              <ul>
+                <li>الوصول إلى المطار والمغادرة منه</li>
+                <li>إجراءات الجوازات واستلام الحقائب</li>
+                <li>الذهاب من المطار إلى الفندق وتسجيل الدخول</li>
+                <li>الراحة من عناء السفر والاستعداد للعودة</li>
+              </ul>
+              <p>لذلك <b>لا تُحسب هذان اليومان</b> ضمن أيام البرامج السياحية الفعلية.</p>`
+      },
+      {
+        title: 'الرحلات الداخلية بين المدن',
+        text: `<p>إذا كانت رحلتك تتضمن <b>طيران داخلي</b> أو <b>سفراً بالسيارة أو القطار</b> بين مدن مختلفة، فاليوم الذي تسافر فيه يُحسب كالتالي:</p>
+              <ul>
+                <li>إذا كان السفر في الصباح: يبقى نصف اليوم تقريباً للبرامج.</li>
+                <li>إذا كان السفر في المساء: يبقى نصف اليوم تقريباً للبرامج.</li>
+                <li>إذا كان السفر طويلاً (أكثر من 6 ساعات): يُنصح بعدم احتسابه كيوم برامج كامل.</li>
+              </ul>`
+      },
+      {
+        title: 'المعادلة البسيطة',
+        text: `<p>احسب الأيام الفعلية للبرامج السياحية كالتالي:</p>
+              <p style="text-align:center;font-size:1.1em;margin:12px 0;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);">
+                <b>أيام البرامج = إجمالي الأيام − (يوم الوصول + يوم المغادرة + أيام الرحلات الداخلية)</b>
+              </p>`
+      },
+      {
+        title: 'مثال تطبيقي',
+        text: `<p>لنفترض رحلة تايلند مدتها <b>14 يوماً</b>:</p>`,
+        example: {
+          title: '✈️ رحلة تايلند — 14 يوماً',
+          rows: [
+            { label: 'إجمالي أيام الرحلة', val: '14 يوم' },
+            { label: '− يوم الوصول والمغادرة', val: '2 يوم' },
+            { label: '− رحلة داخلية (بانكوك → شيانغماي)', val: '1 يوم' },
+            { label: '− رحلة داخلية (شيانغماي → بوكيت)', val: '1 يوم' },
+            { label: '= أيام البرامج الفعلية', val: '10 أيام' }
+          ]
+        },
+        tip: {
+          title: '💡 النتيجة',
+          text: 'بدلاً من قسمة الميزانية على 14 يوماً، اقسمها على <b>10 أيام فقط</b> — وهذا يعطيك ميزانية يومية أعلى وأدق.'
+        }
+      },
+      {
+        title: 'كيف تطبّق ذلك في هذا التطبيق؟',
+        text: `<p>في بطاقة <b>«📊 البرامج لكل يوم»</b>، عدّل حقل <b>«عدد الأيام»</b> ليصبح عدد الأيام الفعلية للبرامج (بدلاً من إجمالي أيام الرحلة).</p>
+              <ul>
+                <li>اكتب مثلاً: <b>10</b> بدلاً من <b>14</b>.</li>
+                <li>سيقوم التطبيق تلقائياً بقسمة المبلغ المتبقي على الأيام الفعلية.</li>
+                <li>اضغط زر <b>↺</b> إذا أردت استعادة عدد الأيام الكلي.</li>
+              </ul>
+              <p>بهذه الطريقة، ستحصل على ميزانية يومية <b>واقعية</b> وقابلة للتطبيق فعلاً خلال رحلتك.</p>`
+      }
+    ],
+    footNote: 'عدّل «عدد الأيام» في بطاقة «البرامج لكل يوم» ليصبح حسابه دقيقًا',
+    okBtn: 'فهمت، شكرًا 👍'
+  },
+  en: {
+    title: 'How to calculate tourist program days?',
+    subtitle: 'A short guide for accurate daily program budgets',
+    intro: 'Not every day of your trip counts as a tourist program day. Some days are spent traveling or settling in, and this <strong>significantly affects</strong> your available daily budget.',
+    sections: [
+      {
+        title: 'First and Last Day — Not Counted as Program Days',
+        text: `<p>The first and last days of the trip are usually spent on:</p>
+              <ul>
+                <li>Arriving at and departing from the airport</li>
+                <li>Passport control and luggage collection</li>
+                <li>Travel from airport to hotel and check-in</li>
+                <li>Resting from travel fatigue and preparing to return</li>
+              </ul>
+              <p>Therefore, <b>these two days are not counted</b> as actual program days.</p>`
+      },
+      {
+        title: 'Internal Trips Between Cities',
+        text: `<p>If your trip includes <b>domestic flights</b> or <b>travel by car or train</b> between cities, the travel day counts as:</p>
+              <ul>
+                <li>If traveling in the morning: about half a day remains for programs.</li>
+                <li>If traveling in the evening: about half a day remains for programs.</li>
+                <li>If the trip is long (more than 6 hours): it's best not to count it as a full program day.</li>
+              </ul>`
+      },
+      {
+        title: 'The Simple Equation',
+        text: `<p>Calculate actual tourist program days as follows:</p>
+              <p style="text-align:center;font-size:1.1em;margin:12px 0;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);">
+                <b>Program Days = Total Days − (Arrival Day + Departure Day + Internal Trip Days)</b>
+              </p>`
+      },
+      {
+        title: 'Practical Example',
+        text: `<p>Let's say a Thailand trip of <b>14 days</b>:</p>`,
+        example: {
+          title: '✈️ Thailand Trip — 14 Days',
+          rows: [
+            { label: 'Total trip days', val: '14 days' },
+            { label: '− Arrival & departure days', val: '2 days' },
+            { label: '− Domestic flight (Bangkok → Chiang Mai)', val: '1 day' },
+            { label: '− Domestic flight (Chiang Mai → Phuket)', val: '1 day' },
+            { label: '= Actual program days', val: '10 days' }
+          ]
+        },
+        tip: {
+          title: '💡 Result',
+          text: 'Instead of dividing your budget by 14 days, divide it by <b>10 days only</b> — this gives you a higher and more accurate daily budget.'
+        }
+      },
+      {
+        title: 'How to Apply This in the App?',
+        text: `<p>In the <b>«📊 Program per Day»</b> card, edit the <b>«Days»</b> field to reflect the actual program days (instead of total trip days).</p>
+              <ul>
+                <li>Write e.g. <b>10</b> instead of <b>14</b>.</li>
+                <li>The app will automatically divide the remaining amount by the actual days.</li>
+                <li>Press the <b>↺</b> button to restore the total days.</li>
+              </ul>
+              <p>This way, you get a <b>realistic</b> daily budget that you can actually follow during your trip.</p>`
+      }
+    ],
+    footNote: 'Edit "Days" in the "Program per Day" card to get an accurate daily figure',
+    okBtn: 'Got it, thanks 👍'
+  }
+};
+
+/* ============================================================
+   الترجمات العامة
 ============================================================ */
 const I18N = {
   ar: {
@@ -1060,7 +1368,8 @@ const I18N = {
     currenciesCardTitleIn: '💱 مجموع كل عملة (سعر الإدخال)',
     currenciesCardTitleOut: '💱 مجموع المعادل (التحويل)',
     currenciesCardEmpty: 'لم تُستخدم أي عملة بعد — اختر عملة من قائمة الصفوف',
-    currenciesCardUpdate: 'آخر تحديث:'
+    currenciesCardUpdate: 'آخر تحديث:',
+    helpLabel: 'تعليمات'
   },
   en: {
     dir: 'ltr',
@@ -1137,7 +1446,8 @@ const I18N = {
     currenciesCardTitleIn: '💱 Total per Input Currency',
     currenciesCardTitleOut: '💱 Total per Converted Currency',
     currenciesCardEmpty: 'No currency used yet — pick a currency from row list',
-    currenciesCardUpdate: 'Last update:'
+    currenciesCardUpdate: 'Last update:',
+    helpLabel: 'Help'
   }
 };
 
@@ -1182,7 +1492,7 @@ function getDefaultTitles(lang){
 /* ============================================================
    الحالة
 ============================================================ */
-const STORAGE_KEY = 'travel_budget_v11';
+const STORAGE_KEY = 'travel_budget_v12';
 
 function createDefaultPanel(idx){
   return {
@@ -1235,9 +1545,6 @@ function curName(code){
   return STATE.lang === 'ar' ? c.ar : c.en;
 }
 
-/* ============================================================
-   أدوات
-============================================================ */
 const esc = s => String(s).replace(/[&<>"']/g,
   c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -1374,12 +1681,15 @@ function applyLang(){
   document.getElementById('exportLabel').textContent = t('export');
   document.getElementById('importLabel').textContent = t('import');
   document.getElementById('ratesLabel').textContent  = t('ratesLabel');
+  document.getElementById('helpLabel').textContent   = t('helpLabel');
   document.getElementById('titlesPanelTitle').textContent = t('titlesPanelTitle');
   document.getElementById('resetLabel').textContent  = t('resetLabel');
   document.getElementById('newTitleInput').placeholder = t('addTitlePlaceholder');
   document.getElementById('addBtn').textContent      = t('addBtn');
   document.getElementById('addPlanLabel').textContent = t('addPlanLabel');
   updateRatesStatusUI();
+  /* إعادة بناء محتوى التعليمات */
+  renderHelpContent();
 }
 
 function retranslateAll(toLang){
@@ -1396,23 +1706,92 @@ function updateRatesStatusUI(){
   const txt = document.getElementById('ratesStatusText');
   if (!el || !txt) return;
   el.classList.remove('ok','err');
-
-  if (RATES.source === 'live'){
-    el.classList.add('ok');
-    txt.textContent = t('ratesOk');
-  } else if (RATES.source === 'cached'){
-    el.classList.add('ok');
-    txt.textContent = t('ratesCached');
-  } else if (RATES.source === 'fallback'){
-    txt.textContent = t('ratesFallback');
-  } else if (RATES.source === 'error'){
-    el.classList.add('err');
-    txt.textContent = t('ratesError');
-  } else {
-    txt.textContent = '…';
-  }
+  if (RATES.source === 'live'){ el.classList.add('ok'); txt.textContent = t('ratesOk'); }
+  else if (RATES.source === 'cached'){ el.classList.add('ok'); txt.textContent = t('ratesCached'); }
+  else if (RATES.source === 'fallback'){ txt.textContent = t('ratesFallback'); }
+  else if (RATES.source === 'error'){ el.classList.add('err'); txt.textContent = t('ratesError'); }
+  else { txt.textContent = '…'; }
 }
 
+/* ============================================================
+   بناء محتوى نافذة التعليمات
+============================================================ */
+function renderHelpContent(){
+  const C = HELP_CONTENT[STATE.lang] || HELP_CONTENT.ar;
+  document.getElementById('helpTitle').textContent = C.title;
+  document.getElementById('helpSubtitle').textContent = C.subtitle;
+  document.getElementById('helpFootNote').textContent = C.footNote;
+  document.getElementById('helpOk').textContent = C.okBtn;
+
+  const body = document.getElementById('helpBody');
+
+  let html = `<div class="help-intro">${C.intro}</div>`;
+
+  C.sections.forEach((sec, i) => {
+    /* استخدم رقمًا تسلسليًا بالعربية أو الإنجليزية */
+    const num = STATE.lang === 'ar'
+      ? ['١','٢','٣','٤','٥'][i] || (i+1)
+      : (i+1);
+
+    html += `<div class="help-section">
+      <div class="help-section-title">
+        <span class="num">${num}</span>
+        <span>${sec.title}</span>
+      </div>
+      <div class="help-text">${sec.text}</div>`;
+
+    if (sec.example){
+      html += `<div class="help-example">
+        <div class="ex-title">${sec.example.title}</div>`;
+      sec.example.rows.forEach((r, ri) => {
+        const isLast = ri === sec.example.rows.length - 1;
+        html += `<div class="ex-row" ${isLast ? 'style="font-weight:900"' : ''}>
+          <span>${r.label}</span>
+          <span class="ex-val">${r.val}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    if (sec.tip){
+      html += `<div class="help-tip">
+        <div class="tip-title">${sec.tip.title}</div>
+        <div>${sec.tip.text}</div>
+      </div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  body.innerHTML = html;
+}
+
+/* فتح/إغلاق نافذة التعليمات */
+function openHelp(){
+  renderHelpContent();
+  document.getElementById('helpOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeHelp(){
+  document.getElementById('helpOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('btnHelp').addEventListener('click', openHelp);
+document.getElementById('helpClose').addEventListener('click', closeHelp);
+document.getElementById('helpOk').addEventListener('click', closeHelp);
+document.getElementById('helpOverlay').addEventListener('click', e => {
+  if (e.target.id === 'helpOverlay') closeHelp();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('helpOverlay').classList.contains('show')){
+    closeHelp();
+  }
+});
+
+/* ============================================================
+   لوحة البنود
+============================================================ */
 function renderTitlesUI(){
   const tabsEl = document.getElementById('tabs');
   const chipListEl = document.getElementById('chipList');
@@ -1873,12 +2252,10 @@ function renderInCurrenciesCard(sec, totals){
   }
 
   const codes = Object.keys(totals).sort((a,b) => totals[b].foreign - totals[a].foreign);
-
   if (!codes.length){
     listEl.innerHTML = `<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;
     return;
   }
-
   listEl.innerHTML = codes.map(code => {
     const c = CURRENCIES[code];
     const sym = c ? c.sym : code;
@@ -1904,14 +2281,11 @@ function renderInCurrenciesCard(sec, totals){
 function renderOutCurrenciesCard(sec, totals){
   const listEl = sec.querySelector('[data-k="ccListOut"]');
   if (!listEl) return;
-
   const codes = Object.keys(totals).sort((a,b) => totals[b].foreign - totals[a].foreign);
-
   if (!codes.length){
     listEl.innerHTML = `<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;
     return;
   }
-
   listEl.innerHTML = codes.map(code => {
     const c = CURRENCIES[code];
     const sym = c ? c.sym : code;
