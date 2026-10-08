@@ -7,664 +7,632 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 <style>
-  :root{
-    --bg1:#1e293b; --bg2:#0b1220;
-    --panel:#ffffff; --panel2:#f8fafc;
-    --ink:#0f172a; --muted:#64748b;
-    --line:#e5e9f0; --line2:#cbd5e1;
-    --sky:#0ea5e9; --teal:#14b8a6; --amber:#f59e0b;
-    --green:#16a34a; --red:#e11d48; --purple:#8b5cf6;
-    --soft:#f8fafc;
-    --input-bg:#fffdf5;
-    --input-border:#cbd5e1;
-    --input-border-hover:#94a3b8;
-    --head-grad-1:#0f172a; --head-grad-2:#1e3a5f;
-    --row-alt:#ffffff;
+:root{--bg1:#1e293b;--bg2:#0b1220;--panel:#fff;--panel2:#f8fafc;--ink:#0f172a;--muted:#64748b;--line:#e5e9f0;--line2:#cbd5e1;--sky:#0ea5e9;--teal:#14b8a6;--amber:#f59e0b;--green:#16a34a;--red:#e11d48;--purple:#8b5cf6;--soft:#f8fafc;--input-bg:#fffdf5;--input-border:#cbd5e1;--input-border-hover:#94a3b8;--head-grad-1:#0f172a;--head-grad-2:#1e3a5f;--row-alt:#fff}
+body.dark{--bg1:#0b1220;--bg2:#050810;--panel:#111827;--panel2:#0f172a;--ink:#e5e7eb;--muted:#94a3b8;--line:#1f2937;--line2:#334155;--soft:#0f172a;--input-bg:#1e293b;--input-border:#334155;--input-border-hover:#475569;--head-grad-1:#050810;--head-grad-2:#0f172a;--row-alt:#0f172a;--sky:#38bdf8;--teal:#2dd4bf;--amber:#fbbf24}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,var(--bg1),var(--bg2) 60%);color:var(--ink);min-height:100vh;padding:22px 16px 40px;font-size:calc(14px * var(--fs,1));transition:background .3s,color .3s}
+.site-footer{max-width:1500px;margin:48px auto 0;padding:24px 20px;text-align:center;position:relative}
+.site-footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#0ea5e9,#14b8a6,#8b5cf6,transparent);opacity:.7}
+.footer-inner{display:inline-flex;flex-direction:column;align-items:center;gap:10px;padding:18px 40px;background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(30,58,95,.5));border:1px solid rgba(255,255,255,.12);border-radius:20px;backdrop-filter:blur(12px);box-shadow:0 20px 45px rgba(2,6,23,.4);position:relative;overflow:hidden}
+.footer-logo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#14b8a6 50%,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;box-shadow:0 10px 30px rgba(14,165,233,.45)}
+.footer-name{font-size:26px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#7dd3fc 0%,#5eead4 35%,#a78bfa 70%,#f0abfc 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.footer-tagline{font-size:11.5px;color:#94a3b8;font-weight:600;letter-spacing:2.5px;text-transform:uppercase}
+.footer-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(148,163,184,.4),transparent);margin:6px 0 2px}
+.footer-copy{font-size:11px;color:#64748b;font-weight:600;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.footer-copy .heart{color:#e11d48}
+.footer-year{padding:1px 8px;background:rgba(255,255,255,.08);border-radius:6px;border:1px solid rgba(255,255,255,.1);font-weight:800;color:#cbd5e1;font-size:10.5px}
+.page-head{max-width:1500px;margin:0 auto 14px;text-align:center;color:#e2e8f0}
+.page-head h1{margin:0 0 4px;font-size:1.75em}
+.page-head p{margin:0;color:#94a3b8;font-size:.95em}
+.toolbar{max-width:1500px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px;backdrop-filter:blur(8px)}
+.tb-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#e2e8f0;font-family:inherit;font-weight:700;font-size:.85em;padding:7px 12px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.tb-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
+.tb-btn.primary{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border-color:transparent}
+.tb-btn.rates-btn{background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:transparent}
+.tb-btn.xlsx-export{background:linear-gradient(135deg,#16a34a,#15803d);border-color:transparent}
+.tb-btn.xlsx-import{background:linear-gradient(135deg,#0d9488,#0891b2);border-color:transparent}
+.tb-btn.help-btn{background:linear-gradient(135deg,#f59e0b,#f97316);border-color:transparent}
+.tb-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
+.rates-status{font-size:.78em;color:#94a3b8;font-weight:600;display:flex;align-items:center;gap:6px}
+.rates-status .dot{width:8px;height:8px;border-radius:50%;background:#64748b;display:inline-block}
+.rates-status.ok .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
+.titles-panel{max-width:1500px;margin:0 auto 18px;background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(2,6,23,.45);border:1px solid rgba(255,255,255,.06)}
+.titles-head{background:linear-gradient(135deg,var(--head-grad-1),var(--head-grad-2));color:#fff;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.titles-head h3{margin:0;font-size:1em;display:flex;align-items:center;gap:8px}
+.titles-head .reset-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-family:inherit;font-size:.8em;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.tabs{display:flex;background:var(--soft);border-bottom:2px solid var(--line2);padding:0 10px;gap:4px;flex-wrap:wrap}
+.tab{background:transparent;border:0;font-family:inherit;font-size:.9em;font-weight:700;color:var(--muted);padding:11px 15px;cursor:pointer;display:flex;align-items:center;gap:8px;position:relative;top:2px;border-radius:10px 10px 0 0}
+.tab.active{background:var(--panel);color:var(--ink);box-shadow:0 -3px 0 0 var(--sky) inset}
+.tab[data-cat="hotel"].active{box-shadow:0 -3px 0 0 var(--teal) inset}
+.tab[data-cat="other"].active{box-shadow:0 -3px 0 0 var(--amber) inset}
+.tab .count{background:var(--line);color:var(--muted);font-size:.75em;padding:1px 8px;border-radius:999px;font-weight:800;min-width:22px;text-align:center}
+.tab.active .count{background:var(--sky);color:#fff}
+.tab-body{padding:13px 18px 15px}
+.chip-list{display:flex;flex-wrap:wrap;gap:8px;min-height:36px;margin-bottom:12px}
+.chip-list .empty{color:var(--muted);font-size:.9em;font-style:italic}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line2);color:var(--ink);font-size:.85em;font-weight:600;padding:5px 8px 5px 13px;border-radius:999px}
+.chip.air{background:#e0f2fe;border-color:#7dd3fc;color:#0369a1}
+.chip.hotel{background:#ccfbf1;border-color:#5eead4;color:#0f766e}
+.chip.other{background:#fef3c7;border-color:#fcd34d;color:#92400e}
+.chip button{background:transparent;border:0;color:inherit;cursor:pointer;font-size:1.1em;padding:0 3px;border-radius:50%;opacity:.6}
+.add-row{display:flex;gap:8px}
+.add-row input{flex:1;border:1.5px solid var(--input-border);border-radius:9px;padding:8px 12px;font-family:inherit;font-size:.92em;background:var(--input-bg);color:var(--ink)}
+.add-row input:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(14,165,233,.15)}
+.add-row button{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:700;font-size:.92em;padding:9px 18px;border-radius:9px;cursor:pointer}
+.panels{max-width:1500px;margin:0 auto;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(560px,1fr))}
+@media(max-width:640px){.panels{grid-template-columns:1fr}}
+.panel{background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(2,6,23,.45);border:1px solid rgba(255,255,255,.06);position:relative}
+.panel-head{background:linear-gradient(135deg,var(--head-grad-1),var(--head-grad-2));color:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.panel-head h2{margin:0;font-size:1.05em;display:flex;align-items:center;gap:10px}
+.badge{background:rgba(14,165,233,.25);border:1px solid rgba(14,165,233,.5);color:#7dd3fc;font-size:.75em;padding:3px 10px;border-radius:999px;font-weight:700}
+.panel-remove{background:rgba(225,29,72,.2);border:1px solid rgba(225,29,72,.4);color:#fda4af;font-family:inherit;font-size:.8em;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;margin-inline-start:auto}
+.head-inputs{display:flex;gap:12px;flex-wrap:wrap}
+.head-inputs label{display:flex;flex-direction:column;font-size:.72em;color:#94a3b8;gap:4px}
+.head-inputs .inp{width:110px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:6px 9px;font-size:.95em;font-weight:700;font-family:inherit;text-align:center}
+.head-inputs .inp:focus{outline:none;border-color:var(--sky);background:rgba(14,165,233,.18)}
+.table-wrap{overflow-x:auto;padding:13px 14px 0}
+table{width:100%;border-collapse:collapse;font-size:.9em;min-width:1280px}
+thead th{background:var(--soft);color:var(--muted);font-weight:800;font-size:.76em;padding:8px 5px;border-bottom:1px solid var(--line2);text-align:center;white-space:nowrap}
+thead th:nth-child(3){text-align:right}
+thead th .th-sub{display:block;font-size:.85em;font-weight:600;color:#94a3b8;margin-top:1px}
+thead th.th-cur-in{color:#0369a1}
+thead th.th-cur-out{color:#7c3aed}
+tbody td{border-bottom:1px solid var(--line);padding:4px;vertical-align:middle}
+tbody tr{background:var(--row-alt)}
+tbody tr.cat-air{background:rgba(14,165,233,.05)}
+tbody tr.cat-hotel{background:rgba(20,184,166,.05)}
+tbody tr.row-off{opacity:.55}
+.empty-state{text-align:center;padding:30px 20px;color:var(--muted)}
+.empty-state .icon{font-size:2.5em;opacity:.5}
+.empty-state .txt{font-size:.95em;font-weight:600;color:var(--muted)}
+.empty-state .sub{font-size:.82em}
+.cell-inp{width:100%;border:1.5px solid var(--input-border);background:var(--input-bg);border-radius:8px;padding:7px 6px;font-family:inherit;font-size:.9em;color:var(--ink);box-shadow:inset 0 1px 2px rgba(15,23,42,.04)}
+.cell-inp:focus{outline:none;border-color:var(--sky);background:var(--panel);box-shadow:0 0 0 3px rgba(14,165,233,.18)}
+.cell-inp.n{text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.cell-inp[type="number"]::-webkit-outer-spin-button,.cell-inp[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cell-inp[type="number"]{-moz-appearance:textfield}
+@keyframes clampShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.clamp-shake{animation:clampShake .3s;border-color:var(--red) !important;background:rgba(225,29,72,.1) !important}
+.date-wrap{position:relative;display:flex;align-items:center}
+.date-wrap .cell-inp.date-txt{padding-inline-end:26px;text-align:center}
+.cal-btn{position:absolute;inset-inline-end:2px;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;font-size:.95em;padding:5px 4px;border-radius:6px;color:var(--muted)}
+.cal-native{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.toggle-cell{text-align:center}
+.toggle-wrap{display:inline-flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
+.toggle-wrap input{position:absolute;opacity:0;width:0;height:0}
+.toggle-track{width:36px;height:20px;background:#cbd5e1;border-radius:999px;position:relative;transition:background .2s;flex-shrink:0}
+.toggle-track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.2s}
+.toggle-wrap input:checked + .toggle-track{background:linear-gradient(135deg,#16a34a,#14b8a6)}
+.toggle-wrap input:checked + .toggle-track::after{left:18px}
+.toggle-label{font-size:.68em;font-weight:800;color:#94a3b8;min-width:26px}
+.currency-cell{text-align:center;padding:3px !important}
+.currency-sel{width:100%;border:1.5px solid var(--input-border);background:var(--input-bg);border-radius:8px;padding:6px 2px;font-family:inherit;font-size:.78em;font-weight:800;text-align:center;color:var(--ink);cursor:pointer}
+.currency-cell.cur-in .currency-sel{border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.05)}
+.currency-cell.cur-out .currency-sel{border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.05)}
+.bhd-cell{text-align:center;font-weight:800;background:rgba(139,92,246,.08);border:1.5px dashed rgba(139,92,246,.35);border-radius:8px;padding:7px 4px;font-size:.82em;color:#7c3aed;white-space:nowrap}
+.cell-total{text-align:center;font-weight:800;color:#047857;background:rgba(22,163,74,.08);border:1.5px dashed rgba(22,163,74,.35);border-radius:8px;padding:7px 5px;font-size:.9em;white-space:nowrap}
+.del-btn{background:rgba(225,29,72,.08);border:1.5px solid rgba(225,29,72,.25);cursor:pointer;padding:6px;border-radius:8px;color:var(--red)}
+.cat-cell{text-align:center;white-space:nowrap}
+.cat-pill{display:inline-block;font-size:.68em;font-weight:800;padding:3px 7px;border-radius:999px;border:1.5px solid transparent}
+.cat-pill.air{background:#e0f2fe;color:#0369a1;border-color:#7dd3fc}
+.cat-pill.hotel{background:#ccfbf1;color:#0f766e;border-color:#5eead4}
+.cat-pill.other{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+tfoot .row-grand td{background:linear-gradient(90deg,var(--head-grad-1),var(--head-grad-2));color:#fff;font-weight:800;font-size:.95em;border:0;padding:11px 8px}
+tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-align:end}
+.num{text-align:center;font-variant-numeric:tabular-nums}
+.table-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:13px 16px 16px;background:var(--soft);border-top:1px dashed var(--line2);margin-top:13px}
+.btn-add{background:linear-gradient(135deg,#16a34a,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.9em;padding:9px 18px;border-radius:9px;cursor:pointer}
+.btn-clear{background:transparent;border:1.5px solid rgba(225,29,72,.3);color:var(--red);font-family:inherit;font-weight:700;font-size:.88em;padding:9px 13px;border-radius:9px;cursor:pointer}
+.btn-print{background:linear-gradient(135deg,#8b5cf6,#6366f1);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer}
+.btn-share{background:linear-gradient(135deg,#f59e0b,#f97316);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer}
+.btn-xlsx{background:linear-gradient(135deg,#16a34a,#15803d);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer}
+.table-actions .info{margin-inline-start:auto;font-size:.82em;color:var(--muted)}
+.table-actions .info b{color:var(--ink)}
+.table-actions .info .off-badge{display:inline-block;background:var(--line);color:var(--muted);font-size:.85em;font-weight:800;padding:2px 8px;border-radius:999px;margin-inline-start:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:15px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.stat .s-label{font-size:.8em;color:var(--muted);font-weight:700;line-height:1.3}
+.stat .s-value{font-size:1.3em;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
+.stat .cur{font-size:.62em;font-weight:700;opacity:.65}
+.stat.hi{background:linear-gradient(180deg,rgba(22,163,74,.12),rgba(22,163,74,.05));border-color:rgba(22,163,74,.3)}
+.stat.hi .s-value{color:#047857}
+.stat.warn{background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(245,158,11,.04));border-color:rgba(245,158,11,.3)}
+.stat.warn .s-value{color:#b45309}
+.stat.bad{background:linear-gradient(180deg,rgba(225,29,72,.1),rgba(225,29,72,.04));border-color:rgba(225,29,72,.3)}
+.stat.bad .s-value{color:var(--red)}
+.stat.purple{background:linear-gradient(180deg,rgba(139,92,246,.12),rgba(139,92,246,.04));border-color:rgba(139,92,246,.3)}
+.stat.purple .s-value{color:#7c3aed}
+.totals-row{display:grid;gap:12px;padding:0 15px 15px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.currencies-card{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
+.currencies-card.in-card{border-color:rgba(14,165,233,.35)}
+.currencies-card.out-card{border-color:rgba(139,92,246,.35)}
+.currencies-card .cc-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.currencies-card .cc-title{font-size:.9em;font-weight:800;color:var(--ink)}
+.currencies-card .cc-update{font-size:.75em;color:var(--muted);font-weight:600}
+.currencies-list{display:flex;flex-direction:column;gap:7px}
+.currency-item{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font-size:.85em;flex-wrap:wrap}
+.currency-item .ci-left{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--ink)}
+.currency-item .ci-code{color:#fff;padding:3px 9px;border-radius:7px;font-size:.8em;letter-spacing:.5px}
+.ci-code.in-code{background:linear-gradient(135deg,#0ea5e9,#14b8a6)}
+.ci-code.out-code{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
+.currency-item .ci-name{color:var(--muted);font-weight:600;font-size:.88em}
+.currency-item .ci-right{display:flex;align-items:center;gap:9px;font-variant-numeric:tabular-nums}
+.currency-item .ci-sub{font-weight:800;font-size:.95em}
+.ci-sub.in-sub{color:#0369a1}
+.ci-sub.out-sub{color:#7c3aed}
+.currency-item .ci-bhd{font-weight:800;color:#047857;font-size:.95em}
+.currency-item .ci-arrow{color:var(--muted)}
+.currencies-empty{text-align:center;color:var(--muted);font-size:.85em;padding:10px;font-style:italic}
+.perday-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px dashed rgba(245,158,11,.4);flex-wrap:wrap}
+.perday-row label{font-size:.72em;font-weight:800;color:#92400e;white-space:nowrap}
+.perday-inp{width:56px;border:1.5px solid #fcd34d;background:var(--input-bg);border-radius:6px;padding:4px 6px;font-family:inherit;font-size:.85em;font-weight:800;color:#78350f;text-align:center}
+.perday-reset{background:transparent;border:0;cursor:pointer;font-size:.78em;color:#a16207;padding:2px 5px;border-radius:5px;font-family:inherit;font-weight:800}
+.add-plan-wrap{max-width:1500px;margin:18px auto 0;display:flex;justify-content:center}
+.btn-add-plan{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.95em;padding:12px 26px;border-radius:12px;cursor:pointer}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.modal{background:var(--panel);border-radius:16px;padding:22px 24px;max-width:440px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,.5)}
+.modal h3{margin:0 0 10px;font-size:1.1em;color:var(--ink)}
+.modal p{margin:0 0 20px;font-size:.92em;color:var(--muted);line-height:1.6}
+.modal-actions{display:flex;flex-direction:column;gap:8px}
+.modal-actions button{font-family:inherit;font-weight:800;font-size:.92em;padding:11px 16px;border-radius:9px;cursor:pointer;border:0}
+.modal-actions .m-save{background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff}
+.modal-actions .m-confirm{background:rgba(225,29,72,.12);color:var(--red);border:1.5px solid rgba(225,29,72,.3)}
+.modal-actions .m-cancel{background:var(--soft);color:var(--muted);border:1.5px solid var(--line2)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,#16a34a,#14b8a6);color:#fff;font-weight:700;font-size:.9em;padding:11px 22px;border-radius:999px;box-shadow:0 12px 30px rgba(22,163,74,.4);transition:transform .3s;z-index:10000;pointer-events:none;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.help-overlay{position:fixed;inset:0;background:rgba(2,6,23,.75);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);overflow-y:auto}
+.help-overlay.show{display:flex}
+.help-modal{background:var(--panel);border-radius:22px;width:100%;max-width:820px;max-height:calc(100vh - 40px);display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden;position:relative}
+.help-head{background:linear-gradient(135deg,#0f172a,#1e3a5f 50%,#4c1d95);color:#fff;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
+.help-head-inner{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.help-icon-big{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.help-head h2{margin:0;font-size:1.35em;color:#fff}
+.help-head .help-sub{margin:4px 0 0;font-size:.85em;color:#cbd5e1}
+.help-close{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.help-body{padding:22px 26px 8px;overflow-y:auto;flex:1}
+.help-intro{background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(139,92,246,.08));border:1.5px solid rgba(14,165,233,.25);border-radius:14px;padding:14px 16px;margin-bottom:20px;font-size:.92em;line-height:1.7;color:var(--ink)}
+.help-section{margin-bottom:22px}
+.help-section-title{display:flex;align-items:center;gap:10px;font-size:1em;font-weight:900;color:var(--ink);margin-bottom:10px;padding-bottom:8px;border-bottom:2px dashed var(--line)}
+.help-section-title .num{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85em;font-weight:900;flex-shrink:0}
+.help-text{font-size:.9em;line-height:1.85;color:var(--ink);padding-inline-start:40px}
+.help-text ul{padding-inline-start:20px}
+.help-text b{color:#0369a1;font-weight:800}
+.help-example{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.06));border:1.5px solid rgba(245,158,11,.35);border-radius:12px;padding:14px 16px;margin:12px 0 4px 40px;font-size:.88em;line-height:1.9}
+.help-example .ex-title{font-weight:900;color:#b45309;margin-bottom:6px}
+.help-example .ex-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;border-bottom:1px dashed rgba(245,158,11,.25)}
+.help-example .ex-row:last-child{border:0;font-weight:800;color:#b45309;padding-top:8px;margin-top:4px;border-top:2px solid rgba(245,158,11,.4)}
+.help-tip{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(20,184,166,.06));border-inline-start:4px solid #16a34a;border-radius:10px;padding:12px 16px;margin:12px 0 4px 40px;font-size:.88em;line-height:1.75;color:var(--ink)}
+.help-tip .tip-title{font-weight:900;color:#047857;margin-bottom:4px}
+.help-foot{padding:14px 26px 20px;background:var(--soft);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.help-foot .hf-note{font-size:.82em;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px}
+.help-foot .hf-icon{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#0ea5e9,#14b8a6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800}
+.help-foot .hf-btn{font-family:inherit;font-weight:800;font-size:.9em;padding:10px 22px;border-radius:10px;cursor:pointer;border:0;background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff}
+
+/* ============ pdf-header-zone ============ */
+.pdf-header-zone{display:none}
+
+/* ============ تصميم الطباعة و PDF (الحل الجذري) ============ */
+.print-target {
+  background: #fff !important;
+  padding: 10px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  /* إضافة خطوط تدعم الرموز التعبيرية (Emojis) لضمان ظهورها كاملة */
+  font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif !important;
+  color: #0f172a !important;
+  direction: rtl !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.print-target .pdf-header-zone{display:block !important}
+
+.print-target .pdf-hero{
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%) !important;
+  color:#fff !important;
+  padding:12px 18px !important;
+  border-radius:12px !important;
+  margin-bottom:8px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
+}
+.print-target .pdf-hero h1{margin:0 !important;font-size:20px !important;font-weight:900 !important;color:#fff !important}
+.print-target .pdf-hero .pdf-hero-sub{margin:3px 0 0 0 !important;font-size:10px !important;color:#cbd5e1 !important;font-weight:600 !important}
+.print-target .pdf-hero .pdf-hero-brand{
+  background:rgba(255,255,255,.15) !important;
+  border:1px solid rgba(255,255,255,.3) !important;
+  padding:6px 12px !important;
+  border-radius:8px !important;
+  font-size:10px !important;font-weight:800 !important;color:#fff !important;letter-spacing:2px !important;
+}
+.print-target .pdf-plan-strip{
+  background:linear-gradient(135deg,#0ea5e9,#14b8a6) !important;
+  color:#fff !important;
+  padding:8px 16px !important;
+  border-radius:10px !important;
+  margin-bottom:8px !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
+}
+.print-target .pdf-plan-strip .ps-name{font-size:14px !important;font-weight:900 !important;color:#fff !important;margin:0 !important}
+.print-target .pdf-plan-strip .ps-meta{display:flex !important;gap:6px !important;align-items:center !important}
+.print-target .pdf-plan-strip .ps-badge{
+  background:rgba(255,255,255,.25) !important;
+  padding:3px 10px !important;border-radius:999px !important;
+  font-size:10px !important;font-weight:800 !important;color:#fff !important;
+  border:1px solid rgba(255,255,255,.4) !important;
+}
+.print-target .pdf-kpi-row{display:grid !important;grid-template-columns:repeat(4,1fr) !important;gap:6px !important;margin-bottom:8px !important}
+.print-target .pdf-kpi{
+  background:linear-gradient(135deg,#f8fafc,#e2e8f0) !important;
+  border:1px solid #cbd5e1 !important;
+  border-radius:10px !important;
+  padding:8px 10px !important;
+  display:flex !important;flex-direction:column !important;gap:1px !important;
+  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
+}
+.print-target .pdf-kpi .kpi-label{font-size:9px !important;color:#475569 !important;font-weight:800 !important}
+.print-target .pdf-kpi .kpi-value{font-size:14px !important;color:#0f172a !important;font-weight:900 !important}
+.print-target .pdf-kpi .kpi-cur{font-size:9px !important;font-weight:700 !important;color:#64748b !important;margin-inline-start:3px !important}
+.print-target .pdf-kpi.green{background:linear-gradient(135deg,#16a34a,#14b8a6) !important;border:0 !important}
+.print-target .pdf-kpi.green .kpi-label,.print-target .pdf-kpi.green .kpi-value{color:#fff !important}
+.print-target .pdf-kpi.green .kpi-cur{color:rgba(255,255,255,.85) !important}
+.print-target .pdf-kpi.sky{background:linear-gradient(135deg,#0ea5e9,#0284c7) !important;border:0 !important}
+.print-target .pdf-kpi.sky .kpi-label,.print-target .pdf-kpi.sky .kpi-value{color:#fff !important}
+.print-target .pdf-kpi.sky .kpi-cur{color:rgba(255,255,255,.85) !important}
+.print-target .pdf-kpi.teal{background:linear-gradient(135deg,#14b8a6,#0d9488) !important;border:0 !important}
+.print-target .pdf-kpi.teal .kpi-label,.print-target .pdf-kpi.teal .kpi-value{color:#fff !important}
+.print-target .pdf-kpi.teal .kpi-cur{color:rgba(255,255,255,.85) !important}
+.print-target .pdf-section-title{
+  font-size:13px !important;font-weight:900 !important;color:#0f172a !important;
+  padding:3px 0 !important;margin:10px 0 6px 0 !important;
+  border-bottom:3px solid #0ea5e9 !important;display:inline-block !important;
+}
+
+/* ===== الجدول في الطباعة (الحل الجذري لمنع القطع) ===== */
+.print-target .table-wrap {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+  display: block !important;
+}
+.print-target table {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  table-layout: fixed !important; /* تثبيت عرض الجدول لمنع الخروج عن الصفحة */
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  font-size: 9px !important;
+  border: 1.5px solid #0f172a !important;
+}
+.print-target thead th,
+.print-target tbody td {
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important; /* السماح بالتفاف النص الطويل */
+  line-height: 1.2 !important;
+  vertical-align: middle !important;
+}
+.print-target thead th {
+  background: #0f172a !important;
+  color: #fff !important;
+  padding: 4px 2px !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  border: 1px solid #0f172a !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* توزيع نسب الأعمدة الظاهرة لتساوي 100% بالضبط (بعد إخفاء العمودين الأول والأخير) */
+.print-target thead th:nth-child(2), .print-target tbody td:nth-child(2) { width: 8% !important; }  /* التاريخ */
+.print-target thead th:nth-child(3), .print-target tbody td:nth-child(3) { width: 22% !important; } /* البند */
+.print-target thead th:nth-child(4), .print-target tbody td:nth-child(4) { width: 10% !important; } /* التصنيف */
+.print-target thead th:nth-child(5), .print-target tbody td:nth-child(5) { width: 10% !important; } /* السعر */
+.print-target thead th:nth-child(6), .print-target tbody td:nth-child(6) { width: 12% !important; } /* العملة (إدخال) */
+.print-target thead th:nth-child(7), .print-target tbody td:nth-child(7) { width: 12% !important; } /* المعادل */
+.print-target thead th:nth-child(8), .print-target tbody td:nth-child(8) { width: 12% !important; } /* العملة (تحويل) */
+.print-target thead th:nth-child(9), .print-target tbody td:nth-child(9) { width: 6% !important; }  /* الأيام */
+.print-target thead th:nth-child(10), .print-target tbody td:nth-child(10){ width: 8% !important; } /* الإجمالي */
+
+.print-target tbody td {
+  padding: 4px 2px !important;
+  font-size: 9px !important;
+  border: 1px solid #0f172a !important;
+  text-align: center !important;
+  background: #fff !important;
+}
+.print-target .cell-inp {
+  background: transparent !important; border: 0 !important; box-shadow: none !important;
+  color: #0f172a !important; padding: 2px 3px !important; font-size: 9px !important;
+  font-weight: 700 !important; text-align: center !important; width: 100% !important;
+}
+.print-target .date-txt { text-align: center !important; }
+.print-target .bhd-cell, .print-target .cell-total {
+  background: rgba(255,255,255,.65) !important;
+  border: 1px solid rgba(15,23,42,.15) !important;
+  padding: 3px 4px !important; font-size: 9px !important; font-weight: 800 !important;
+  border-radius: 5px !important; white-space: nowrap !important; display: block !important;
+}
+.print-target .cell-total { color: #047857 !important; }
+.print-target .bhd-cell { color: #7c3aed !important; }
+.print-target .cat-pill {
+  display: inline-block !important; padding: 2px 7px !important; border-radius: 999px !important;
+  font-size: 8px !important; font-weight: 800 !important; border: 0 !important; color: #fff !important;
+}
+.print-target .cat-pill.air { background: #0ea5e9 !important; }
+.print-target .cat-pill.hotel { background: #14b8a6 !important; }
+.print-target .cat-pill.other { background: #f59e0b !important; }
+.print-target tfoot .row-grand td {
+  background: #0f172a !important; color: #fff !important;
+  padding: 7px 6px !important; font-size: 10px !important; font-weight: 800 !important;
+  border: 1px solid #0f172a !important;
+}
+.print-target tfoot .row-grand td.grand-label { color: #cbd5e1 !important; text-align: end !important; padding-inline-end: 10px !important; }
+.print-target tfoot .row-grand td.tf-total { color: #34d399 !important; font-size: 12px !important; }
+
+/* ===== الإحصائيات — أفقي ===== */
+.print-target .stats {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px 12px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+.print-target .stat {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  min-height: 0 !important;
+  -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+}
+.print-target .stat .s-label { color: #475569 !important; font-size: 10px !important; font-weight: 800 !important; line-height: 1.2 !important; }
+.print-target .stat .s-value { color: #0f172a !important; font-size: 12px !important; font-weight: 900 !important; display: inline !important; white-space: nowrap !important; }
+.print-target .stat .cur { color: inherit !important; opacity: .7 !important; font-size: 9px !important; font-weight: 700 !important; }
+.print-target .stat.hi { background: linear-gradient(135deg, #16a34a, #14b8a6) !important; border: 0 !important; }
+.print-target .stat.hi .s-label, .print-target .stat.hi .s-value { color: #fff !important; }
+.print-target .stat.purple { background: linear-gradient(135deg, #8b5cf6, #6366f1) !important; border: 0 !important; }
+.print-target .stat.purple .s-label, .print-target .stat.purple .s-value { color: #fff !important; }
+.print-target .stat.warn { background: linear-gradient(135deg, #f59e0b, #f97316) !important; border: 0 !important; }
+.print-target .stat.warn .s-label, .print-target .stat.warn .s-value { color: #fff !important; }
+.print-target .stat.bad { background: linear-gradient(135deg, #e11d48, #be123c) !important; border: 0 !important; }
+.print-target .stat.bad .s-label, .print-target .stat.bad .s-value { color: #fff !important; }
+.print-target .perday-row { display: inline !important; border: 0 !important; padding: 0 !important; margin: 0 !important; }
+.print-target .perday-row label { color: inherit !important; font-size: 9px !important; opacity: .85 !important; display: inline !important; }
+.print-target .perday-inp, .print-target .perday-reset { display: none !important; }
+
+/* ===== بطاقات العملات ===== */
+.print-target .totals-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 12px !important;
+  padding: 0 !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+.print-target .currencies-card {
+  background: #f8fafc !important; border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important; padding: 10px 12px !important;
+}
+.print-target .currencies-card.in-card { border: 1.5px solid rgba(14,165,233,.4) !important; background: #f0f9ff !important; }
+.print-target .currencies-card.out-card { border: 1.5px solid rgba(139,92,246,.4) !important; background: #f5f3ff !important; }
+.print-target .currencies-card .cc-head { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 6px !important; }
+.print-target .currencies-card .cc-title { font-size: 11px !important; font-weight: 900 !important; color: #0ea5e9 !important; border-bottom: 2px solid #0ea5e9 !important; padding-bottom: 2px !important; display: inline-block !important; }
+.print-target .currencies-card.out-card .cc-title { color: #8b5cf6 !important; border-bottom-color: #8b5cf6 !important; }
+.print-target .currencies-card .cc-update { color: #94a3b8 !important; font-size: 9px !important; font-weight: 600 !important; }
+.print-target .currency-item {
+  display: grid !important; grid-template-columns: 60px 1fr 1.1fr 1fr !important;
+  gap: 6px !important; padding: 6px 8px !important; background: #fff !important;
+  border: 1px solid #e2e8f0 !important; border-radius: 6px !important; margin-bottom: 4px !important;
+  align-items: center !important;
+}
+.print-target .currency-item .ci-left, .print-target .currency-item .ci-right { display: contents !important; }
+.print-target .currency-item .ci-code {
+  color: #fff !important; padding: 2px 6px !important; border-radius: 5px !important;
+  font-size: 9px !important; font-weight: 800 !important; text-align: center !important;
+}
+.print-target .currency-item .ci-name { color: #334155 !important; font-size: 9.5px !important; font-weight: 600 !important; }
+.print-target .currency-item .ci-sub { color: #0f172a !important; font-size: 9.5px !important; font-weight: 800 !important; }
+.print-target .currency-item .ci-bhd { color: #047857 !important; font-size: 9.5px !important; font-weight: 800 !important; }
+.print-target .currency-item .ci-arrow { display: none !important; }
+.print-target .currencies-empty { color: #94a3b8 !important; font-size: 9.5px !important; text-align: center !important; }
+
+/* إخفاء العناصر التفاعلية */
+.print-target .table-actions,
+.print-target .panel-remove,
+.print-target .cal-btn,
+.print-target .del-btn,
+.print-target .toggle-cell,
+.print-target thead th:first-child,
+.print-target tbody td:first-child,
+.print-target thead th:last-child,
+.print-target tbody td:last-child,
+.print-target .empty-state,
+.print-target .panel-head { display: none !important; }
+.print-target tfoot .row-grand td:first-child { display: table-cell !important; }
+
+@media print {
+  @page {
+    size: A4 landscape !important; /* إجبار الطباعة على الوضع الأفقي */
+    margin: 10mm !important;
   }
-  body.dark{
-    --bg1:#0b1220; --bg2:#050810;
-    --panel:#111827; --panel2:#0f172a;
-    --ink:#e5e7eb; --muted:#94a3b8;
-    --line:#1f2937; --line2:#334155;
-    --soft:#0f172a;
-    --input-bg:#1e293b;
-    --input-border:#334155;
-    --input-border-hover:#475569;
-    --head-grad-1:#050810; --head-grad-2:#0f172a;
-    --row-alt:#0f172a;
-    --sky:#38bdf8; --teal:#2dd4bf; --amber:#fbbf24;
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;
-    background:radial-gradient(1200px 600px at 50% -10%, var(--bg1), var(--bg2) 60%);
-    color:var(--ink); min-height:100vh; padding:22px 16px 40px;
-    font-size:calc(14px * var(--fs,1));
-    transition:background .3s, color .3s;
+  body * { visibility: hidden !important; }
+  body.printing .panel.print-target,
+  body.printing .panel.print-target * { visibility: visible !important; }
+  body.printing .panel.print-target {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
-
-  .site-footer{max-width:1500px;margin:48px auto 0;padding:24px 20px;text-align:center;position:relative}
-  .site-footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#0ea5e9,#14b8a6,#8b5cf6,transparent);opacity:.7}
-  .footer-inner{display:inline-flex;flex-direction:column;align-items:center;gap:10px;padding:18px 40px;background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(30,58,95,.5));border:1px solid rgba(255,255,255,.12);border-radius:20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 20px 45px rgba(2,6,23,.4);position:relative;overflow:hidden}
-  .footer-inner::before{content:"";position:absolute;inset:-2px;border-radius:20px;background:linear-gradient(135deg,#0ea5e9,#14b8a6,#8b5cf6,#0ea5e9);background-size:300% 300%;animation:gradientShift 8s ease infinite;z-index:-1;opacity:.35;filter:blur(12px)}
-  @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-  .footer-logo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#14b8a6 50%,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;box-shadow:0 10px 30px rgba(14,165,233,.45), inset 0 1px 0 rgba(255,255,255,.3);letter-spacing:-1px;position:relative}
-  .footer-logo::after{content:"";position:absolute;inset:-3px;border-radius:19px;background:linear-gradient(135deg,#0ea5e9,#14b8a6,#8b5cf6);z-index:-1;filter:blur(8px);opacity:.6}
-  .footer-name{font-size:26px;font-weight:900;letter-spacing:2px;background:linear-gradient(135deg,#7dd3fc 0%,#5eead4 35%,#a78bfa 70%,#f0abfc 100%);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:gradientShift 6s ease infinite;line-height:1.1;margin-top:2px}
-  .footer-tagline{font-size:11.5px;color:#94a3b8;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-top:1px}
-  .footer-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(148,163,184,.4),transparent);margin:6px 0 2px}
-  .footer-copy{font-size:11px;color:#64748b;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
-  .footer-copy .heart{color:#e11d48;display:inline-block;animation:heartbeat 1.6s ease-in-out infinite}
-  @keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
-  .footer-year{padding:1px 8px;background:rgba(255,255,255,.08);border-radius:6px;border:1px solid rgba(255,255,255,.1);font-weight:800;color:#cbd5e1;font-size:10.5px}
-  body.dark .footer-inner{background:linear-gradient(135deg,rgba(5,8,16,.7),rgba(15,23,42,.6))}
-  @media(max-width:640px){
-    .footer-inner{padding:14px 24px}
-    .footer-logo{width:46px;height:46px;font-size:18px;border-radius:13px}
-    .footer-name{font-size:20px;letter-spacing:1.5px}
-    .footer-tagline{font-size:10px;letter-spacing:2px}
-  }
-
-  .page-head{max-width:1500px;margin:0 auto 14px;text-align:center;color:#e2e8f0}
-  .page-head h1{margin:0 0 4px;font-size:1.75em;letter-spacing:.2px}
-  .page-head p{margin:0;color:#94a3b8;font-size:.95em}
-
-  .toolbar{max-width:1500px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px;backdrop-filter:blur(8px)}
-  .tb-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#e2e8f0;font-family:inherit;font-weight:700;font-size:.85em;padding:7px 12px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
-  .tb-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
-  .tb-btn:disabled{opacity:.5;cursor:wait}
-  .tb-btn.primary{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border-color:transparent}
-  .tb-btn.rates-btn{background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:transparent}
-  .tb-btn.xlsx-export{background:linear-gradient(135deg,#16a34a,#15803d);border-color:transparent}
-  .tb-btn.xlsx-import{background:linear-gradient(135deg,#0d9488,#0891b2);border-color:transparent}
-  .tb-btn.help-btn{background:linear-gradient(135deg,#f59e0b,#f97316);border-color:transparent;animation:helpPulse 2.4s ease-in-out infinite}
-  @keyframes helpPulse{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5)}50%{box-shadow:0 0 0 8px rgba(245,158,11,0)}}
-  .tb-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
-
-  .rates-status{font-size:.78em;color:#94a3b8;font-weight:600;display:flex;align-items:center;gap:6px}
-  .rates-status .dot{width:8px;height:8px;border-radius:50%;background:#64748b;display:inline-block}
-  .rates-status.ok .dot{background:#4ade80;box-shadow:0 0 8px #4ade80}
-  .rates-status.err .dot{background:#e11d48}
-
-  .titles-panel{max-width:1500px;margin:0 auto 18px;background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(2,6,23,.45);border:1px solid rgba(255,255,255,.06)}
-  .titles-head{background:linear-gradient(135deg,var(--head-grad-1),var(--head-grad-2));color:#fff;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .titles-head h3{margin:0;font-size:1em;display:flex;align-items:center;gap:8px}
-  .titles-head .reset-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;font-family:inherit;font-size:.8em;padding:6px 12px;border-radius:8px;cursor:pointer;transition:.15s;font-weight:600}
-  .titles-head .reset-btn:hover{background:rgba(255,255,255,.2);color:#fff}
-
-  .tabs{display:flex;background:var(--soft);border-bottom:2px solid var(--line2);padding:0 10px;gap:4px;flex-wrap:wrap}
-  .tab{background:transparent;border:0;font-family:inherit;font-size:.9em;font-weight:700;color:var(--muted);padding:11px 15px;cursor:pointer;display:flex;align-items:center;gap:8px;position:relative;top:2px;transition:.15s;border-radius:10px 10px 0 0}
-  .tab:hover{background:rgba(14,165,233,.08);color:var(--ink)}
-  .tab.active{background:var(--panel);color:var(--ink);margin-bottom:-2px;box-shadow:0 -3px 0 0 var(--sky) inset}
-  .tab[data-cat="hotel"].active{box-shadow:0 -3px 0 0 var(--teal) inset}
-  .tab[data-cat="other"].active{box-shadow:0 -3px 0 0 var(--amber) inset}
-  .tab .count{background:var(--line);color:var(--muted);font-size:.75em;padding:1px 8px;border-radius:999px;font-weight:800;min-width:22px;text-align:center}
-  .tab.active .count{background:var(--sky);color:#fff}
-  .tab[data-cat="hotel"].active .count{background:var(--teal)}
-  .tab[data-cat="other"].active .count{background:var(--amber)}
-
-  .tab-body{padding:13px 18px 15px}
-  .chip-list{display:flex;flex-wrap:wrap;gap:8px;min-height:36px;margin-bottom:12px}
-  .chip-list .empty{color:var(--muted);font-size:.9em;font-style:italic;padding:6px 0}
-  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line2);color:var(--ink);font-size:.85em;font-weight:600;padding:5px 8px 5px 13px;border-radius:999px}
-  .chip.air{background:#e0f2fe;border-color:#7dd3fc;color:#0369a1}
-  .chip.hotel{background:#ccfbf1;border-color:#5eead4;color:#0f766e}
-  .chip.other{background:#fef3c7;border-color:#fcd34d;color:#92400e}
-  body.dark .chip.air{background:rgba(56,189,248,.15);color:#7dd3fc}
-  body.dark .chip.hotel{background:rgba(45,212,191,.15);color:#5eead4}
-  body.dark .chip.other{background:rgba(251,191,36,.15);color:#fcd34d}
-  .chip button{background:transparent;border:0;color:inherit;cursor:pointer;font-size:1.1em;line-height:1;padding:0 3px;border-radius:50%;opacity:.6}
-  .chip button:hover{opacity:1;background:rgba(0,0,0,.1)}
-  .add-row{display:flex;gap:8px}
-  .add-row input{flex:1;border:1.5px solid var(--input-border);border-radius:9px;padding:8px 12px;font-family:inherit;font-size:.92em;background:var(--input-bg);color:var(--ink)}
-  .add-row input:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(14,165,233,.15)}
-  .add-row button{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:700;font-size:.92em;padding:9px 18px;border-radius:9px;cursor:pointer}
-
-  .panels{max-width:1500px;margin:0 auto;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(560px,1fr))}
-  @media(max-width:640px){ .panels{grid-template-columns:1fr} }
-
-  .panel{background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 20px 45px rgba(2,6,23,.45);border:1px solid rgba(255,255,255,.06);position:relative}
-  .panel-head{background:linear-gradient(135deg,var(--head-grad-1),var(--head-grad-2));color:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
-  .panel-head h2{margin:0;font-size:1.05em;display:flex;align-items:center;gap:10px}
-  .badge{background:rgba(14,165,233,.25);border:1px solid rgba(14,165,233,.5);color:#7dd3fc;font-size:.75em;padding:3px 10px;border-radius:999px;font-weight:700}
-  .panel-remove{background:rgba(225,29,72,.2);border:1px solid rgba(225,29,72,.4);color:#fda4af;font-family:inherit;font-size:.8em;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;margin-inline-start:auto}
-  .panel-remove:hover{background:rgba(225,29,72,.35);color:#fff}
-
-  .head-inputs{display:flex;gap:12px;flex-wrap:wrap}
-  .head-inputs label{display:flex;flex-direction:column;font-size:.72em;color:#94a3b8;gap:4px}
-  .head-inputs .inp{width:110px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:6px 9px;font-size:.95em;font-weight:700;font-family:inherit;text-align:center}
-  .head-inputs .inp:focus{outline:none;border-color:var(--sky);background:rgba(14,165,233,.18)}
-
-  .table-wrap{overflow-x:auto;padding:13px 14px 0}
-  table{width:100%;border-collapse:collapse;font-size:.9em;min-width:1280px}
-  thead th{background:var(--soft);color:var(--muted);font-weight:800;font-size:.76em;letter-spacing:.3px;padding:8px 5px;border-bottom:1px solid var(--line2);text-align:center;white-space:nowrap}
-  thead th:nth-child(3){text-align:right}
-  thead th .th-sub{display:block;font-size:.85em;font-weight:600;color:#94a3b8;margin-top:1px}
-  thead th.th-cur-in{color:#0369a1}
-  thead th.th-cur-out{color:#7c3aed}
-  body.dark thead th.th-cur-in{color:#7dd3fc}
-  body.dark thead th.th-cur-out{color:#a78bfa}
-
-  tbody td{border-bottom:1px solid var(--line);padding:4px 4px;vertical-align:middle}
-  tbody tr{background:var(--row-alt)}
-  tbody tr:hover{background:rgba(14,165,233,.05)}
-  tbody tr.cat-air td:first-child{border-inline-start:4px solid var(--sky)}
-  tbody tr.cat-hotel td:first-child{border-inline-start:4px solid var(--teal)}
-  tbody tr.cat-other td:first-child{border-inline-start:4px solid var(--amber)}
-  tbody tr.cat-air{background:rgba(14,165,233,.05)}
-  tbody tr.cat-hotel{background:rgba(20,184,166,.05)}
-  tbody tr.row-new{animation: rowIn .35s ease-out}
-  @keyframes rowIn{from{background:rgba(22,163,74,.2); transform:translateY(-6px); opacity:0}to{background:transparent; transform:translateY(0); opacity:1}}
-  tbody tr.row-removing{animation: rowOut .28s ease-in forwards}
-  @keyframes rowOut{to{opacity:0; transform:translateX(40px); max-height:0}}
-  tbody tr.row-off{opacity:.55}
-  tbody tr.row-off td:first-child{border-inline-start:4px solid #cbd5e1 !important}
-  tbody tr.row-off .cell-inp,tbody tr.row-off .cell-total,tbody tr.row-off .bhd-cell,tbody tr.row-off .currency-sel{text-decoration:line-through;text-decoration-color:#cbd5e1;color:#94a3b8}
-
-  .empty-state{text-align:center;padding:30px 20px;color:var(--muted)}
-  .empty-state .icon{font-size:2.5em;margin-bottom:8px;opacity:.5}
-  .empty-state .txt{font-size:.95em;font-weight:600;color:var(--muted);margin-bottom:4px}
-  .empty-state .sub{font-size:.82em}
-
-  .cell-inp{width:100%;border:1.5px solid var(--input-border);background:var(--input-bg);border-radius:8px;padding:7px 6px;font-family:inherit;font-size:.9em;color:var(--ink);transition:border-color .15s, background .15s, box-shadow .15s;box-shadow:inset 0 1px 2px rgba(15,23,42,.04)}
-  .cell-inp::placeholder{color:#94a3b8;font-weight:400}
-  .cell-inp:hover{border-color:var(--input-border-hover)}
-  .cell-inp:focus{outline:none;border-color:var(--sky);background:var(--panel);box-shadow:0 0 0 3px rgba(14,165,233,.18)}
-  .cell-inp.n{text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
-  .cell-inp[type="number"]::-webkit-outer-spin-button,.cell-inp[type="number"]::-webkit-inner-spin-button,.perday-inp::-webkit-outer-spin-button,.perday-inp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-  .cell-inp[type="number"],.perday-inp[type="number"]{-moz-appearance:textfield}
-
-  @keyframes clampShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
-  .clamp-shake{animation:clampShake .3s;border-color:var(--red) !important;background:rgba(225,29,72,.1) !important}
-
-  .date-wrap{position:relative;display:flex;align-items:center}
-  .date-wrap .cell-inp.date-txt{padding-inline-end:26px;font-variant-numeric:tabular-nums;text-align:center}
-  .cal-btn{position:absolute;inset-inline-end:2px;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;font-size:.95em;line-height:1;padding:5px 4px;border-radius:6px;color:var(--muted)}
-  .cal-btn:hover{background:#e0f2fe;color:var(--sky)}
-  .cal-native{position:absolute;inset-inline-end:2px;top:50%;transform:translateY(-50%);width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0;margin:0}
-
-  .toggle-cell{text-align:center}
-  .toggle-wrap{display:inline-flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
-  .toggle-wrap input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
-  .toggle-track{width:36px;height:20px;background:#cbd5e1;border-radius:999px;position:relative;transition:background .2s;flex-shrink:0}
-  .toggle-track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s, left .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-  .toggle-wrap input:checked + .toggle-track{background:linear-gradient(135deg,#16a34a,#14b8a6)}
-  .toggle-wrap input:checked + .toggle-track::after{left:18px}
-  .toggle-label{font-size:.68em;font-weight:800;color:#94a3b8;min-width:26px}
-  .toggle-wrap input:checked ~ .toggle-label{color:#047857}
-  body.dark .toggle-wrap input:checked ~ .toggle-label{color:#34d399}
-
-  .currency-cell{text-align:center;padding:3px 3px !important}
-  .currency-sel{width:100%;border:1.5px solid var(--input-border);background:var(--input-bg);border-radius:8px;padding:6px 2px;font-family:inherit;font-size:.78em;font-weight:800;text-align:center;color:var(--ink);cursor:pointer;transition:.15s}
-  .currency-sel:hover{border-color:var(--input-border-hover)}
-  .currency-sel:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(14,165,233,.18)}
-  .currency-cell.cur-in .currency-sel{border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.05)}
-  .currency-cell.cur-out .currency-sel{border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.05)}
-
-  .bhd-cell{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;background:rgba(139,92,246,.08);border:1.5px dashed rgba(139,92,246,.35);border-radius:8px;padding:7px 4px;font-size:.82em;color:#7c3aed;line-height:1.25;white-space:nowrap}
-  body.dark .bhd-cell{color:#a78bfa;border-color:rgba(167,139,250,.4)}
-
-  .cell-total{text-align:center;font-weight:800;font-variant-numeric:tabular-nums;color:#047857;background:rgba(22,163,74,.08);border:1.5px dashed rgba(22,163,74,.35);border-radius:8px;padding:7px 5px;font-size:.9em;line-height:1.25;white-space:nowrap}
-  body.dark .cell-total{color:#34d399;border-color:rgba(52,211,153,.4)}
-
-  .del-btn{background:rgba(225,29,72,.08);border:1.5px solid rgba(225,29,72,.25);cursor:pointer;font-size:.9em;line-height:1;padding:6px 6px;border-radius:8px;color:var(--red)}
-  .del-btn:hover{background:rgba(225,29,72,.15);transform:scale(1.08)}
-
-  .cat-cell{text-align:center;white-space:nowrap}
-  .cat-pill{display:inline-block;font-size:.68em;font-weight:800;padding:3px 7px;border-radius:999px;border:1.5px solid transparent}
-  .cat-pill.air{background:#e0f2fe;color:#0369a1;border-color:#7dd3fc}
-  .cat-pill.hotel{background:#ccfbf1;color:#0f766e;border-color:#5eead4}
-  .cat-pill.other{background:#fef3c7;color:#92400e;border-color:#fcd34d}
-  body.dark .cat-pill.air{background:rgba(56,189,248,.15);color:#7dd3fc;border-color:rgba(56,189,248,.4)}
-  body.dark .cat-pill.hotel{background:rgba(45,212,191,.15);color:#5eead4;border-color:rgba(45,212,191,.4)}
-  body.dark .cat-pill.other{background:rgba(251,191,36,.15);color:#fcd34d;border-color:rgba(251,191,36,.4)}
-
-  tfoot .row-grand td{background:linear-gradient(90deg,var(--head-grad-1),var(--head-grad-2));color:#fff;font-weight:800;font-size:.95em;border:0;padding:11px 8px}
-  tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-align:end}
-  .num{text-align:center;font-variant-numeric:tabular-nums}
-
-  .table-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:13px 16px 16px;background:var(--soft);border-top:1px dashed var(--line2);margin-top:13px}
-  .btn-add{background:linear-gradient(135deg,#16a34a,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.9em;padding:9px 18px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(22,163,74,.35)}
-  .btn-add:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(22,163,74,.45)}
-  .btn-clear{background:transparent;border:1.5px solid rgba(225,29,72,.3);color:var(--red);font-family:inherit;font-weight:700;font-size:.88em;padding:9px 13px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-  .btn-clear:hover{background:rgba(225,29,72,.08)}
-  .btn-print{background:linear-gradient(135deg,#8b5cf6,#6366f1);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(139,92,246,.35)}
-  .btn-share{background:linear-gradient(135deg,#f59e0b,#f97316);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(245,158,11,.35)}
-  .btn-xlsx{background:linear-gradient(135deg,#16a34a,#15803d);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.88em;padding:9px 16px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(22,163,74,.35)}
-  .table-actions .info{margin-inline-start:auto;font-size:.82em;color:var(--muted)}
-  .table-actions .info b{color:var(--ink)}
-  .table-actions .info .off-badge{display:inline-block;background:var(--line);color:var(--muted);font-size:.85em;font-weight:800;padding:2px 8px;border-radius:999px;margin-inline-start:6px}
-
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:15px}
-  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:12px 14px;display:flex;flex-direction:column;gap:3px}
-  .stat .s-label{font-size:.8em;color:var(--muted);font-weight:700;line-height:1.3}
-  .stat .s-value{font-size:1.3em;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
-  .stat .cur{font-size:.62em;font-weight:700;opacity:.65;letter-spacing:.3px}
-  .stat.hi{background:linear-gradient(180deg,rgba(22,163,74,.12),rgba(22,163,74,.05));border-color:rgba(22,163,74,.3)}
-  .stat.hi .s-value{color:#047857}
-  body.dark .stat.hi .s-value{color:#34d399}
-  .stat.warn{background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(245,158,11,.04));border-color:rgba(245,158,11,.3)}
-  .stat.warn .s-value{color:#b45309}
-  body.dark .stat.warn .s-value{color:#fbbf24}
-  .stat.bad{background:linear-gradient(180deg,rgba(225,29,72,.1),rgba(225,29,72,.04));border-color:rgba(225,29,72,.3)}
-  .stat.bad .s-value{color:var(--red)}
-  .stat.purple{background:linear-gradient(180deg,rgba(139,92,246,.12),rgba(139,92,246,.04));border-color:rgba(139,92,246,.3)}
-  .stat.purple .s-value{color:#7c3aed}
-  body.dark .stat.purple .s-value{color:#a78bfa}
-
-  .totals-row{display:grid;gap:12px;padding:0 15px 15px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-  .currencies-card{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
-  .currencies-card.in-card{border-color:rgba(14,165,233,.35)}
-  .currencies-card.out-card{border-color:rgba(139,92,246,.35)}
-  .currencies-card .cc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-  .currencies-card .cc-title{font-size:.9em;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
-  .currencies-card .cc-update{font-size:.75em;color:var(--muted);font-weight:600}
-  .currencies-list{display:flex;flex-direction:column;gap:7px}
-  .currency-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font-size:.85em;flex-wrap:wrap}
-  .currency-item .ci-left{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--ink)}
-  .currency-item .ci-code{color:#fff;padding:3px 9px;border-radius:7px;font-size:.8em;letter-spacing:.5px}
-  .ci-code.in-code{background:linear-gradient(135deg,#0ea5e9,#14b8a6)}
-  .ci-code.out-code{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
-  .currency-item .ci-name{color:var(--muted);font-weight:600;font-size:.88em}
-  .currency-item .ci-right{display:flex;align-items:center;gap:9px;font-variant-numeric:tabular-nums}
-  .currency-item .ci-sub{font-weight:800;font-size:.95em}
-  .ci-sub.in-sub{color:#0369a1}
-  body.dark .ci-sub.in-sub{color:#7dd3fc}
-  .ci-sub.out-sub{color:#7c3aed}
-  body.dark .ci-sub.out-sub{color:#a78bfa}
-  .currency-item .ci-bhd{font-weight:800;color:#047857;font-size:.95em}
-  body.dark .currency-item .ci-bhd{color:#34d399}
-  .currency-item .ci-arrow{color:var(--muted);font-size:1.05em}
-  .currencies-empty{text-align:center;color:var(--muted);font-size:.85em;padding:10px 0;font-style:italic}
-
-  .perday-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px dashed rgba(245,158,11,.4);flex-wrap:wrap}
-  .perday-row label{font-size:.72em;font-weight:800;color:#92400e;white-space:nowrap}
-  body.dark .perday-row label{color:#fbbf24}
-  .perday-inp{width:56px;border:1.5px solid #fcd34d;background:var(--input-bg);border-radius:6px;padding:4px 6px;font-family:inherit;font-size:.85em;font-weight:800;color:#78350f;text-align:center;font-variant-numeric:tabular-nums}
-  body.dark .perday-inp{color:#fde68a}
-  .perday-inp:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.2)}
-  .perday-inp.user-edited{background:rgba(245,158,11,.1);border-color:var(--amber)}
-  .perday-reset{background:transparent;border:0;cursor:pointer;font-size:.78em;color:#a16207;padding:2px 5px;border-radius:5px;font-family:inherit;font-weight:800}
-  .perday-reset:hover{background:rgba(245,158,11,.15)}
-  body.dark .perday-reset{color:#fbbf24}
-
-  .add-plan-wrap{max-width:1500px;margin:18px auto 0;display:flex;justify-content:center}
-  .btn-add-plan{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.95em;padding:12px 26px;border-radius:12px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(14,165,233,.35)}
-
-  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(4px)}
-  .modal{background:var(--panel);border-radius:16px;padding:22px 24px;max-width:440px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,.5)}
-  .modal h3{margin:0 0 10px;font-size:1.1em;color:var(--ink)}
-  .modal p{margin:0 0 20px;font-size:.92em;color:var(--muted);line-height:1.6}
-  .modal-actions{display:flex;flex-direction:column;gap:8px}
-  .modal-actions button{font-family:inherit;font-weight:800;font-size:.92em;padding:11px 16px;border-radius:9px;cursor:pointer;border:0}
-  .modal-actions .m-save{background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff}
-  .modal-actions .m-confirm{background:rgba(225,29,72,.12);color:var(--red);border:1.5px solid rgba(225,29,72,.3)}
-  .modal-actions .m-cancel{background:var(--soft);color:var(--muted);border:1.5px solid var(--line2)}
-
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,#16a34a,#14b8a6);color:#fff;font-weight:700;font-size:.9em;padding:11px 22px;border-radius:999px;box-shadow:0 12px 30px rgba(22,163,74,.4);transition:transform .3s cubic-bezier(.2,.9,.3,1.2);z-index:10000;pointer-events:none;display:flex;align-items:center;gap:8px}
-  .toast.show{transform:translateX(-50%) translateY(0)}
-
-  .help-overlay{position:fixed;inset:0;background:rgba(2,6,23,.75);z-index:9998;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:helpFadeIn .25s ease-out;overflow-y:auto}
-  .help-overlay.show{display:flex}
-  @keyframes helpFadeIn{from{opacity:0}to{opacity:1}}
-  .help-modal{background:var(--panel);border-radius:22px;width:100%;max-width:820px;max-height:calc(100vh - 40px);display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08);animation:helpSlideIn .35s cubic-bezier(.2,.9,.3,1.05);overflow:hidden;position:relative}
-  @keyframes helpSlideIn{from{transform:translateY(30px) scale(.96);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-  .help-head{background:linear-gradient(135deg,#0f172a,#1e3a5f 50%,#4c1d95);color:#fff;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;overflow:hidden}
-  .help-head::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%, rgba(14,165,233,.35), transparent 60%),radial-gradient(circle at 80% 50%, rgba(139,92,246,.35), transparent 60%);pointer-events:none}
-  .help-head-inner{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
-  .help-icon-big{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 10px 30px rgba(245,158,11,.4), inset 0 1px 0 rgba(255,255,255,.3);flex-shrink:0}
-  .help-head h2{margin:0;font-size:1.35em;letter-spacing:.3px;color:#fff}
-  .help-head .help-sub{margin:4px 0 0;font-size:.85em;color:#cbd5e1;opacity:.85}
-  .help-close{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-family:inherit;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;transition:.15s;position:relative;z-index:1;flex-shrink:0}
-  .help-close:hover{background:rgba(225,29,72,.35);border-color:rgba(225,29,72,.5);transform:rotate(90deg)}
-  .help-body{padding:22px 26px 8px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color: var(--line2) transparent}
-  .help-body::-webkit-scrollbar{width:8px}
-  .help-body::-webkit-scrollbar-track{background:transparent}
-  .help-body::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
-  .help-intro{background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(139,92,246,.08));border:1.5px solid rgba(14,165,233,.25);border-radius:14px;padding:14px 16px;margin-bottom:20px;font-size:.92em;line-height:1.7;color:var(--ink)}
-  .help-intro strong{color:#0369a1}
-  body.dark .help-intro strong{color:#7dd3fc}
-  .help-section{margin-bottom:22px}
-  .help-section-title{display:flex;align-items:center;gap:10px;font-size:1em;font-weight:900;color:var(--ink);margin-bottom:10px;padding-bottom:8px;border-bottom:2px dashed var(--line)}
-  .help-section-title .num{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85em;font-weight:900;box-shadow:0 4px 10px rgba(14,165,233,.35);flex-shrink:0}
-  .help-section:nth-child(2) .help-section-title .num{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 4px 10px rgba(245,158,11,.35)}
-  .help-section:nth-child(3) .help-section-title .num{background:linear-gradient(135deg,#8b5cf6,#6366f1);box-shadow:0 4px 10px rgba(139,92,246,.35)}
-  .help-section:nth-child(4) .help-section-title .num{background:linear-gradient(135deg,#16a34a,#14b8a6);box-shadow:0 4px 10px rgba(22,163,74,.35)}
-  .help-section:nth-child(5) .help-section-title .num{background:linear-gradient(135deg,#e11d48,#be123c);box-shadow:0 4px 10px rgba(225,29,72,.35)}
-  .help-text{font-size:.9em;line-height:1.85;color:var(--ink);padding-inline-start:40px}
-  .help-text p{margin:0 0 8px}
-  .help-text ul{margin:6px 0 10px;padding-inline-start:20px}
-  .help-text li{margin-bottom:5px}
-  .help-text b, .help-text strong{color:#0369a1;font-weight:800}
-  body.dark .help-text b, body.dark .help-text strong{color:#7dd3fc}
-  .help-example{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(249,115,22,.06));border:1.5px solid rgba(245,158,11,.35);border-radius:12px;padding:14px 16px;margin:12px 0 4px 40px;font-size:.88em;line-height:1.9}
-  .help-example .ex-title{display:flex;align-items:center;gap:6px;font-weight:900;color:#b45309;margin-bottom:6px;font-size:1.02em}
-  body.dark .help-example .ex-title{color:#fbbf24}
-  .help-example .ex-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;border-bottom:1px dashed rgba(245,158,11,.25)}
-  .help-example .ex-row:last-child{border-bottom:0;font-weight:800;color:#b45309;padding-top:8px;margin-top:4px;border-top:2px solid rgba(245,158,11,.4);border-bottom:0}
-  body.dark .help-example .ex-row:last-child{color:#fbbf24}
-  .help-example .ex-row .ex-val{font-weight:800;font-variant-numeric:tabular-nums}
-  .help-tip{background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(20,184,166,.06));border-inline-start:4px solid #16a34a;border-radius:10px;padding:12px 16px;margin:12px 0 4px 40px;font-size:.88em;line-height:1.75;color:var(--ink)}
-  .help-tip .tip-title{display:flex;align-items:center;gap:6px;font-weight:900;color:#047857;margin-bottom:4px}
-  body.dark .help-tip .tip-title{color:#34d399}
-  .help-foot{padding:14px 26px 20px;background:var(--soft);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-  .help-foot .hf-note{font-size:.82em;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:8px}
-  .help-foot .hf-note .hf-icon{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#0ea5e9,#14b8a6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800}
-  .help-foot .hf-actions{display:flex;gap:8px;flex-wrap:wrap}
-  .help-foot .hf-btn{font-family:inherit;font-weight:800;font-size:.9em;padding:10px 22px;border-radius:10px;cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;transition:.15s}
-  .help-foot .hf-btn.ok{background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff;box-shadow:0 6px 16px rgba(14,165,233,.35)}
-  @media(max-width:640px){
-    .help-modal{max-height:calc(100vh - 20px);border-radius:16px}
-    .help-head{padding:16px 18px}
-    .help-head h2{font-size:1.05em}
-    .help-head .help-sub{font-size:.75em}
-    .help-icon-big{width:42px;height:42px;font-size:22px;border-radius:11px}
-    .help-close{width:32px;height:32px;font-size:16px}
-    .help-body{padding:16px 18px 6px}
-    .help-text{padding-inline-start:0;font-size:.85em}
-    .help-example,.help-tip{margin-inline-start:0}
-    .help-foot{padding:12px 18px 16px}
-    .help-section-title{font-size:.92em}
-    .help-foot .hf-btn{width:100%;justify-content:center}
-    .help-foot .hf-actions{width:100%}
-  }
-
-  /* ============================================================
-     الطباعة — مطابقة لملف Excel
-  ============================================================ */
-  @media print {
-    body{background:#fff !important; color:#000 !important; padding:0 !important; margin:0 !important; font-size:11px !important}
-    body *{ visibility: hidden !important; }
-    body.printing .panel.print-target,
-    body.printing .panel.print-target *{ visibility: visible !important; }
-    body.printing .panel.print-target{
-      position: absolute; left: 0; top: 0; width: 100%;
-      box-shadow: none !important; border: 0 !important; border-radius: 0 !important;
-    }
-
-    /* عنوان التطبيق */
-    body.printing .page-head{ visibility: visible !important; display: block !important; color: #000 !important; margin: 0 0 8px 0 !important; text-align: right !important; }
-    body.printing .page-head h1{ visibility: visible !important; color: #000 !important; font-size: 16px !important; margin: 0 !important; }
-    body.printing .page-head p{ visibility: visible !important; color: #555 !important; font-size: 10px !important; margin: 0 !important; }
-
-    /* رأس اللوحة: اسم الخطة + عدد الأيام + الميزانية كنص عادي */
-    body.printing .panel.print-target .panel-head{
-      background: transparent !important; color: #000 !important;
-      padding: 4px 0 8px 0 !important;
-      display: block !important;
-      border-bottom: 1px solid #999 !important;
-      margin-bottom: 8px !important;
-    }
-    body.printing .panel.print-target .panel-head h2{
-      color: #000 !important; font-size: 14px !important;
-      margin: 0 0 6px 0 !important; display: block !important;
-    }
-    body.printing .panel.print-target .panel-head .badge{
-      background: #e0f2fe !important; color: #0369a1 !important;
-      border: 1px solid #0ea5e9 !important;
-      -webkit-print-color-adjust: exact; print-color-adjust: exact;
-    }
-    body.printing .panel.print-target .head-inputs{display: block !important; gap: 0 !important}
-    body.printing .panel.print-target .head-inputs label{display: inline !important; color: #000 !important; font-size: 11px !important; margin-inline-end: 18px !important}
-    body.printing .panel.print-target .head-inputs .inp{display: inline !important; width: auto !important; background: #fff !important; color: #000 !important; border: 1px solid #666 !important; padding: 1px 6px !important; font-size: 11px !important; font-weight: 700 !important; min-width: 60px !important}
-
-    /* الجدول */
-    body.printing .panel.print-target table{min-width: 0 !important; width: 100% !important; table-layout: fixed; font-size: 9px !important}
-    body.printing .panel.print-target thead th,
-    body.printing .panel.print-target tbody td{padding: 2px 3px !important; white-space: normal !important; word-break: break-word; font-size: 9px !important}
-
-    /* عناصر تُخفى */
-    body.printing .panel.print-target .table-actions,
-    body.printing .panel.print-target .panel-remove,
-    body.printing .panel.print-target .cal-btn,
-    body.printing .panel.print-target .del-btn,
-    body.printing .panel.print-target .toggle-cell,
-    body.printing .panel.print-target th:first-child,
-    body.printing .panel.print-target td:first-child,
-    body.printing .panel.print-target th:last-child,
-    body.printing .panel.print-target td:last-child,
-    body.printing .panel.print-target .currency-sel{ display:none !important; }
-
-    body.printing .panel.print-target tfoot .row-grand td:first-child{display: table-cell !important}
-
-    body.printing .panel.print-target .cell-inp{background: transparent !important; border: 0 !important; box-shadow: none !important; color: #000 !important; padding: 2px 4px !important; font-size: 9px !important}
-    body.printing .panel.print-target .cell-total,
-    body.printing .panel.print-target .bhd-cell{background: transparent !important; border: 1px dashed #999 !important; color: #000 !important; font-size: 9px !important; padding: 2px 3px !important}
-    body.printing .panel.print-target tfoot .row-grand td{background: #e5e7eb !important; color: #000 !important; font-size: 10px !important; padding: 4px 6px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact}
-    body.printing .panel.print-target .cat-pill{border: 1px solid #999 !important; background: #f3f4f6 !important; color: #000 !important; font-size: 9px !important; padding: 1px 4px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact}
-
-    /* الإحصائيات: عمودان */
-    body.printing .panel.print-target .stats{
-      display: grid !important; grid-template-columns: 1fr 1fr !important;
-      gap: 3px 12px !important; padding: 8px 0 !important;
-      border-top: 1px solid #999 !important; margin-top: 8px !important;
-    }
-    body.printing .panel.print-target .stat{
-      display: flex !important; justify-content: space-between !important;
-      align-items: center !important;
-      padding: 3px 6px !important;
-      border: 0 !important; border-bottom: 1px dashed #ccc !important;
-      border-radius: 0 !important; background: transparent !important;
-      color: #000 !important; font-size: 10px !important;
-    }
-    body.printing .panel.print-target .stat .s-label{color: #000 !important; font-size: 10px !important; font-weight: 700 !important}
-    body.printing .panel.print-target .stat .s-value{color: #000 !important; font-size: 11px !important; font-weight: 800 !important; display: inline !important}
-    body.printing .panel.print-target .stat .cur{color: #666 !important; font-size: 9px !important}
-    body.printing .panel.print-target .perday-row{display: inline !important; border: 0 !important; padding: 0 !important; margin: 0 !important}
-    body.printing .panel.print-target .perday-row label{color: #000 !important; font-size: 10px !important}
-    body.printing .panel.print-target .perday-inp{display: none !important}
-    body.printing .panel.print-target .perday-reset{display: none !important}
-
-    /* بطاقات العملات: جدول بسيط 4 أعمدة */
-    body.printing .panel.print-target .totals-row{display: block !important; padding: 0 !important}
-    body.printing .panel.print-target .currencies-card{border: 0 !important; padding: 6px 0 !important; background: transparent !important; border-radius: 0 !important; margin-bottom: 6px !important}
-    body.printing .panel.print-target .currencies-card .cc-title{color: #000 !important; font-size: 11px !important; margin-bottom: 4px !important; font-weight: 800 !important}
-    body.printing .panel.print-target .currencies-card .cc-update{color: #666 !important; font-size: 9px !important}
-    body.printing .panel.print-target .currency-item{
-      display: grid !important;
-      grid-template-columns: 60px 1fr 1fr 1fr !important;
-      gap: 6px !important;
-      padding: 2px 6px !important;
-      border: 0 !important; border-bottom: 1px dashed #ccc !important;
-      background: transparent !important; border-radius: 0 !important;
-      font-size: 10px !important;
-      align-items: center !important;
-    }
-    body.printing .panel.print-target .currency-item .ci-left{
-      display: contents !important;
-    }
-    body.printing .panel.print-target .currency-item .ci-right{
-      display: contents !important;
-    }
-    body.printing .panel.print-target .currency-item .ci-code{color: #fff !important; padding: 1px 6px !important; font-size: 9px !important; text-align: center !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; justify-self: start}
-    body.printing .panel.print-target .currency-item .ci-name{color: #333 !important; font-size: 10px !important}
-    body.printing .panel.print-target .currency-item .ci-sub,
-    body.printing .panel.print-target .currency-item .ci-bhd{color: #000 !important; font-size: 10px !important}
-    body.printing .panel.print-target .currency-item .ci-arrow{display: none !important}
-    body.printing .panel.print-target .currencies-empty{color: #666 !important; font-size: 10px !important}
-
-    @page { margin: 12mm; size: A4 landscape; }
-    .site-footer{ display: none !important; }
-  }
+  .site-footer, .toolbar, .titles-panel, .add-plan-wrap, .page-head { display: none !important; }
+}
 </style>
 </head>
 <body>
 
-  <div class="page-head">
-    <h1 id="appTitle">ترتيب ميزانية السفر 💰</h1>
-    <p id="appSubtitle">أضف صفوفك بنفسك — والمجامع تُحسب تلقائيًا</p>
-  </div>
+<div class="page-head">
+  <h1 id="appTitle">ترتيب ميزانية السفر 💰</h1>
+  <p id="appSubtitle">أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا</p>
+</div>
 
-  <div class="toolbar">
-    <button class="tb-btn" id="btnLang" title="تغيير اللغة">🌐 <span id="langLabel">EN</span></button>
-    <button class="tb-btn" id="btnFontDec" title="تصغير الخط">A−</button>
-    <button class="tb-btn" id="btnFontInc" title="تكبير الخط">A+</button>
-    <button class="tb-btn" id="btnTheme" title="الوضع الليلي/النهاري">🌙</button>
-    <div class="tb-sep"></div>
-    <button class="tb-btn primary" id="btnSave">💾 <span id="saveLabel">حفظ</span></button>
-    <button class="tb-btn" id="btnExport">📤 <span id="exportLabel">تصدير</span></button>
-    <button class="tb-btn" id="btnImport">📥 <span id="importLabel">استيراد</span></button>
-    <button class="tb-btn xlsx-export" id="btnExportXlsx" title="تصدير كملف Excel قابل للتعديل">📊 <span id="exportXlsxLabel">تصدير Excel</span></button>
-    <button class="tb-btn xlsx-import" id="btnImportXlsx" title="استيراد ملف Excel معدَّل">📋 <span id="importXlsxLabel">استيراد Excel</span></button>
-    <input type="file" id="importXlsxFile" accept=".xlsx,.xls" style="display:none">
-    <button class="tb-btn rates-btn" id="btnRefreshRates" title="تحديث أسعار الصرف">🔄 <span id="ratesLabel">تحديث الأسعار</span></button>
-    <button class="tb-btn help-btn" id="btnHelp" title="كيف أحسب أيام البرامج السياحية؟">
-      <span>📖</span> <span id="helpLabel">تعليمات</span>
-    </button>
-    <span class="rates-status" id="ratesStatus"><span class="dot"></span><span id="ratesStatusText">…</span></span>
-    <input type="file" id="importFile" accept=".json" style="display:none">
-  </div>
+<div class="toolbar">
+  <button class="tb-btn" id="btnLang">🌐 <span id="langLabel">EN</span></button>
+  <button class="tb-btn" id="btnFontDec">A−</button>
+  <button class="tb-btn" id="btnFontInc">A+</button>
+  <button class="tb-btn" id="btnTheme">🌙</button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn primary" id="btnSave">💾 <span id="saveLabel">حفظ</span></button>
+  <button class="tb-btn" id="btnExport">📤 <span id="exportLabel">تصدير</span></button>
+  <button class="tb-btn" id="btnImport">📥 <span id="importLabel">استيراد</span></button>
+  <button class="tb-btn xlsx-export" id="btnExportXlsx">📊 <span id="exportXlsxLabel">تصدير Excel</span></button>
+  <button class="tb-btn xlsx-import" id="btnImportXlsx">📋 <span id="importXlsxLabel">استيراد Excel</span></button>
+  <input type="file" id="importXlsxFile" accept=".xlsx,.xls" style="display:none">
+  <button class="tb-btn rates-btn" id="btnRefreshRates">🔄 <span id="ratesLabel">تحديث الأسعار</span></button>
+  <button class="tb-btn help-btn" id="btnHelp"><span>📖</span> <span id="helpLabel">تعليمات</span></button>
+  <span class="rates-status" id="ratesStatus"><span class="dot"></span><span id="ratesStatusText">…</span></span>
+  <input type="file" id="importFile" accept=".json" style="display:none">
+</div>
 
-  <div class="titles-panel">
-    <div class="titles-head">
-      <h3 id="titlesPanelTitle">📋 إدارة البنود</h3>
-      <button class="reset-btn" id="resetTitles" type="button">↺ <span id="resetLabel">استعادة الافتراضي</span></button>
-    </div>
-    <div class="tabs" id="tabs"></div>
-    <div class="tab-body">
-      <div class="chip-list" id="chipList"></div>
-      <div class="add-row">
-        <input id="newTitleInput" type="text" placeholder="" autocomplete="off">
-        <button id="addBtn" type="button">+</button>
-      </div>
+<div class="titles-panel">
+  <div class="titles-head">
+    <h3 id="titlesPanelTitle">📋 إدارة البنود</h3>
+    <button class="reset-btn" id="resetTitles" type="button">↺ <span id="resetLabel">استعادة الافتراضي</span></button>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="tab-body">
+    <div class="chip-list" id="chipList"></div>
+    <div class="add-row">
+      <input id="newTitleInput" type="text" autocomplete="off">
+      <button id="addBtn" type="button">+</button>
     </div>
   </div>
+</div>
 
-  <datalist id="titlesList"></datalist>
-  <div class="panels" id="panels"></div>
-  <div class="add-plan-wrap" id="addPlanWrap">
-    <button class="btn-add-plan" id="btnAddPlan">➕ <span id="addPlanLabel">إضافة خطة جديدة</span></button>
-  </div>
+<datalist id="titlesList"></datalist>
+<div class="panels" id="panels"></div>
+<div class="add-plan-wrap" id="addPlanWrap">
+  <button class="btn-add-plan" id="btnAddPlan">➕ <span id="addPlanLabel">إضافة خطة جديدة</span></button>
+</div>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-logo">M</div>
-      <div class="footer-name">Muharraqi</div>
-      <div class="footer-tagline">Travel Budget Planner</div>
-      <div class="footer-divider"></div>
-      <div class="footer-copy">
-        <span>© <span class="footer-year" id="footerYear">2025</span> جميع الحقوق محفوظة</span>
-        <span>·</span>
-        <span>صُنع بـ <span class="heart">♥</span> لتنظيم رحلاتك</span>
-      </div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">M</div>
+    <div class="footer-name">Muharraqi</div>
+    <div class="footer-tagline">Travel Budget Planner</div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">
+      <span>© <span class="footer-year" id="footerYear">2025</span> جميع الحقوق محفوظة</span>
+      <span>·</span>
+      <span>صُنع بـ <span class="heart">♥</span> لتنظيم رحلاتك</span>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <div class="help-overlay" id="helpOverlay">
-    <div class="help-modal">
-      <div class="help-head">
-        <div class="help-head-inner">
-          <div class="help-icon-big">📖</div>
-          <div>
-            <h2 id="helpTitle">كيف تحسب أيام البرامج السياحية؟</h2>
-            <p class="help-sub" id="helpSubtitle">دليل مختصر لحساب ميزانية البرامج اليومية بدقة</p>
-          </div>
-        </div>
-        <button class="help-close" id="helpClose" title="إغلاق">✕</button>
-      </div>
-      <div class="help-body" id="helpBody"></div>
-      <div class="help-foot">
-        <div class="hf-note">
-          <span class="hf-icon">💡</span>
-          <span id="helpFootNote">عدّل «عدد الأيام» في بطاقة «البرامج لكل يوم» ليصبح حسابه دقيقًا</span>
-        </div>
-        <div class="hf-actions">
-          <button class="hf-btn ok" id="helpOk">فهمت، شكرًا 👍</button>
+<div class="help-overlay" id="helpOverlay">
+  <div class="help-modal">
+    <div class="help-head">
+      <div class="help-head-inner">
+        <div class="help-icon-big">📖</div>
+        <div>
+          <h2 id="helpTitle">كيف تحسب أيام البرامج السياحية؟</h2>
+          <p class="help-sub" id="helpSubtitle">دليل مختصر</p>
         </div>
       </div>
+      <button class="help-close" id="helpClose">✕</button>
+    </div>
+    <div class="help-body" id="helpBody"></div>
+    <div class="help-foot">
+      <div class="hf-note"><span class="hf-icon">💡</span><span id="helpFootNote">عدّل عدد الأيام</span></div>
+      <div class="hf-actions"><button class="hf-btn ok" id="helpOk">فهمت، شكرًا 👍</button></div>
     </div>
   </div>
+</div>
 
-  <div class="modal-overlay" id="modalOverlay" style="display:none">
-    <div class="modal">
-      <h3 id="modalTitle"></h3>
-      <p id="modalMessage"></p>
-      <div class="modal-actions">
-        <button class="m-save" id="modalSave"></button>
-        <button class="m-confirm" id="modalConfirm"></button>
-        <button class="m-cancel" id="modalCancel"></button>
-      </div>
+<div class="modal-overlay" id="modalOverlay" style="display:none">
+  <div class="modal">
+    <h3 id="modalTitle"></h3>
+    <p id="modalMessage"></p>
+    <div class="modal-actions">
+      <button class="m-save" id="modalSave"></button>
+      <button class="m-confirm" id="modalConfirm"></button>
+      <button class="m-cancel" id="modalCancel"></button>
     </div>
   </div>
+</div>
 
-  <div class="toast" id="toast">✓ <span id="toastMsg">تم الحفظ</span></div>
+<div class="toast" id="toast">✓ <span id="toastMsg">تم الحفظ</span></div>
 
 <script>
 "use strict";
-
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-const CURRENCIES = {
-  BHD:{ar:'دينار بحريني',en:'Bahraini Dinar',sym:'د.ب'},
-  USD:{ar:'دولار أمريكي',en:'US Dollar',sym:'$'},
-  EUR:{ar:'يورو',en:'Euro',sym:'€'},
-  GBP:{ar:'جنيه إسترليني',en:'British Pound',sym:'£'},
-  SAR:{ar:'ريال سعودي',en:'Saudi Riyal',sym:'﷼'},
-  AED:{ar:'درهم إماراتي',en:'UAE Dirham',sym:'د.إ'},
-  KWD:{ar:'دينار كويتي',en:'Kuwaiti Dinar',sym:'د.ك'},
-  OMR:{ar:'ريال عماني',en:'Omani Rial',sym:'ر.ع'},
-  QAR:{ar:'ريال قطري',en:'Qatari Riyal',sym:'ر.ق'},
-  JOD:{ar:'دينار أردني',en:'Jordanian Dinar',sym:'د.أ'},
-  EGP:{ar:'جنيه مصري',en:'Egyptian Pound',sym:'ج.م'},
-  THB:{ar:'بات تايلندي',en:'Thai Baht',sym:'฿'},
-  JPY:{ar:'ين ياباني',en:'Japanese Yen',sym:'¥'},
-  CNY:{ar:'يوان صيني',en:'Chinese Yuan',sym:'¥'},
-  INR:{ar:'روبية هندية',en:'Indian Rupee',sym:'₹'},
-  MYR:{ar:'رينغيت ماليزي',en:'Malaysian Ringgit',sym:'RM'},
-  SGD:{ar:'دولار سنغافوري',en:'Singapore Dollar',sym:'S$'},
-  IDR:{ar:'روبية إندونيسية',en:'Indonesian Rupiah',sym:'Rp'},
-  KRW:{ar:'وون كوري',en:'Korean Won',sym:'₩'},
-  TRY:{ar:'ليرة تركية',en:'Turkish Lira',sym:'₺'}
-};
-
-const RATES_API = 'https://open.er-api.com/v6/latest/BHD';
-const RATES_CACHE_KEY = 'travel_budget_rates_v1';
-const RATES_TTL_MS = 6 * 60 * 60 * 1000;
-
-let RATES = { base:'BHD', rates:{ BHD:1 }, lastUpdate:null, source:'fallback' };
-const FALLBACK_RATES = { BHD:1, USD:2.6526, EUR:2.4450, GBP:2.0850, SAR:9.9500, AED:9.7430, KWD:0.8125, OMR:1.0200, QAR:9.6600, JOD:1.8800, EGP:131.500, THB:95.500, JPY:402.500, CNY:19.200, INR:222.500, MYR:11.850, SGD:3.5600, IDR:42000.0, KRW:3600.00, TRY:90.5000 };
-
+const CURRENCIES={BHD:{ar:'دينار بحريني',en:'Bahraini Dinar',sym:'د.ب'},USD:{ar:'دولار أمريكي',en:'US Dollar',sym:'$'},EUR:{ar:'يورو',en:'Euro',sym:'€'},GBP:{ar:'جنيه إسترليني',en:'British Pound',sym:'£'},SAR:{ar:'ريال سعودي',en:'Saudi Riyal',sym:'﷼'},AED:{ar:'درهم إماراتي',en:'UAE Dirham',sym:'د.إ'},KWD:{ar:'دينار كويتي',en:'Kuwaiti Dinar',sym:'د.ك'},OMR:{ar:'ريال عماني',en:'Omani Rial',sym:'ر.ع'},QAR:{ar:'ريال قطري',en:'Qatari Riyal',sym:'ر.ق'},JOD:{ar:'دينار أردني',en:'Jordanian Dinar',sym:'د.أ'},EGP:{ar:'جنيه مصري',en:'Egyptian Pound',sym:'ج.م'},THB:{ar:'بات تايلندي',en:'Thai Baht',sym:'฿'},JPY:{ar:'ين ياباني',en:'Japanese Yen',sym:'¥'},CNY:{ar:'يوان صيني',en:'Chinese Yuan',sym:'¥'},INR:{ar:'روبية هندية',en:'Indian Rupee',sym:'₹'},MYR:{ar:'رينغيت ماليزي',en:'Malaysian Ringgit',sym:'RM'},SGD:{ar:'دولار سنغافوري',en:'Singapore Dollar',sym:'S$'},IDR:{ar:'روبية إندونيسية',en:'Indonesian Rupiah',sym:'Rp'},KRW:{ar:'وون كوري',en:'Korean Won',sym:'₩'},TRY:{ar:'ليرة تركية',en:'Turkish Lira',sym:'₺'}};
+const RATES_API='https://open.er-api.com/v6/latest/BHD';
+const RATES_CACHE_KEY='travel_budget_rates_v1';
+const RATES_TTL_MS=6*60*60*1000;
+let RATES={base:'BHD',rates:{BHD:1},lastUpdate:null,source:'fallback'};
+const FALLBACK_RATES={BHD:1,USD:2.6526,EUR:2.4450,GBP:2.0850,SAR:9.9500,AED:9.7430,KWD:0.8125,OMR:1.0200,QAR:9.6600,JOD:1.8800,EGP:131.500,THB:95.500,JPY:402.500,CNY:19.200,INR:222.500,MYR:11.850,SGD:3.5600,IDR:42000.0,KRW:3600.00,TRY:90.5000};
 function loadRatesFromCache(){try{const raw=localStorage.getItem(RATES_CACHE_KEY);if(!raw)return null;const c=JSON.parse(raw);if(!c||!c.rates||!c.ts)return null;if(Date.now()-c.ts>RATES_TTL_MS)return null;return c;}catch(e){return null;}}
 function saveRatesToCache(){try{localStorage.setItem(RATES_CACHE_KEY,JSON.stringify({rates:RATES.rates,lastUpdate:RATES.lastUpdate,ts:Date.now()}));}catch(e){}}
-async function fetchRatesFromInternet(){try{const res=await fetch(RATES_API,{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);const data=await res.json();if(!data||data.result!=='success'||!data.rates)throw new Error('bad response');RATES={base:data.base_code||'BHD',rates:data.rates,lastUpdate:data.time_last_update_utc||new Date().toUTCString(),source:'live'};saveRatesToCache();return true;}catch(err){console.warn('فشل جلب أسعار الصرف:',err);return false;}}
-function toBHD(amount,code){const r=RATES.rates[code];if(!isFinite(amount))return 0;if(!r||r===0)return 0;return amount/r;}
-function fromBHD(amountBHD,code){const r=RATES.rates[code];if(!isFinite(amountBHD))return 0;if(!r)return 0;return amountBHD*r;}
-function convert(amount,fromCode,toCode){return fromBHD(toBHD(amount,fromCode),toCode);}
+async function fetchRatesFromInternet(){try{const res=await fetch(RATES_API,{cache:'no-store'});if(!res.ok)throw new Error('HTTP');const data=await res.json();if(!data||data.result!=='success'||!data.rates)throw new Error('bad');RATES={base:data.base_code||'BHD',rates:data.rates,lastUpdate:data.time_last_update_utc||new Date().toUTCString(),source:'live'};saveRatesToCache();return true;}catch(err){return false;}}
+function toBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a/r;}
+function fromBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a*r;}
+function convert(a,fc,tc){return fromBHD(toBHD(a,fc),tc);}
 
-const HELP_CONTENT = {ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر لحساب ميزانية البرامج اليومية بدقة',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية. بعض الأيام تكون مشغولة بالسفر أو الترتيب، وهذا <strong>يؤثر بشكل كبير</strong> على الميزانية اليومية المتاحة لك.',sections:[{title:'اليوم الأول والأخير — لا تُحسب كأيام برامج',text:`<p>في العادة يكون اليوم الأول والأخير من الرحلة مشغولَين بـ:</p><ul><li>الوصول إلى المطار والمغادرة منه</li><li>إجراءات الجوازات واستلام الحقائب</li><li>الذهاب من المطار إلى الفندق وتسجيل الدخول</li><li>الراحة من عناء السفر والاستعداد للعودة</li></ul><p>لذلك <b>لا تُحسب هذان اليومان</b> ضمن أيام البرامج السياحية الفعلية.</p>`},{title:'الرحلات الداخلية بين المدن',text:`<p>إذا كانت رحلتك تتضمن <b>طيران داخلي</b> أو <b>سفراً بالسيارة أو القطار</b> بين مدن مختلفة، فاليوم الذي تسافر فيه يُحسب كالتالي:</p><ul><li>إذا كان السفر في الصباح: يبقى نصف اليوم تقريباً للبرامج.</li><li>إذا كان السفر في المساء: يبقى نصف اليوم تقريباً للبرامج.</li><li>إذا كان السفر طويلاً (أكثر من 6 ساعات): يُنصح بعدم احتسابه كيوم برامج كامل.</li></ul>`},{title:'المعادلة البسيطة',text:`<p>احسب الأيام الفعلية للبرامج السياحية كالتالي:</p><p style="text-align:center;font-size:1.1em;margin:12px 0;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (يوم الوصول + يوم المغادرة + أيام الرحلات الداخلية)</b></p>`},{title:'مثال تطبيقي',text:`<p>لنفترض رحلة تايلند مدتها <b>14 يوماً</b>:</p>`,example:{title:'✈️ رحلة تايلند — 14 يوماً',rows:[{label:'إجمالي أيام الرحلة',val:'14 يوم'},{label:'− يوم الوصول والمغادرة',val:'2 يوم'},{label:'− رحلة داخلية (بانكوك → شيانغماي)',val:'1 يوم'},{label:'− رحلة داخلية (شيانغماي → بوكيت)',val:'1 يوم'},{label:'= أيام البرامج الفعلية',val:'10 أيام'}]},tip:{title:'💡 النتيجة',text:'بدلاً من قسمة الميزانية على 14 يوماً، اقسمها على <b>10 أيام فقط</b> — وهذا يعطيك ميزانية يومية أعلى وأدق.'}},{title:'كيف تطبّق ذلك في هذا التطبيق؟',text:`<p>في بطاقة <b>«📊 البرامج لكل يوم»</b>، عدّل حقل <b>«عدد الأيام»</b> ليصبح عدد الأيام الفعلية للبرامج (بدلاً من إجمالي أيام الرحلة).</p><ul><li>اكتب مثلاً: <b>10</b> بدلاً من <b>14</b>.</li><li>سيقوم التطبيق تلقائياً بقسمة المبلغ المتبقي على الأيام الفعلية.</li><li>اضغط زر <b>↺</b> إذا أردت استعادة عدد الأيام الكلي.</li></ul><p>بهذه الطريقة، ستحصل على ميزانية يومية <b>واقعية</b> وقابلة للتطبيق فعلاً خلال رحلتك.</p>`}],footNote:'عدّل «عدد الأيام» في بطاقة «البرامج لكل يوم» ليصبح حسابه دقيقًا',okBtn:'فهمت، شكرًا 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide for accurate daily program budgets',intro:'Not every day of your trip counts as a tourist program day. Some days are spent traveling or settling in, and this <strong>significantly affects</strong> your available daily budget.',sections:[{title:'First and Last Day — Not Counted as Program Days',text:`<p>The first and last days of the trip are usually spent on:</p><ul><li>Arriving at and departing from the airport</li><li>Passport control and luggage collection</li><li>Travel from airport to hotel and check-in</li><li>Resting from travel fatigue and preparing to return</li></ul><p>Therefore, <b>these two days are not counted</b> as actual program days.</p>`},{title:'Internal Trips Between Cities',text:`<p>If your trip includes <b>domestic flights</b> or <b>travel by car or train</b> between cities, the travel day counts as:</p><ul><li>If traveling in the morning: about half a day remains for programs.</li><li>If traveling in the evening: about half a day remains for programs.</li><li>If the trip is long (more than 6 hours): it's best not to count it as a full program day.</li></ul>`},{title:'The Simple Equation',text:`<p>Calculate actual tourist program days as follows:</p><p style="text-align:center;font-size:1.1em;margin:12px 0;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>Program Days = Total Days − (Arrival Day + Departure Day + Internal Trip Days)</b></p>`},{title:'Practical Example',text:`<p>Let's say a Thailand trip of <b>14 days</b>:</p>`,example:{title:'✈️ Thailand Trip — 14 Days',rows:[{label:'Total trip days',val:'14 days'},{label:'− Arrival & departure days',val:'2 days'},{label:'− Domestic flight (Bangkok → Chiang Mai)',val:'1 day'},{label:'− Domestic flight (Chiang Mai → Phuket)',val:'1 day'},{label:'= Actual program days',val:'10 days'}]},tip:{title:'💡 Result',text:'Instead of dividing your budget by 14 days, divide it by <b>10 days only</b> — this gives you a higher and more accurate daily budget.'}},{title:'How to Apply This in the App?',text:`<p>In the <b>«📊 Program per Day»</b> card, edit the <b>«Days»</b> field to reflect the actual program days (instead of total trip days).</p><ul><li>Write e.g. <b>10</b> instead of <b>14</b>.</li><li>The app will automatically divide the remaining amount by the actual days.</li><li>Press the <b>↺</b> button to restore the total days.</li></ul><p>This way, you get a <b>realistic</b> daily budget that you can actually follow during your trip.</p>`}],footNote:'Edit "Days" in the "Program per Day" card to get an accurate daily figure',okBtn:'Got it, thanks 👍'}};
+const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر لحساب ميزانية البرامج اليومية بدقة',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>عدّل حقل «عدد الأيام» في بطاقة «البرامج لكل يوم».</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Edit Days field.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
 
-const I18N = {
-  ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',exportXlsxLabel:'تصدير Excel',importXlsxLabel:'استيراد Excel',excelSuccess:'تم تصدير ملف Excel بنجاح 📊',excelImportSuccess:'تم استيراد ملف Excel بنجاح ✨',excelImportError:'تعذّر استيراد ملف Excel — تأكد من صيغة الملف',excelNoSheets:'لا توجد بيانات في ملف Excel',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة البنود الافتراضية؟',resetConfirmMsg:'سيتم استبدال قائمة البنود الحالية بالقائمة الافتراضية.',deleteAllTitle:'حذف جميع الصفوف؟',deleteAllMsg:'سيتم حذف كل صفوف هذه الخطة نهائيًا.',removePlanTitle:'حذف هذه الخطة؟',removePlanMsg:'سيتم حذف الخطة بكل صفوفها.',modalSaveFirst:'💾 حفظ نسخة أولاً ثم المتابعة',modalConfirm:'⚠️ تأكيد بدون حفظ',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند جديد…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف بعد',emptySub:'اضغط «إضافة صف» لتبدأ',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',statPerDay:'📊 البرامج لكل يوم',statPerDayDays:'عدد الأيام:',perDayResetTitle:'استعادة عدد الأيام الكلي',importSuccess:'تم استيراد البيانات بنجاح',importError:'تعذّر استيراد الملف',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم إلغاء المشاركة',shareFallback:'تم تنزيل الملف',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر المُدخَل',currencyOutTitle:'العملة التي تريد التحويل إليها',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'أسعار مخزّنة',ratesFallback:'أسعار احتياطية',ratesError:'فشل الاتصال',ratesUpdated:'تم تحديث أسعار الصرف',ratesFailed:'تعذّر جلب أسعار الصرف',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة بعد — اختر عملة من قائمة الصفوف',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات'},
-  en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows — totals calculate automatically',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',exportXlsxLabel:'Export Excel',importXlsxLabel:'Import Excel',excelSuccess:'Excel file exported successfully 📊',excelImportSuccess:'Excel file imported successfully ✨',excelImportError:'Failed to import Excel — check the file format',excelNoSheets:'No data found in Excel file',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset to Default',resetConfirmTitle:'Reset default titles?',resetConfirmMsg:'The current titles list will be replaced with the default list.',deleteAllTitle:'Delete all rows?',deleteAllMsg:'All rows in this plan will be permanently deleted.',removePlanTitle:'Delete this plan?',removePlanMsg:'The plan and all its rows will be deleted.',modalSaveFirst:'💾 Save first, then continue',modalConfirm:'⚠️ Confirm without saving',modalCancel:'Cancel',addTitlePlaceholder:'Type a new title…',addBtn:'+ Add',addPlanLabel:'Add new plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert to)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows yet',emptySub:'Click "Add Row" to start',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other Items',statHand:'💰 Remaining in Hand',statPerDay:'📊 Program per Day',statPerDayDays:'Days:',perDayResetTitle:'Reset to total days',importSuccess:'Data imported successfully',importError:'Failed to import file',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add a title to',shareSuccess:'PDF created',shareCancelled:'Share cancelled',shareFallback:'File downloaded',generating:'Generating PDF…',approx:'≈',currencyInTitle:'Currency of the input price',currencyOutTitle:'Currency to convert to',ratesLabel:'Refresh Rates',ratesLoading:'Updating…',ratesOk:'Live rates',ratesCached:'Cached rates',ratesFallback:'Fallback rates',ratesError:'Connection failed',ratesUpdated:'Exchange rates updated',ratesFailed:'Failed to fetch exchange rates',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency used yet — pick a currency from row list',currenciesCardUpdate:'Last update:',helpLabel:'Help'}
-};
+const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',exportXlsxLabel:'تصدير Excel',importXlsxLabel:'استيراد Excel',excelSuccess:'تم تصدير Excel 📊',excelImportSuccess:'تم استيراد Excel ✨',excelImportError:'تعذّر الاستيراد',excelNoSheets:'لا توجد بيانات',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',statPerDay:'📊 البرامج لكل يوم',statPerDayDays:'عدد الأيام:',perDayResetTitle:'استعادة',importSuccess:'تم الاستيراد',importError:'تعذّر الاستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات'},en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',exportXlsxLabel:'Export Excel',importXlsxLabel:'Import Excel',excelSuccess:'Excel exported 📊',excelImportSuccess:'Excel imported ✨',excelImportError:'Import failed',excelNoSheets:'No data',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',statPerDay:'📊 Program per Day',statPerDayDays:'Days:',perDayResetTitle:'Reset',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help'}};
 
-const TITLE_I18N = {'flight':{ar:'رحلة طيران',en:'flight'},'lunch':{ar:'غداء',en:'lunch'},'dinner':{ar:'عشاء',en:'dinner'},'transport':{ar:'مواصلات',en:'transport'},'Laundry':{ar:'غسيل',en:'Laundry'},'Sweet & could store':{ar:'حلويات ومشروبات',en:'Sweet & could store'},'Hospital':{ar:'مستشفى',en:'Hospital'},'Others':{ar:'أخرى',en:'Others'},'hotels':{ar:'فنادق',en:'hotels'}};
-const DEFAULT_TITLE_KEYS = {air:['flight'],hotel:['hotels'],other:['lunch','dinner','transport','Laundry','Sweet & could store','Hospital','Others']};
+const TITLE_I18N={'flight':{ar:'رحلة طيران',en:'flight'},'lunch':{ar:'غداء',en:'lunch'},'dinner':{ar:'عشاء',en:'dinner'},'transport':{ar:'مواصلات',en:'transport'},'Laundry':{ar:'غسيل',en:'Laundry'},'Sweet & could store':{ar:'حلويات ومشروبات',en:'Sweet & could store'},'Hospital':{ar:'مستشفى',en:'Hospital'},'Others':{ar:'أخرى',en:'Others'},'hotels':{ar:'فنادق',en:'hotels'}};
+const DEFAULT_TITLE_KEYS={air:['flight'],hotel:['hotels'],other:['lunch','dinner','transport','Laundry','Sweet & could store','Hospital','Others']};
+function findKey(str){if(!str)return null;const s=String(str).trim().toLowerCase();for(const[k,t]of Object.entries(TITLE_I18N)){if(k.toLowerCase()===s||t.ar.toLowerCase()===s||t.en.toLowerCase()===s)return k;}return null;}
+function translateStr(str,toLang){const k=findKey(str);if(k&&TITLE_I18N[k])return TITLE_I18N[k][toLang];return str;}
+function getDefaultTitles(lang){const o={air:[],hotel:[],other:[]};['air','hotel','other'].forEach(c=>{o[c]=DEFAULT_TITLE_KEYS[c].map(k=>TITLE_I18N[k]?TITLE_I18N[k][lang]:k);});return o;}
 
-function findKey(str){if(!str)return null;const s=String(str).trim().toLowerCase();for(const[key,tr]of Object.entries(TITLE_I18N)){if(key.toLowerCase()===s||tr.ar.toLowerCase()===s||tr.en.toLowerCase()===s)return key;}return null;}
-function translateStr(str,toLang){const key=findKey(str);if(key&&TITLE_I18N[key])return TITLE_I18N[key][toLang];return str;}
-function getDefaultTitles(lang){const out={air:[],hotel:[],other:[]};['air','hotel','other'].forEach(cat=>{out[cat]=DEFAULT_TITLE_KEYS[cat].map(k=>TITLE_I18N[k]?TITLE_I18N[k][lang]:k);});return out;}
-
-const STORAGE_KEY = 'travel_budget_v14';
+const STORAGE_KEY='travel_budget_v14';
 function createDefaultPanel(idx){return{id:'plan_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),index:idx,days:14,budget:0,perdayDays:null,rows:[]};}
 function createDefaultState(){return{lang:'ar',theme:'light',fontScale:1,titles:getDefaultTitles('ar'),panels:[createDefaultPanel(0)],activeCat:'air'};}
 function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const s=JSON.parse(raw);if(!s||typeof s!=='object'||!Array.isArray(s.panels))return null;if(!s.titles||typeof s.titles!=='object')s.titles=getDefaultTitles(s.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(s.titles[c]))s.titles[c]=[];});s.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];if(typeof p.days!=='number')p.days=14;if(typeof p.budget!=='number')p.budget=0;if(p.perdayDays===undefined)p.perdayDays=null;p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});if(typeof s.fontScale!=='number')s.fontScale=1;if(!s.lang)s.lang='ar';if(!s.theme)s.theme='light';if(!s.activeCat)s.activeCat='air';return s;}catch(e){return null;}}
 
-let STATE = loadState() || createDefaultState();
+let STATE=loadState()||createDefaultState();
 function t(key){const d=I18N[STATE.lang]||I18N.ar;return d[key]!==undefined?d[key]:key;}
 function curSym(code){const c=CURRENCIES[code];return c?c.sym:code;}
 function curName(code){const c=CURRENCIES[code];if(!c)return code;return STATE.lang==='ar'?c.ar:c.en;}
-const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt = n => (isFinite(n)?n:0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-
-const AIR_KEYWORDS = /flight|طيران|رحلة|طائرة|مطار|airport|hkt|bkk|cnx|cei|dmk|phuket|jet|air/i;
-const HOTEL_KEYWORDS = /hotel|hotels|فندق|فنادق|هوتيل|resort|منتجع|hostel|inn|lodge/i;
-
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>(isFinite(n)?n:0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const AIR_KEYWORDS=/flight|طيران|رحلة|طائرة|مطار|airport|hkt|bkk|cnx|cei|dmk|phuket|jet|air/i;
+const HOTEL_KEYWORDS=/hotel|hotels|فندق|فنادق|هوتيل|resort|منتجع|hostel|inn|lodge/i;
 function categoryOf(title){const s=String(title||'').trim().toLowerCase();if(!s)return 'other';for(const cat of['air','hotel','other']){if(STATE.titles[cat].some(x=>x.toLowerCase()===s))return cat;}const key=findKey(title);if(key){for(const cat of['air','hotel','other']){if(STATE.titles[cat].some(x=>findKey(x)===key))return cat;}}if(HOTEL_KEYWORDS.test(s))return 'hotel';if(AIR_KEYWORDS.test(s))return 'air';return 'other';}
-function parseDateForPicker(s){s=String(s||'').trim();const m=s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/);if(!m)return '';const d=String(+m[1]).padStart(2,'0');const mo=String(+m[2]).padStart(2,'0');return `${m[3]}-${mo}-${d}`;}
+function parseDateForPicker(s){s=String(s||'').trim();const m=s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/);if(!m)return '';return `${m[3]}-${String(+m[2]).padStart(2,'0')}-${String(+m[1]).padStart(2,'0')}`;}
 function formatDateFromPicker(v){if(!v)return '';const[y,mo,d]=v.split('-');return `${+d}/${+mo}/${y}`;}
-
 function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(STATE));}catch(e){}}
 let saveToastTimer=null;
 function showSavedToast(){const toast=document.getElementById('toast');document.getElementById('toastMsg').textContent=t('saved');toast.style.background='linear-gradient(135deg,#16a34a,#14b8a6)';toast.classList.add('show');clearTimeout(saveToastTimer);saveToastTimer=setTimeout(()=>toast.classList.remove('show'),1000);}
@@ -676,336 +644,104 @@ function showModal({title,message,onSave,onConfirm}){document.getElementById('mo
 function exportData(){syncFromDOM();const blob=new Blob([JSON.stringify(STATE,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const ts=new Date().toISOString().slice(0,10);a.download=`travel-budget-${ts}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
 function importData(file){const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);if(!data||!Array.isArray(data.panels))throw new Error('bad');STATE=data;if(!STATE.titles)STATE.titles=getDefaultTitles(STATE.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(STATE.titles[c]))STATE.titles[c]=[];});if(!STATE.lang)STATE.lang='ar';if(!STATE.theme)STATE.theme='light';if(typeof STATE.fontScale!=='number')STATE.fontScale=1;if(!STATE.activeCat)STATE.activeCat='air';STATE.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});applyTheme();applyFontScale();applyLang();renderEverything();saveState();showToast(t('importSuccess'));}catch(err){showToast(t('importError'),true);}};reader.onerror=()=>showToast(t('importError'),true);reader.readAsText(file);}
 
-/* ============================================================
-   تصدير Excel — مطابق تمامًا لملف (3).xlsx
-============================================================ */
 function exportToExcel(){
-  if(typeof XLSX==='undefined'){showToast('مكتبة Excel غير محمّلة',true);return;}
+  if(typeof XLSX==='undefined'){showToast('Excel غير محمّل',true);return;}
   syncFromDOM();
-
-  const wb = XLSX.utils.book_new();
-  const isAr = STATE.lang === 'ar';
-  const ordinals = t('planOrdinals');
-
-  const bd = (rgb, style='thin') => ({top:{style,color:{rgb}},bottom:{style,color:{rgb}},left:{style,color:{rgb}},right:{style,color:{rgb}}});
-  const AL = (h, extra={}) => Object.assign({horizontal:h, vertical:'center', readingOrder:2}, extra);
-  const rowStyle = (rgb, align) => ({fill:{fgColor:{rgb}}, font:{color:{rgb:"0F172A"}, sz:10, name:"Calibri"}, alignment:AL(align||'center', align==='right'?{wrapText:true}:{}), border:bd("94A3B8")});
-  const statValStyle = (color) => ({fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:color}, bold:true, sz:11, name:"Calibri"}, alignment:AL('center'), border:bd("E5E9F0")});
-
-  const S = {
-    appTitle:{ fill:{fgColor:{rgb:"0F172A"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:16, name:"Calibri"}, alignment:AL('center') },
-    planName:{ fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:"0F172A"}, bold:true, sz:14, name:"Calibri"}, alignment:AL('right') },
-    headLabel:{ fill:{fgColor:{rgb:"F1F5F9"}}, font:{color:{rgb:"64748B"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('center'), border:bd("CBD5E1") },
-    headValueDays:{ fill:{fgColor:{rgb:"E0F2FE"}}, font:{color:{rgb:"0369A1"}, bold:true, sz:14, name:"Calibri"}, alignment:AL('center'), border:bd("0EA5E9") },
-    headValueBudget:{ fill:{fgColor:{rgb:"FEF3C7"}}, font:{color:{rgb:"92400E"}, bold:true, sz:14, name:"Calibri"}, alignment:AL('center'), border:bd("F59E0B") },
-    th:{ fill:{fgColor:{rgb:"1E3A5F"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:10, name:"Calibri"}, alignment:AL('center',{wrapText:true}), border:bd("0F172A") },
-    thIn:{ fill:{fgColor:{rgb:"0EA5E9"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:10, name:"Calibri"}, alignment:AL('center',{wrapText:true}), border:bd("0369A1") },
-    thOut:{ fill:{fgColor:{rgb:"8B5CF6"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:10, name:"Calibri"}, alignment:AL('center',{wrapText:true}), border:bd("6D28D9") },
-    rowAir: rowStyle("E0F2FE",'center'), rowAirTitle: rowStyle("E0F2FE",'right'),
-    rowHotel: rowStyle("CCFBF1",'center'), rowHotelTitle: rowStyle("CCFBF1",'right'),
-    rowOther: rowStyle("FEF3C7",'center'), rowOtherTitle: rowStyle("FEF3C7",'right'),
-    rowOff: rowStyle("F1F5F9",'center'), rowOffTitle: rowStyle("F1F5F9",'right'),
-    grandLabel:{ fill:{fgColor:{rgb:"F1F5F9"}}, font:{color:{rgb:"0F172A"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('right'), border:bd("0F172A") },
-    grandValue:{ fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:"047857"}, bold:true, sz:12, name:"Calibri"}, alignment:AL('center'), border:bd("0F172A") },
-    handLabel:{ fill:{fgColor:{rgb:"F1F5F9"}}, font:{color:{rgb:"0F172A"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('right'), border:bd("0F172A") },
-    handValue:{ fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:"8B5CF6"}, bold:true, sz:12, name:"Calibri"}, alignment:AL('center'), border:bd("0F172A") },
-    sectionIn:{ fill:{fgColor:{rgb:"0EA5E9"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:12, name:"Calibri"}, alignment:AL('right'), border:bd("0EA5E9") },
-    sectionOut:{ fill:{fgColor:{rgb:"8B5CF6"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:12, name:"Calibri"}, alignment:AL('right'), border:bd("8B5CF6") },
-    statLabel:{ fill:{fgColor:{rgb:"F8FAFC"}}, font:{color:{rgb:"334155"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('right'), border:bd("E5E9F0") },
-    statValue: statValStyle("0F172A"),
-    statValueGreen: statValStyle("047857"),
-    statValuePurple: statValStyle("7C3AED"),
-    statValueAmber: statValStyle("B45309"),
-    statValueRed: statValStyle("E11D48"),
-    curHead:{ fill:{fgColor:{rgb:"F1F5F9"}}, font:{color:{rgb:"64748B"}, bold:true, sz:10, name:"Calibri"}, alignment:AL('center'), border:bd("CBD5E1") },
-    curCodeIn:{ fill:{fgColor:{rgb:"0EA5E9"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('center'), border:bd("0EA5E9") },
-    curCodeOut:{ fill:{fgColor:{rgb:"8B5CF6"}}, font:{color:{rgb:"FFFFFF"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('center'), border:bd("8B5CF6") },
-    curCell:{ fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:"0F172A"}, sz:10, name:"Calibri"}, alignment:AL('center'), border:bd("E5E9F0") },
-    curCellGreen:{ fill:{fgColor:{rgb:"FFFFFF"}}, font:{color:{rgb:"047857"}, bold:true, sz:11, name:"Calibri"}, alignment:AL('center'), border:bd("E5E9F0") },
-    emptyCell:{ fill:{fgColor:{rgb:"FFFFFF"}} }
-  };
-
-  const C = (v, s) => (s ? { v, s } : { v });
-  const E = (s) => C('', s || S.emptyCell);
-
-  STATE.panels.forEach((panel, idx) => {
-    const planLabel = t('planLabelPrefix') + (ordinals[idx] || (idx+1));
-    const aoa = [];
-    const merges = [];
-
-    /* Row 1: عنوان التطبيق مدموج A:J */
-    const appTitleRow = aoa.length;
-    aoa.push([C(t('title'), S.appTitle), ...Array(9).fill(C('', S.appTitle))]);
-    merges.push({s:{r:appTitleRow,c:0}, e:{r:appTitleRow,c:9}});
-
-    /* Row 2: اسم الخطة في A */
-    aoa.push([C(planLabel, S.planName), ...Array(9).fill(C('', S.planName))]);
-
-    /* Row 3: عدد الأيام الكلي | value | | | | الميزانية | value */
-    aoa.push([
-      C(isAr?'عدد الأيام الكلي':'Total Days', S.headLabel),
-      C(panel.days, S.headValueDays),
-      E(S.headLabel), E(S.headLabel), E(S.headLabel),
-      C(isAr?'الميزانية (د.ب)':'Budget (BHD)', S.headLabel),
-      C(panel.budget, S.headValueBudget),
-      E(S.headLabel), E(S.headLabel), E(S.headLabel)
-    ]);
-
-    /* Row 4: فارغ */
+  const wb=XLSX.utils.book_new();
+  const isAr=STATE.lang==='ar';
+  const ordinals=t('planOrdinals');
+  const bd=(rgb,style='thin')=>({top:{style,color:{rgb}},bottom:{style,color:{rgb}},left:{style,color:{rgb}},right:{style,color:{rgb}}});
+  const AL=(h,extra={})=>Object.assign({horizontal:h,vertical:'center',readingOrder:2},extra);
+  const rowStyle=(rgb,align)=>({fill:{fgColor:{rgb}},font:{color:{rgb:"0F172A"},sz:10,name:"Calibri"},alignment:AL(align||'center',align==='right'?{wrapText:true}:{}),border:bd("94A3B8")});
+  const statValStyle=(color)=>({fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:color},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")});
+  const S={appTitle:{fill:{fgColor:{rgb:"0F172A"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:16,name:"Calibri"},alignment:AL('center')},planName:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},bold:true,sz:14,name:"Calibri"},alignment:AL('right')},headLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},headValueDays:{fill:{fgColor:{rgb:"E0F2FE"}},font:{color:{rgb:"0369A1"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},headValueBudget:{fill:{fgColor:{rgb:"FEF3C7"}},font:{color:{rgb:"92400E"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("F59E0B")},th:{fill:{fgColor:{rgb:"1E3A5F"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0F172A")},thIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0369A1")},thOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("6D28D9")},rowAir:rowStyle("E0F2FE",'center'),rowAirTitle:rowStyle("E0F2FE",'right'),rowHotel:rowStyle("CCFBF1",'center'),rowHotelTitle:rowStyle("CCFBF1",'right'),rowOther:rowStyle("FEF3C7",'center'),rowOtherTitle:rowStyle("FEF3C7",'right'),rowOff:rowStyle("F1F5F9",'center'),rowOffTitle:rowStyle("F1F5F9",'right'),grandLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},grandValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},handLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},handValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"8B5CF6"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},sectionIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("0EA5E9")},sectionOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("8B5CF6")},statLabel:{fill:{fgColor:{rgb:"F8FAFC"}},font:{color:{rgb:"334155"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("E5E9F0")},statValue:statValStyle("0F172A"),statValueGreen:statValStyle("047857"),statValuePurple:statValStyle("7C3AED"),statValueAmber:statValStyle("B45309"),statValueRed:statValStyle("E11D48"),curHead:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:10,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},curCodeIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},curCodeOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("8B5CF6")},curCell:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},sz:10,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},curCellGreen:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},emptyCell:{fill:{fgColor:{rgb:"FFFFFF"}}}};
+  const C=(v,s)=>(s?{v,s}:{v});
+  const E=(s)=>C('',s||S.emptyCell);
+  STATE.panels.forEach((panel,idx)=>{
+    const planLabel=t('planLabelPrefix')+(ordinals[idx]||(idx+1));
+    const aoa=[];const merges=[];
+    const appTitleRow=aoa.length;
+    aoa.push([C(t('title'),S.appTitle),...Array(9).fill(C('',S.appTitle))]);
+    merges.push({s:{r:appTitleRow,c:0},e:{r:appTitleRow,c:9}});
+    aoa.push([C(planLabel,S.planName),...Array(9).fill(C('',S.planName))]);
+    aoa.push([C(isAr?'عدد الأيام الكلي':'Total Days',S.headLabel),C(panel.days,S.headValueDays),E(S.headLabel),E(S.headLabel),E(S.headLabel),C(isAr?'الميزانية (د.ب)':'Budget (BHD)',S.headLabel),C(panel.budget,S.headValueBudget),E(S.headLabel),E(S.headLabel),E(S.headLabel)]);
     aoa.push(Array(10).fill(E()));
-
-    /* Row 5: رؤوس الجدول */
-    aoa.push([
-      C(isAr?'تفعيل':'Active', S.th),
-      C(isAr?'التاريخ':'Date', S.th),
-      C(isAr?'البند':'Title', S.th),
-      C(isAr?'التصنيف':'Category', S.th),
-      C(isAr?'العملة (إدخال)':'Currency (In)', S.thIn),
-      C(isAr?'السعر':'Price', S.th),
-      C(isAr?'العملة (تحويل)':'Currency (Out)', S.thOut),
-      C(isAr?'المعادل':'Equivalent', S.th),
-      C(isAr?'الأيام':'Days', S.th),
-      C(isAr?'الإجمالي (د.ب)':'Total (BHD)', S.th)
-    ]);
-
-    /* Rows 6+: البيانات */
-    let sumBHD=0, airSum=0, hotelSum=0, otherSum=0;
-    const totalsIn = {}, totalsOut = {};
-
-    panel.rows.forEach(row => {
-      const cat = categoryOf(row.title);
-      const catLabel = isAr ? {air:'✈️ طيران', hotel:'🏨 فنادق', other:'📦 أخرى'}[cat] : {air:'✈️ Flights', hotel:'🏨 Hotels', other:'📦 Other'}[cat];
-
-      const curIn = row.currency || 'BHD';
-      const curOut = row.currency2 || 'BHD';
-      const priceIn = Number(row.price) || 0;
-      const d = Number(row.days) || 0;
-      const equiv = convert(priceIn, curIn, curOut);
-      const priceInBHD = toBHD(priceIn, curIn);
-      const lineBHD = priceInBHD * d;
-      const isOn = row.ok !== false;
-
-      const baseStyle = !isOn ? S.rowOff : (cat==='air'?S.rowAir:cat==='hotel'?S.rowHotel:S.rowOther);
-      const titleStyle = !isOn ? S.rowOffTitle : (cat==='air'?S.rowAirTitle:cat==='hotel'?S.rowHotelTitle:S.rowOtherTitle);
-
-      if (isOn){
-        sumBHD += lineBHD;
-        if (cat==='air') airSum += lineBHD;
-        if (cat==='hotel') hotelSum += lineBHD;
-        if (cat==='other') otherSum += lineBHD;
-
-        const lineIn = priceIn * d;
-        if (!totalsIn[curIn]) totalsIn[curIn] = {foreign:0, bhd:0};
-        totalsIn[curIn].foreign += lineIn;
-        totalsIn[curIn].bhd += lineBHD;
-
-        const lineOut = equiv * d;
-        if (!totalsOut[curOut]) totalsOut[curOut] = {foreign:0, bhd:0};
-        totalsOut[curOut].foreign += lineOut;
-        totalsOut[curOut].bhd += lineBHD;
-      }
-
-      aoa.push([
-        C(isOn ? (isAr?'نعم':'Yes') : (isAr?'لا':'No'), baseStyle),
-        C(row.date || '', baseStyle),
-        C(row.title || '', titleStyle),
-        C(catLabel, baseStyle),
-        C(curIn, baseStyle),
-        C(priceIn, baseStyle),
-        C(curOut, baseStyle),
-        C(Number(equiv.toFixed(2)), baseStyle),
-        C(d, baseStyle),
-        C(Number(lineBHD.toFixed(2)), baseStyle)
-      ]);
+    aoa.push([C(isAr?'تفعيل':'Active',S.th),C(isAr?'التاريخ':'Date',S.th),C(isAr?'البند':'Title',S.th),C(isAr?'التصنيف':'Category',S.th),C(isAr?'السعر':'Price',S.th),C(isAr?'العملة (إدخال)':'Currency (In)',S.thIn),C(isAr?'المعادل':'Equivalent',S.th),C(isAr?'العملة (تحويل)':'Currency (Out)',S.thOut),C(isAr?'الأيام':'Days',S.th),C(isAr?'الإجمالي (د.ب)':'Total (BHD)',S.th)]);
+    let sumBHD=0,airSum=0,hotelSum=0,otherSum=0;
+    const totalsIn={},totalsOut={};
+    panel.rows.forEach(row=>{
+      const cat=categoryOf(row.title);
+      const catLabel=isAr?{air:'✈️ طيران',hotel:'🏨 فنادق',other:'📦 أخرى'}[cat]:{air:'✈️ Flights',hotel:'🏨 Hotels',other:'📦 Other'}[cat];
+      const curIn=row.currency||'BHD';const curOut=row.currency2||'BHD';
+      const priceIn=Number(row.price)||0;const d=Number(row.days)||0;
+      const equiv=convert(priceIn,curIn,curOut);const priceInBHD=toBHD(priceIn,curIn);const lineBHD=priceInBHD*d;
+      const isOn=row.ok!==false;
+      const baseStyle=!isOn?S.rowOff:(cat==='air'?S.rowAir:cat==='hotel'?S.rowHotel:S.rowOther);
+      const titleStyle=!isOn?S.rowOffTitle:(cat==='air'?S.rowAirTitle:cat==='hotel'?S.rowHotelTitle:S.rowOtherTitle);
+      if(isOn){sumBHD+=lineBHD;if(cat==='air')airSum+=lineBHD;if(cat==='hotel')hotelSum+=lineBHD;if(cat==='other')otherSum+=lineBHD;const lineIn=priceIn*d;if(!totalsIn[curIn])totalsIn[curIn]={foreign:0,bhd:0};totalsIn[curIn].foreign+=lineIn;totalsIn[curIn].bhd+=lineBHD;const lineOut=equiv*d;if(!totalsOut[curOut])totalsOut[curOut]={foreign:0,bhd:0};totalsOut[curOut].foreign+=lineOut;totalsOut[curOut].bhd+=lineBHD;}
+      aoa.push([C(isOn?(isAr?'نعم':'Yes'):(isAr?'لا':'No'),baseStyle),C(row.date||'',baseStyle),C(row.title||'',titleStyle),C(catLabel,baseStyle),C(priceIn,baseStyle),C(curIn,baseStyle),C(Number(equiv.toFixed(2)),baseStyle),C(curOut,baseStyle),C(d,baseStyle),C(Number(lineBHD.toFixed(2)),baseStyle)]);
     });
-
-    /* الإجمالي الكلي: label في I، value في J */
-    const hand = (panel.budget || 0) - sumBHD;
-    aoa.push([...Array(8).fill(E()), C(isAr?'الإجمالي الكلي':'Grand Total', S.grandLabel), C(Number(sumBHD.toFixed(2)), S.grandValue)]);
-
-    /* المتبقي في اليد: label في I، value في J */
-    aoa.push([...Array(8).fill(E()), C(isAr?'المتبقي في اليد':'Remaining', S.handLabel), C(Number(hand.toFixed(2)), S.handValue)]);
-
-    /* صف فارغ */
+    const hand=(panel.budget||0)-sumBHD;
+    aoa.push([...Array(8).fill(E()),C(isAr?'الإجمالي الكلي':'Grand Total',S.grandLabel),C(Number(sumBHD.toFixed(2)),S.grandValue)]);
+    aoa.push([...Array(8).fill(E()),C(isAr?'المتبقي في اليد':'Remaining',S.handLabel),C(Number(hand.toFixed(2)),S.handValue)]);
     aoa.push(Array(10).fill(E()));
-
-    /* عنوان الإحصائيات */
-    const statsTitleRow = aoa.length;
-    aoa.push([C('📊 ' + (isAr?'ملخص الإحصائيات':'Statistics Summary'), S.sectionIn), ...Array(9).fill(C('', S.sectionIn))]);
-    merges.push({s:{r:statsTitleRow,c:0}, e:{r:statsTitleRow,c:9}});
-
-    /* الإحصائيات: عمودان (A/B و D/F) */
-    const airHotel = airSum + hotelSum;
-    const perdayDays = panel.perdayDays || panel.days || 1;
-    const perDay = perdayDays > 0 ? hand / perdayDays : 0;
-    const perDayLabel = t('statPerDay') + (panel.perdayDays ? ` (${panel.perdayDays} ${isAr?'يوم':'d'})` : '');
-    const handStyle = hand < 0 ? S.statValueRed : S.statValueGreen;
-
-    const statsRows = [
-      [
-        {label:t('statBudget'), value:panel.budget||0, style:S.statValue},
-        {label:t('statAirHotel'), value:airHotel, style:S.statValueGreen}
-      ],
-      [
-        {label:t('statAir'), value:airSum, style:S.statValue},
-        {label:t('statOther'), value:otherSum, style:S.statValuePurple}
-      ],
-      [
-        {label:t('statHotel'), value:hotelSum, style:S.statValue},
-        {label:t('statHand'), value:hand, style:handStyle}
-      ],
-      [
-        null,
-        {label:perDayLabel, value:perDay, style:S.statValueAmber}
-      ]
-    ];
-
-    statsRows.forEach(([left, right]) => {
-      const row = [];
-      if (left){
-        row.push(C(left.label, S.statLabel));
-        row.push(C(Number(left.value.toFixed(2)) + ' ' + (isAr?'د.ب':'BHD'), left.style));
-        row.push(E(S.statLabel));
-      } else {
-        row.push(E(S.statLabel));
-        row.push(E(S.statLabel));
-        row.push(E(S.statLabel));
-      }
-      if (right){
-        row.push(C(right.label, S.statLabel));
-        row.push(E(S.statLabel));
-        row.push(C(Number(right.value.toFixed(2)) + ' ' + (isAr?'د.ب':'BHD'), right.style));
-      } else {
-        row.push(E(S.statLabel));
-        row.push(E(S.statLabel));
-        row.push(E(S.statLabel));
-      }
-      row.push(E(S.statLabel));
-      aoa.push(row);
-    });
-
-    /* 4 صفوف فارغة كما في الملف */
+    const statsTitleRow=aoa.length;
+    aoa.push([C('📊 '+(isAr?'ملخص الإحصائيات':'Statistics Summary'),S.sectionIn),...Array(9).fill(C('',S.sectionIn))]);
+    merges.push({s:{r:statsTitleRow,c:0},e:{r:statsTitleRow,c:9}});
+    const airHotel=airSum+hotelSum;
+    const perdayDays=panel.perdayDays||panel.days||1;
+    const perDay=perdayDays>0?hand/perdayDays:0;
+    const perDayLabel=t('statPerDay')+(panel.perdayDays?` (${panel.perdayDays} ${isAr?'يوم':'d'})`:'');
+    const handStyle=hand<0?S.statValueRed:S.statValueGreen;
+    const statsRows=[[{label:t('statBudget'),value:panel.budget||0,style:S.statValue},{label:t('statOther'),value:otherSum,style:S.statValuePurple}],[{label:t('statAir'),value:airSum,style:S.statValue},{label:t('statHand'),value:hand,style:handStyle}],[{label:t('statHotel'),value:hotelSum,style:S.statValue},{label:perDayLabel,value:perDay,style:S.statValueAmber}],[{label:t('statAirHotel'),value:airHotel,style:S.statValueGreen},null]];
+    statsRows.forEach(([left,right])=>{const row=[];if(left){row.push(C(left.label,S.statLabel));row.push(C(Number(left.value.toFixed(2))+' '+(isAr?'د.ب':'BHD'),left.style));row.push(E(S.statLabel));}else{row.push(E(S.statLabel));row.push(E(S.statLabel));row.push(E(S.statLabel));}if(right){row.push(C(right.label,S.statLabel));row.push(E(S.statLabel));row.push(C(Number(right.value.toFixed(2))+' '+(isAr?'د.ب':'BHD'),right.style));}else{row.push(E(S.statLabel));row.push(E(S.statLabel));row.push(E(S.statLabel));}row.push(E(S.statLabel));aoa.push(row);});
+    aoa.push(Array(10).fill(E()));aoa.push(Array(10).fill(E()));
+    const inTitleRow=aoa.length;
+    aoa.push([C(t('currenciesCardTitleIn'),S.sectionIn),...Array(9).fill(C('',S.sectionIn))]);
+    merges.push({s:{r:inTitleRow,c:0},e:{r:inTitleRow,c:9}});
+    aoa.push([C(isAr?'العملة':'Currency',S.curHead),C(isAr?'الاسم':'Name',S.curHead),C(isAr?'المبلغ':'Amount',S.curHead),C(isAr?'المعادل (د.ب)':'Equivalent (BHD)',S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead)]);
+    const inCodes=Object.keys(totalsIn).sort((a,b)=>totalsIn[b].foreign-totalsIn[a].foreign);
+    if(!inCodes.length){aoa.push([C(t('currenciesCardEmpty'),S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);}else{inCodes.forEach(code=>{const c=CURRENCIES[code];aoa.push([C(code,S.curCodeIn),C(curName(code),S.curCell),C(Number(totalsIn[code].foreign.toFixed(2))+' '+(c?c.sym:code),S.curCell),C(Number(totalsIn[code].bhd.toFixed(2)),S.curCellGreen),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);});}
     aoa.push(Array(10).fill(E()));
-    aoa.push(Array(10).fill(E()));
-    aoa.push(Array(10).fill(E()));
-    aoa.push(Array(10).fill(E()));
-
-    /* بطاقة العملات (سعر الإدخال) */
-    const inTitleRow = aoa.length;
-    aoa.push([C(t('currenciesCardTitleIn'), S.sectionIn), ...Array(9).fill(C('', S.sectionIn))]);
-    merges.push({s:{r:inTitleRow,c:0}, e:{r:inTitleRow,c:9}});
-
-    /* رؤوس بطاقة العملة: A=العملة, B=الاسم, C=المبلغ, D=المعادل */
-    aoa.push([
-      C(isAr?'العملة':'Currency', S.curHead),
-      C(isAr?'الاسم':'Name', S.curHead),
-      C(isAr?'المبلغ':'Amount', S.curHead),
-      C(isAr?'المعادل (د.ب)':'Equivalent (BHD)', S.curHead),
-      E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead)
-    ]);
-
-    const inCodes = Object.keys(totalsIn).sort((a,b)=>totalsIn[b].foreign-totalsIn[a].foreign);
-    if (!inCodes.length){
-      aoa.push([C(t('currenciesCardEmpty'), S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell)]);
-    } else {
-      inCodes.forEach(code => {
-        const c = CURRENCIES[code];
-        aoa.push([
-          C(code, S.curCodeIn),
-          C(curName(code), S.curCell),
-          C(Number(totalsIn[code].foreign.toFixed(2)) + ' ' + (c?c.sym:code), S.curCell),
-          C(Number(totalsIn[code].bhd.toFixed(2)), S.curCellGreen),
-          E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell)
-        ]);
-      });
-    }
-
-    /* صف فارغ */
-    aoa.push(Array(10).fill(E()));
-
-    /* بطاقة العملات (التحويل) */
-    const outTitleRow = aoa.length;
-    aoa.push([C(t('currenciesCardTitleOut'), S.sectionOut), ...Array(9).fill(C('', S.sectionOut))]);
-    merges.push({s:{r:outTitleRow,c:0}, e:{r:outTitleRow,c:9}});
-
-    aoa.push([
-      C(isAr?'العملة':'Currency', S.curHead),
-      C(isAr?'الاسم':'Name', S.curHead),
-      C(isAr?'المبلغ':'Amount', S.curHead),
-      C(isAr?'المعادل (د.ب)':'Equivalent (BHD)', S.curHead),
-      E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead), E(S.curHead)
-    ]);
-
-    const outCodes = Object.keys(totalsOut).sort((a,b)=>totalsOut[b].foreign-totalsOut[a].foreign);
-    if (!outCodes.length){
-      aoa.push([C(t('currenciesCardEmpty'), S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell)]);
-    } else {
-      outCodes.forEach(code => {
-        const c = CURRENCIES[code];
-        aoa.push([
-          C(code, S.curCodeOut),
-          C(curName(code), S.curCell),
-          C(Number(totalsOut[code].foreign.toFixed(2)) + ' ' + (c?c.sym:code), S.curCell),
-          C(Number(totalsOut[code].bhd.toFixed(2)), S.curCellGreen),
-          E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell), E(S.curCell)
-        ]);
-      });
-    }
-
-    const ws = XLSX.utils.aoa_to_sheet(aoa);
-    ws['!cols'] = [{wch:22},{wch:16},{wch:32},{wch:18},{wch:15},{wch:14},{wch:15},{wch:16},{wch:14},{wch:18}];
-    ws['!rows'] = [];
-    ws['!rows'][0] = {hpt: 30};
-    ws['!merges'] = merges;
-    ws['!views'] = [{ RTL: true }];
-
-    const sheetName = String(planLabel).substring(0, 31) || ('Sheet' + (idx+1));
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    const outTitleRow=aoa.length;
+    aoa.push([C(t('currenciesCardTitleOut'),S.sectionOut),...Array(9).fill(C('',S.sectionOut))]);
+    merges.push({s:{r:outTitleRow,c:0},e:{r:outTitleRow,c:9}});
+    aoa.push([C(isAr?'العملة':'Currency',S.curHead),C(isAr?'الاسم':'Name',S.curHead),C(isAr?'المبلغ':'Amount',S.curHead),C(isAr?'المعادل (د.ب)':'Equivalent (BHD)',S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead)]);
+    const outCodes=Object.keys(totalsOut).sort((a,b)=>totalsOut[b].foreign-totalsOut[a].foreign);
+    if(!outCodes.length){aoa.push([C(t('currenciesCardEmpty'),S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);}else{outCodes.forEach(code=>{const c=CURRENCIES[code];aoa.push([C(code,S.curCodeOut),C(curName(code),S.curCell),C(Number(totalsOut[code].foreign.toFixed(2))+' '+(c?c.sym:code),S.curCell),C(Number(totalsOut[code].bhd.toFixed(2)),S.curCellGreen),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);});}
+    const ws=XLSX.utils.aoa_to_sheet(aoa);
+    ws['!cols']=[{wch:22},{wch:16},{wch:32},{wch:18},{wch:14},{wch:16},{wch:18},{wch:16},{wch:14},{wch:18}];
+    ws['!rows']=[];ws['!rows'][0]={hpt:30};ws['!merges']=merges;ws['!views']=[{RTL:true}];
+    const sheetName=String(planLabel).substring(0,31)||('Sheet'+(idx+1));
+    XLSX.utils.book_append_sheet(wb,ws,sheetName);
   });
-
-  /* ورقة الملخص */
-  const sumAoa = [];
-  sumAoa.push([
-    C(isAr?'الخطة':'Plan', S.th),
-    C(isAr?'عدد الأيام':'Days', S.th),
-    C(isAr?'الميزانية':'Budget', S.th),
-    C(isAr?'الإجمالي':'Total', S.th),
-    C(isAr?'المتبقي':'Remaining', S.th)
-  ]);
-  STATE.panels.forEach((p, i) => {
-    let sumBHD = 0;
-    p.rows.forEach(r => { if (r.ok === false) return; sumBHD += toBHD(Number(r.price)||0, r.currency||'BHD') * (Number(r.days)||0); });
-    const label = t('planLabelPrefix') + (ordinals[i] || (i+1));
-    const hand = (p.budget||0) - sumBHD;
-    sumAoa.push([C(label, S.curCell), C(p.days, S.curCell), C(Number((p.budget||0).toFixed(2)), S.curCell), C(Number(sumBHD.toFixed(2)), S.curCellGreen), C(Number(hand.toFixed(2)), hand<0 ? S.statValueRed : S.curCellGreen)]);
-  });
-  const wsSum = XLSX.utils.aoa_to_sheet(sumAoa);
-  wsSum['!cols'] = [{wch:22},{wch:12},{wch:16},{wch:16},{wch:16}];
-  wsSum['!views'] = [{ RTL: true }];
-  XLSX.utils.book_append_sheet(wb, wsSum, isAr ? 'ملخص' : 'Summary');
-
-  wb.Workbook = { Views: [{ RTL: true }] };
-
-  const ts = new Date().toISOString().slice(0,10);
-  XLSX.writeFile(wb, `travel-budget-${ts}.xlsx`);
+  const sumAoa=[];
+  sumAoa.push([C(isAr?'الخطة':'Plan',S.th),C(isAr?'عدد الأيام':'Days',S.th),C(isAr?'الميزانية':'Budget',S.th),C(isAr?'الإجمالي':'Total',S.th),C(isAr?'المتبقي':'Remaining',S.th)]);
+  STATE.panels.forEach((p,i)=>{let sumBHD=0;p.rows.forEach(r=>{if(r.ok===false)return;sumBHD+=toBHD(Number(r.price)||0,r.currency||'BHD')*(Number(r.days)||0);});const label=t('planLabelPrefix')+(ordinals[i]||(i+1));const hand=(p.budget||0)-sumBHD;sumAoa.push([C(label,S.curCell),C(p.days,S.curCell),C(Number((p.budget||0).toFixed(2)),S.curCell),C(Number(sumBHD.toFixed(2)),S.curCellGreen),C(Number(hand.toFixed(2)),hand<0?S.statValueRed:S.curCellGreen)]);});
+  const wsSum=XLSX.utils.aoa_to_sheet(sumAoa);
+  wsSum['!cols']=[{wch:22},{wch:12},{wch:16},{wch:16},{wch:16}];
+  wsSum['!views']=[{RTL:true}];
+  XLSX.utils.book_append_sheet(wb,wsSum,isAr?'ملخص':'Summary');
+  wb.Workbook={Views:[{RTL:true}]};
+  const ts=new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb,`travel-budget-${ts}.xlsx`);
   showToast(t('excelSuccess'));
 }
 
 function importFromExcel(file){
-  if(typeof XLSX==='undefined'){showToast('مكتبة Excel غير محمّلة',true);return;}
+  if(typeof XLSX==='undefined'){showToast('Excel غير محمّل',true);return;}
   const reader=new FileReader();
   reader.onload=e=>{
     try{
       const data=new Uint8Array(e.target.result);
       const wb=XLSX.read(data,{type:'array'});
-      if(!wb.SheetNames||!wb.SheetNames.length){showToast(t('excelNoSheets'),true);return;}
       const sheetNames=wb.SheetNames.filter(n=>n!=='ملخص'&&n!=='Summary');
       if(!sheetNames.length){showToast(t('excelNoSheets'),true);return;}
       const newPanels=[];
       sheetNames.forEach((sheetName,pIdx)=>{
         const ws=wb.Sheets[sheetName];
         const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-        let days=14, budget=0, headerRowIdx=-1;
+        let days=14,budget=0,headerRowIdx=-1;
         for(let r=0;r<Math.min(rows.length,10);r++){const firstCell=String(rows[r][0]||'').trim();if(/تفعيل|Active|نشط/i.test(firstCell)){headerRowIdx=r;break;}}
         rows.slice(0,headerRowIdx>0?headerRowIdx:5).forEach(row=>{row.forEach((cell,ci)=>{const s=String(cell||'').trim();if(/عدد الأيام الكلي|Total Days/i.test(s)){const v=parseFloat(row[ci+1]);if(isFinite(v)&&v>0)days=v;}if(/الميزانية|Budget/i.test(s)){const v=parseFloat(row[ci+1]);if(isFinite(v))budget=v;}});});
         const panelRows=[];
@@ -1015,19 +751,16 @@ function importFromExcel(file){
             const firstCell=String(row[0]||'').trim();
             if(/الإجمالي الكلي|Grand Total|المتبقي|Remaining/i.test(firstCell))break;
             const title=String(row[2]||'').trim();
-            const price=parseFloat(row[5]);
-            const dd=parseFloat(row[8]);
+            const price=parseFloat(row[4]);const dd=parseFloat(row[8]);
             if(!title&&!isFinite(price)&&!isFinite(dd))continue;
             const activeCell=String(row[0]||'').trim().toLowerCase();
             const ok=!/^(لا|no|false|0)$/i.test(activeCell);
-            let curIn=String(row[4]||'').trim().toUpperCase();
-            let curOut=String(row[6]||'').trim().toUpperCase();
-            if(!CURRENCIES[curIn])curIn='BHD';
-            if(!CURRENCIES[curOut])curOut='BHD';
-            panelRows.push({ok, date:String(row[1]||'').trim(), title, currency:curIn, currency2:curOut, price:isFinite(price)?price:null, days:isFinite(dd)?dd:null});
+            let curIn=String(row[5]||'').trim().toUpperCase();let curOut=String(row[7]||'').trim().toUpperCase();
+            if(!CURRENCIES[curIn])curIn='BHD';if(!CURRENCIES[curOut])curOut='BHD';
+            panelRows.push({ok,date:String(row[1]||'').trim(),title,currency:curIn,currency2:curOut,price:isFinite(price)?price:null,days:isFinite(dd)?dd:null});
           }
         }
-        newPanels.push({id:'plan_'+Date.now()+'_'+pIdx+'_'+Math.random().toString(36).slice(2,6), index:pIdx, days, budget, perdayDays:null, rows:panelRows});
+        newPanels.push({id:'plan_'+Date.now()+'_'+pIdx+'_'+Math.random().toString(36).slice(2,6),index:pIdx,days,budget,perdayDays:null,rows:panelRows});
       });
       if(!newPanels.length){showToast(t('excelImportError'),true);return;}
       STATE.panels=newPanels;saveState();renderEverything();showToast(t('excelImportSuccess'));
@@ -1037,7 +770,7 @@ function importFromExcel(file){
   reader.readAsArrayBuffer(file);
 }
 
-function applyTheme(){document.body.classList.toggle('dark',STATE.theme==='dark');const btn=document.getElementById('btnTheme');if(btn)btn.textContent=STATE.theme==='dark'?'☀️':'🌙';}
+function applyTheme(){document.body.classList.toggle('dark',STATE.theme==='dark');const b=document.getElementById('btnTheme');if(b)b.textContent=STATE.theme==='dark'?'☀️':'🌙';}
 function applyFontScale(){document.body.style.setProperty('--fs',STATE.fontScale);}
 function applyLang(){
   document.documentElement.lang=STATE.lang;document.documentElement.dir=t('dir');
@@ -1063,12 +796,11 @@ function updateRatesStatusUI(){const el=document.getElementById('ratesStatus');c
 function renderHelpContent(){const C=HELP_CONTENT[STATE.lang]||HELP_CONTENT.ar;document.getElementById('helpTitle').textContent=C.title;document.getElementById('helpSubtitle').textContent=C.subtitle;document.getElementById('helpFootNote').textContent=C.footNote;document.getElementById('helpOk').textContent=C.okBtn;const body=document.getElementById('helpBody');let html=`<div class="help-intro">${C.intro}</div>`;C.sections.forEach((sec,i)=>{const num=STATE.lang==='ar'?['١','٢','٣','٤','٥'][i]||(i+1):(i+1);html+=`<div class="help-section"><div class="help-section-title"><span class="num">${num}</span><span>${sec.title}</span></div><div class="help-text">${sec.text}</div>`;if(sec.example){html+=`<div class="help-example"><div class="ex-title">${sec.example.title}</div>`;sec.example.rows.forEach((r,ri)=>{const isLast=ri===sec.example.rows.length-1;html+=`<div class="ex-row" ${isLast?'style="font-weight:900"':''}><span>${r.label}</span><span class="ex-val">${r.val}</span></div>`;});html+=`</div>`;}if(sec.tip){html+=`<div class="help-tip"><div class="tip-title">${sec.tip.title}</div><div>${sec.tip.text}</div></div>`;}html+=`</div>`;});body.innerHTML=html;}
 function openHelp(){renderHelpContent();document.getElementById('helpOverlay').classList.add('show');document.body.style.overflow='hidden';}
 function closeHelp(){document.getElementById('helpOverlay').classList.remove('show');document.body.style.overflow='';}
-
 document.getElementById('btnHelp').addEventListener('click',openHelp);
 document.getElementById('helpClose').addEventListener('click',closeHelp);
 document.getElementById('helpOk').addEventListener('click',closeHelp);
 document.getElementById('helpOverlay').addEventListener('click',e=>{if(e.target.id==='helpOverlay')closeHelp();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('helpOverlay').classList.contains('show')){closeHelp();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('helpOverlay').classList.contains('show'))closeHelp();});
 
 function renderTitlesUI(){
   const tabsEl=document.getElementById('tabs');const chipListEl=document.getElementById('chipList');const datalist=document.getElementById('titlesList');
@@ -1086,7 +818,6 @@ document.getElementById('chipList').addEventListener('click',e=>{const b=e.targe
 function addTitle(v){v=String(v||'').trim();if(!v)return;['air','hotel','other'].forEach(c=>{STATE.titles[c]=STATE.titles[c].filter(x=>x.toLowerCase()!==v.toLowerCase());});STATE.titles[STATE.activeCat].push(v);saveState();renderTitlesUI();recalcAllPanels();}
 document.getElementById('addBtn').addEventListener('click',()=>{const inp=document.getElementById('newTitleInput');addTitle(inp.value);inp.value='';inp.focus();});
 document.getElementById('newTitleInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addTitle(e.target.value);e.target.value='';}});
-
 function buildCurrencyOptions(selected){return Object.entries(CURRENCIES).map(([code,c])=>{const label=STATE.lang==='ar'?`${code} — ${c.ar}`:`${code} — ${c.en}`;return `<option value="${code}" ${code===selected?'selected':''}>${esc(label)}</option>`;}).join('');}
 function enforceMax(inp,getMax){
   const clamp=()=>{const maxV=parseFloat(getMax())||0;const v=parseFloat(inp.value);if(isFinite(v)&&maxV>0&&v>maxV){inp.value=maxV;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);return true;}if(isFinite(v)&&v<0)inp.value=0;return false;};
@@ -1103,10 +834,10 @@ function makeRowEl(row,maxDays){
     <td><div class="date-wrap"><input type="text" class="cell-inp date-txt" data-f="date" value="${esc(row.date??'')}" placeholder="—"><button type="button" class="cal-btn" aria-label="cal">📅</button><input type="date" class="cal-native" tabindex="-1" aria-hidden="true"></div></td>
     <td><input type="text" class="cell-inp title-inp" data-f="title" list="titlesList" autocomplete="off" value="${esc(row.title??'')}" placeholder="…"></td>
     <td class="cat-cell"><span class="cat-pill">—</span></td>
-    <td class="currency-cell cur-in"><select class="currency-sel" data-f="currency" title="${t('currencyInTitle')}">${buildCurrencyOptions(curIn)}</select></td>
     <td><input type="number" min="0" step="0.01" class="cell-inp n" data-f="price" value="${row.price??''}" placeholder="0.00"></td>
-    <td class="currency-cell cur-out"><select class="currency-sel" data-f="currency2" title="${t('currencyOutTitle')}">${buildCurrencyOptions(curOut)}</select></td>
+    <td class="currency-cell cur-in"><select class="currency-sel" data-f="currency" title="${t('currencyInTitle')}">${buildCurrencyOptions(curIn)}</select></td>
     <td class="bhd-cell" data-k="equiv">0.00</td>
+    <td class="currency-cell cur-out"><select class="currency-sel" data-f="currency2" title="${t('currencyOutTitle')}">${buildCurrencyOptions(curOut)}</select></td>
     <td><input type="number" min="0" max="${maxDays||''}" step="1" class="cell-inp n" data-f="days" value="${row.days??''}" placeholder="0"></td>
     <td class="cell-total" data-k="lineBHD">0.00 د.ب</td>
     <td style="text-align:center"><button type="button" class="del-btn" title="${t('thDelete')}">🗑️</button></td>
@@ -1124,6 +855,15 @@ function makeRowEl(row,maxDays){
 function buildPanelEl(panel,idx){
   const sec=document.createElement('section');sec.className='panel';sec.dataset.pid=panel.id;
   const ordinals=t('planOrdinals');const label=t('planLabelPrefix')+(ordinals[idx]||(idx+1));
+  let _sumBHD=0,_air=0,_hotel=0,_other=0;
+  (panel.rows||[]).forEach(r=>{
+    if(r.ok===false)return;
+    const cat=categoryOf(r.title);
+    const l=toBHD(Number(r.price)||0,r.currency||'BHD')*(Number(r.days)||0);
+    _sumBHD+=l;if(cat==='air')_air+=l;else if(cat==='hotel')_hotel+=l;else _other+=l;
+  });
+  const _hand=(panel.budget||0)-_sumBHD;
+
   sec.innerHTML=`
     <div class="panel-head">
       <h2>${esc(label)} <span class="badge">${panel.days}</span></h2>
@@ -1133,14 +873,56 @@ function buildPanelEl(panel,idx){
         <label>${t('budgetLabel')} (${t('currency')})<input type="number" min="0" step="0.01" class="inp budget-inp" value="${panel.budget}"></label>
       </div>
     </div>
+
+    <div class="pdf-header-zone">
+      <div class="pdf-hero">
+        <div>
+          <h1>${esc(t('title'))}</h1>
+          <div class="pdf-hero-sub">${esc(t('subtitle'))}</div>
+        </div>
+        <div class="pdf-hero-brand">MUHARRAQI</div>
+      </div>
+      <div class="pdf-plan-strip">
+        <h3 class="ps-name">${esc(label)}</h3>
+        <div class="ps-meta">
+          <span class="ps-badge">📅 ${panel.days} ${STATE.lang==='ar'?'يوم':'days'}</span>
+          <span class="ps-badge">💰 ${fmt(panel.budget||0)} ${t('currency')}</span>
+        </div>
+      </div>
+      <div class="pdf-kpi-row">
+        <div class="pdf-kpi sky">
+          <div class="kpi-label">${esc(t('statAir'))}</div>
+          <div class="kpi-value">${fmt(_air)}<span class="kpi-cur">${t('currency')}</span></div>
+        </div>
+        <div class="pdf-kpi teal">
+          <div class="kpi-label">${esc(t('statHotel'))}</div>
+          <div class="kpi-value">${fmt(_hotel)}<span class="kpi-cur">${t('currency')}</span></div>
+        </div>
+        <div class="pdf-kpi green">
+          <div class="kpi-label">${esc(t('statHand'))}</div>
+          <div class="kpi-value">${fmt(_hand)}<span class="kpi-cur">${t('currency')}</span></div>
+        </div>
+        <div class="pdf-kpi">
+          <div class="kpi-label">${esc(t('statOther'))}</div>
+          <div class="kpi-value">${fmt(_other)}<span class="kpi-cur">${t('currency')}</span></div>
+        </div>
+      </div>
+    </div>
+
     <div class="table-wrap">
       <table>
         <thead><tr>
-            <th style="width:80px">${t('thToggle')}</th><th style="width:104px">${t('thDate')}</th><th>${t('thTitle')}</th><th style="width:68px">${t('thCat')}</th>
-            <th class="th-cur-in" style="width:114px">${t('thCurrencyIn')}<span class="th-sub">${t('thCurrencyInSub')}</span></th>
-            <th style="width:100px">${t('thPrice')}</th>
-            <th class="th-cur-out" style="width:114px">${t('thCurrencyOut')}<span class="th-sub">${t('thCurrencyOutSub')}</span></th>
-            <th style="width:126px">${t('thBHD')}</th><th style="width:66px">${t('thDays')}</th><th style="width:114px">${t('thTotal')}</th><th style="width:40px">${t('thDelete')}</th>
+            <th style="width:80px">${t('thToggle')}</th>
+            <th style="width:9%">${t('thDate')}</th>
+            <th style="width:21%">${t('thTitle')}</th>
+            <th style="width:8%">${t('thCat')}</th>
+            <th style="width:9%">${t('thPrice')}</th>
+            <th class="th-cur-in" style="width:11%">${t('thCurrencyIn')}<span class="th-sub">${t('thCurrencyInSub')}</span></th>
+            <th style="width:12%">${t('thBHD')}</th>
+            <th class="th-cur-out" style="width:11%">${t('thCurrencyOut')}<span class="th-sub">${t('thCurrencyOutSub')}</span></th>
+            <th style="width:7%">${t('thDays')}</th>
+            <th style="width:12%">${t('thTotal')}</th>
+            <th style="width:40px">${t('thDelete')}</th>
         </tr></thead>
         <tbody></tbody>
         <tfoot><tr class="row-grand">
@@ -1191,30 +973,31 @@ function buildPanelEl(panel,idx){
   const tbody=sec.querySelector('tbody');panel.rows.forEach(r=>tbody.appendChild(makeRowEl(r,panel.days)));
   const handler=()=>{syncPanelToState(sec);recalcPanel(panel,sec);saveState();};
   sec.addEventListener('input',handler);sec.addEventListener('change',handler);sec.addEventListener('keyup',handler);
-
   const perdayInp=sec.querySelector('.perday-inp');const perdayReset=sec.querySelector('.perday-reset');const daysInp=sec.querySelector('.days-inp');
   enforceMax(perdayInp,()=>perdayInp.max||daysInp.value);
   perdayInp.addEventListener('input',()=>{perdayInp.dataset.userEdited='1';perdayInp.classList.add('user-edited');});
   perdayReset.addEventListener('click',()=>{delete perdayInp.dataset.userEdited;perdayInp.classList.remove('user-edited');perdayInp.value=daysInp.value;handler();});
   daysInp.addEventListener('input',()=>{
     const pd=parseFloat(daysInp.value)||0;perdayInp.max=pd;let pv=parseFloat(perdayInp.value);
-    if(isFinite(pv)&&pv>pd){perdayInp.value=pd;perdayInp.classList.add('clamp-shake');setTimeout(()=>perdayInp.classList.remove('clamp-shake'),400);}else if(!perdayInp.dataset.userEdited){perdayInp.value=pd;}
+    if(isFinite(pv)&&pv>pd){perdayInp.value=pd;perdayInp.classList.add('clamp-shake');setTimeout(()=>perdayInp.classList.remove('clamp-shake'),400);}
+    else if(!perdayInp.dataset.userEdited){perdayInp.value=pd;}
     tbody.querySelectorAll('[data-f="days"]').forEach(inp=>{inp.max=pd;const v=parseFloat(inp.value);if(isFinite(v)&&v>pd){inp.value=pd;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);}});
   });
-
   tbody.addEventListener('click',e=>{const b=e.target.closest('.del-btn');if(!b)return;const tr=b.closest('tr');if(!tr)return;tr.classList.add('row-removing');setTimeout(()=>{tr.remove();syncPanelToState(sec);recalcPanel(panel,sec);saveState();},260);});
   sec.querySelector('.btn-add').addEventListener('click',()=>{
     const newTr=makeRowEl(null,parseFloat(daysInp.value)||0);tbody.appendChild(newTr);newTr.classList.add('row-new');setTimeout(()=>newTr.classList.remove('row-new'),400);
     syncPanelToState(sec);recalcPanel(panel,sec);saveState();
-    const titleInp=newTr.querySelector('[data-f="title"]');if(titleInp)titleInp.focus();newTr.scrollIntoView({behavior:'smooth',block:'center'});
+    const titleInp=newTr.querySelector('[data-f="title"]');if(titleInp)titleInp.focus();
+    newTr.scrollIntoView({behavior:'smooth',block:'center'});
   });
   sec.querySelector('.btn-clear').addEventListener('click',()=>{if(!tbody.children.length)return;showModal({title:t('deleteAllTitle'),message:t('deleteAllMsg'),onSave:()=>{exportData();setTimeout(()=>doClearRows(tbody,sec,panel),400);},onConfirm:()=>doClearRows(tbody,sec,panel)});});
   sec.querySelector('.btn-print').addEventListener('click',()=>printPlan(sec));
-  sec.querySelector('.btn-share').addEventListener('click',()=>sharePlanPDF(sec,label));
+  sec.querySelector('.btn-share').addEventListener('click',()=>sharePlanPDF(sec,label,idx));
   sec.querySelector('.btn-xlsx').addEventListener('click',()=>exportToExcel());
   const removeBtn=sec.querySelector('[data-remove]');
   if(removeBtn){removeBtn.addEventListener('click',()=>{if(STATE.panels.length<=1)return;showModal({title:t('removePlanTitle'),message:t('removePlanMsg'),onSave:()=>{exportData();setTimeout(()=>doRemovePlan(panel.id),400);},onConfirm:()=>doRemovePlan(panel.id)});});}
-  recalcPanel(panel,sec);return sec;
+  recalcPanel(panel,sec);
+  return sec;
 }
 
 function doClearRows(tbody,sec,panel){Array.from(tbody.children).forEach((tr,i)=>{setTimeout(()=>{tr.classList.add('row-removing');setTimeout(()=>{tr.remove();syncPanelToState(sec);recalcPanel(panel,sec);saveState();},260);},i*25);});}
@@ -1233,34 +1016,22 @@ function syncPanelToState(sec){
   });
 }
 function syncFromDOM(){document.querySelectorAll('.panel').forEach(panelEl=>syncPanelToState(panelEl));}
-
 function setStat(sec,key,val,{bad=false}={}){const el=sec.querySelector(`[data-k="${key}"]`);if(!el)return;el.textContent=fmt(val);const card=el.closest('.stat');if(card)card.classList.toggle('bad',bad&&val<0);}
-
-function renderInCurrenciesCard(sec,totals){
-  const listEl=sec.querySelector('[data-k="ccListIn"]');const updEl=sec.querySelector('[data-k="ccUpdate"]');if(!listEl)return;
-  if(updEl){if(RATES.lastUpdate){const d=new Date(RATES.lastUpdate);if(!isNaN(d.getTime())){updEl.textContent=t('currenciesCardUpdate')+' '+d.toLocaleString(STATE.lang==='ar'?'ar-BH':'en-GB',{dateStyle:'short',timeStyle:'short'});}else{updEl.textContent=t('currenciesCardUpdate')+' '+RATES.lastUpdate;}}else{updEl.textContent='';}}
-  const codes=Object.keys(totals).sort((a,b)=>totals[b].foreign-totals[a].foreign);
-  if(!codes.length){listEl.innerHTML=`<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;return;}
-  listEl.innerHTML=codes.map(code=>{const c=CURRENCIES[code];const sym=c?c.sym:code;const name=curName(code);const foreign=totals[code].foreign;const bhd=totals[code].bhd;return `<div class="currency-item"><div class="ci-left"><span class="ci-code in-code">${esc(code)}</span><span class="ci-name">${esc(name)}</span></div><div class="ci-right"><span class="ci-sub in-sub">${fmt(foreign)} ${esc(sym)}</span><span class="ci-arrow">→</span><span class="ci-bhd">${fmt(bhd)} ${curSym('BHD')}</span></div></div>`;}).join('');
-}
-function renderOutCurrenciesCard(sec,totals){
-  const listEl=sec.querySelector('[data-k="ccListOut"]');if(!listEl)return;
-  const codes=Object.keys(totals).sort((a,b)=>totals[b].foreign-totals[a].foreign);
-  if(!codes.length){listEl.innerHTML=`<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;return;}
-  listEl.innerHTML=codes.map(code=>{const c=CURRENCIES[code];const sym=c?c.sym:code;const name=curName(code);const foreign=totals[code].foreign;const bhd=totals[code].bhd;return `<div class="currency-item"><div class="ci-left"><span class="ci-code out-code">${esc(code)}</span><span class="ci-name">${esc(name)}</span></div><div class="ci-right"><span class="ci-sub out-sub">${fmt(foreign)} ${esc(sym)}</span><span class="ci-arrow">→</span><span class="ci-bhd">${fmt(bhd)} ${curSym('BHD')}</span></div></div>`;}).join('');
-}
+function renderInCurrenciesCard(sec,totals){const listEl=sec.querySelector('[data-k="ccListIn"]');const updEl=sec.querySelector('[data-k="ccUpdate"]');if(!listEl)return;if(updEl){if(RATES.lastUpdate){const d=new Date(RATES.lastUpdate);if(!isNaN(d.getTime()))updEl.textContent=t('currenciesCardUpdate')+' '+d.toLocaleString(STATE.lang==='ar'?'ar-BH':'en-GB',{dateStyle:'short',timeStyle:'short'});else updEl.textContent=t('currenciesCardUpdate')+' '+RATES.lastUpdate;}else updEl.textContent='';}const codes=Object.keys(totals).sort((a,b)=>totals[b].foreign-totals[a].foreign);if(!codes.length){listEl.innerHTML=`<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;return;}listEl.innerHTML=codes.map(code=>{const c=CURRENCIES[code];const sym=c?c.sym:code;const name=curName(code);const foreign=totals[code].foreign;const bhd=totals[code].bhd;return `<div class="currency-item"><div class="ci-left"><span class="ci-code in-code">${esc(code)}</span><span class="ci-name">${esc(name)}</span></div><div class="ci-right"><span class="ci-sub in-sub">${fmt(foreign)} ${esc(sym)}</span><span class="ci-arrow">→</span><span class="ci-bhd">${fmt(bhd)} ${curSym('BHD')}</span></div></div>`;}).join('');}
+function renderOutCurrenciesCard(sec,totals){const listEl=sec.querySelector('[data-k="ccListOut"]');if(!listEl)return;const codes=Object.keys(totals).sort((a,b)=>totals[b].foreign-totals[a].foreign);if(!codes.length){listEl.innerHTML=`<div class="currencies-empty">${t('currenciesCardEmpty')}</div>`;return;}listEl.innerHTML=codes.map(code=>{const c=CURRENCIES[code];const sym=c?c.sym:code;const name=curName(code);const foreign=totals[code].foreign;const bhd=totals[code].bhd;return `<div class="currency-item"><div class="ci-left"><span class="ci-code out-code">${esc(code)}</span><span class="ci-name">${esc(name)}</span></div><div class="ci-right"><span class="ci-sub out-sub">${fmt(foreign)} ${esc(sym)}</span><span class="ci-arrow">→</span><span class="ci-bhd">${fmt(bhd)} ${curSym('BHD')}</span></div></div>`;}).join('');}
 
 function recalcPanel(panel,sec){
   const days=parseFloat(sec.querySelector('.days-inp').value)||0;
   const budget=parseFloat(sec.querySelector('.budget-inp').value)||0;
   sec.querySelector('.badge').textContent=days;
   const perdayInp=sec.querySelector('.perday-inp');let perdayDays=parseFloat(perdayInp.value);if(!isFinite(perdayDays)||perdayDays<=0)perdayDays=days;
-  let sumTotalBHD=0, airSum=0, hotelSum=0, otherSum=0;let rowCount=0, offCount=0;
+  let sumTotalBHD=0,airSum=0,hotelSum=0,otherSum=0;let rowCount=0,offCount=0;
   const totalsIn={};const totalsOut={};
   sec.querySelectorAll('tbody tr').forEach(tr=>{
     rowCount++;
     const okInp=tr.querySelector('.ok-inp');const isOn=okInp?okInp.checked:true;
-    tr.classList.toggle('row-off',!isOn);if(!isOn)offCount++;
+    tr.classList.toggle('row-off',!isOn);
+    if(!isOn)offCount++;
     const titleEl=tr.querySelector('[data-f="title"]');const title=titleEl?titleEl.value:'';
     const cat=categoryOf(title);
     tr.classList.remove('cat-air','cat-hotel','cat-other');tr.classList.add('cat-'+cat);
@@ -1286,36 +1057,93 @@ function recalcPanel(panel,sec){
   const emptyState=sec.querySelector('.empty-state');if(emptyState)emptyState.style.display=(rowCount===0)?'block':'none';
   setStat(sec,'budget',budget);setStat(sec,'airOnly',airSum);setStat(sec,'hotelOnly',hotelSum);setStat(sec,'airHotel',airHotel);setStat(sec,'otherOnly',otherSum);setStat(sec,'hand',hand,{bad:true});setStat(sec,'perDay',perDay,{bad:true});
   renderInCurrenciesCard(sec,totalsIn);renderOutCurrenciesCard(sec,totalsOut);
+  const zone=sec.querySelector('.pdf-header-zone');
+  if(zone){
+    const kpis=zone.querySelectorAll('.pdf-kpi .kpi-value');
+    if(kpis.length>=4){
+      kpis[0].innerHTML=fmt(airSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
+      kpis[1].innerHTML=fmt(hotelSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
+      kpis[2].innerHTML=fmt(hand)+'<span class="kpi-cur">'+t('currency')+'</span>';
+      kpis[3].innerHTML=fmt(otherSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
+    }
+    const stripBadges=zone.querySelectorAll('.ps-badge');
+    if(stripBadges.length>=2){
+      stripBadges[0].textContent='📅 '+days+' '+(STATE.lang==='ar'?'يوم':'days');
+      stripBadges[1].textContent='💰 '+fmt(budget)+' '+t('currency');
+    }
+  }
 }
 
 function recalcAllPanels(){document.querySelectorAll('.panel').forEach(sec=>{const panel=STATE.panels.find(p=>p.id===sec.dataset.pid);if(panel)recalcPanel(panel,sec);});}
 function renderPanels(){const container=document.getElementById('panels');container.innerHTML='';STATE.panels.forEach((p,i)=>container.appendChild(buildPanelEl(p,i)));document.getElementById('addPlanWrap').style.display='flex';}
 function renderEverything(){renderTitlesUI();renderPanels();}
-
 function printPlan(panelEl){document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));document.body.classList.add('printing');panelEl.classList.add('print-target');window.print();}
 window.addEventListener('afterprint',()=>{document.body.classList.remove('printing');document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));});
 
-async function sharePlanPDF(panelEl,label){
+async function sharePlanPDF(panelEl,label,idx){
   if(typeof html2pdf==='undefined'){showToast(t('importError'),true);return;}
   showToast(t('generating'));
   const clone=panelEl.cloneNode(true);
   clone.querySelectorAll('.table-actions, .panel-remove, .cal-btn, .del-btn, .perday-reset').forEach(el=>el.remove());
-  clone.querySelectorAll('input').forEach(inp=>{const span=document.createElement('span');if(inp.type==='checkbox')span.textContent=inp.checked?'✔':'—';else span.textContent=inp.value||'—';inp.parentNode.replaceChild(span,inp);});
-  clone.querySelectorAll('select').forEach(sel=>{const span=document.createElement('span');const opt=sel.options[sel.selectedIndex];span.textContent=opt?opt.textContent:sel.value;sel.parentNode.replaceChild(span,sel);});
+  clone.querySelectorAll('input').forEach(inp=>{
+    const span=document.createElement('span');
+    if(inp.type==='checkbox') span.textContent=inp.checked?'✔':'—';
+    else span.textContent=inp.value||'—';
+    inp.parentNode.replaceChild(span,inp);
+  });
+  clone.querySelectorAll('select').forEach(sel=>{
+    const span = document.createElement('span');
+    const code = sel.value || 'BHD';
+    const cur  = CURRENCIES[code];
+    const isIn = sel.dataset.f === 'currency';
+    const bg   = isIn ? '#0ea5e9' : '#8b5cf6';
+    span.textContent = code + (cur ? '  ' + cur.sym : '');
+    span.setAttribute('style',
+      'display:inline-block;' +
+      'padding:3px 8px;' +
+      'border-radius:5px;' +
+      'font-size:9px;' +
+      'font-weight:900;' +
+      'color:#ffffff;' +
+      'letter-spacing:.3px;' +
+      'white-space:nowrap;' +
+      'background:' + bg + ';' +
+      'text-align:center;' +
+      'min-width:56px;'
+    );
+    sel.parentNode.replaceChild(span, sel);
+  });
   clone.querySelectorAll('button').forEach(b=>b.remove());
-  clone.style.position='fixed';clone.style.left='-9999px';clone.style.top='0';clone.style.width='1600px';
-  clone.style.background='#ffffff';clone.style.color='#0f172a';clone.style.boxShadow='none';clone.style.borderRadius='0';
-  document.body.appendChild(clone);
-  const opt={margin:[8,8,8,8],filename:(label||'plan').replace(/\s+/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false},jsPDF:{unit:'mm',format:'a4',orientation:'landscape'}};
+  clone.classList.add('print-target');
+  const wrap = document.createElement('div');
+  wrap.style.cssText='position:fixed;top:0;left:0;width:1120px;background:#ffffff;z-index:99999;pointer-events:none;opacity:0;';
+  wrap.appendChild(clone);
+  document.body.appendChild(wrap);
+  await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,150)));
+  const opt={
+    margin:[5,5,5,5],
+    filename:(label||'plan').replace(/\s+/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf',
+    image:{type:'jpeg',quality:0.98},
+    html2canvas:{
+      scale:2,
+      backgroundColor:'#ffffff',
+      useCORS:true,
+      logging:false,
+      windowWidth:1120,
+      width:1120,
+      onclone:(doc)=>{const el=doc.querySelector('.print-target');if(el){el.style.opacity='1';el.style.width='1120px';}}
+    },
+    jsPDF:{unit:'mm',format:'a4',orientation:'landscape'}
+  };
   try{
     const blob=await html2pdf().set(opt).from(clone).outputPdf('blob');
-    document.body.removeChild(clone);
+    if(wrap.parentNode)document.body.removeChild(wrap);
     const file=new File([blob],opt.filename,{type:'application/pdf'});
     if(navigator.canShare&&navigator.canShare({files:[file]})){
       try{await navigator.share({files:[file],title:label||'Travel Budget',text:label||''});showToast(t('shareSuccess'));}
       catch(err){if(err&&err.name==='AbortError')showToast(t('shareCancelled'),true);else{downloadBlob(blob,opt.filename);showToast(t('shareFallback'));}}
     }else{downloadBlob(blob,opt.filename);showToast(t('shareFallback'));}
-  }catch(err){if(clone.parentNode)document.body.removeChild(clone);showToast(t('importError'),true);}
+  }catch(err){console.error(err);if(wrap.parentNode)document.body.removeChild(wrap);showToast(t('importError'),true);}
 }
 function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
 
