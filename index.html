@@ -29,8 +29,6 @@ body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;backg
 .tb-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
 .tb-btn.primary{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border-color:transparent}
 .tb-btn.rates-btn{background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:transparent}
-.tb-btn.xlsx-export{background:linear-gradient(135deg,#16a34a,#15803d);border-color:transparent}
-.tb-btn.xlsx-import{background:linear-gradient(135deg,#0d9488,#0891b2);border-color:transparent}
 .tb-btn.help-btn{background:linear-gradient(135deg,#f59e0b,#f97316);border-color:transparent}
 .tb-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
 .rates-status{font-size:.78em;color:#94a3b8;font-weight:600;display:flex;align-items:center;gap:6px}
@@ -211,252 +209,75 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 /* ============ pdf-header-zone ============ */
 .pdf-header-zone{display:none}
 
-/* ============ تصميم الطباعة و PDF (الحل الجذري) ============ */
-.print-target {
-  background: #fff !important;
-  padding: 10px !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  /* إضافة خطوط تدعم الرموز التعبيرية (Emojis) لضمان ظهورها كاملة */
-  font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif !important;
-  color: #0f172a !important;
-  direction: rtl !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
+/* ============ تصميم الطباعة و PDF ============ */
+.print-target{background:#fff !important;padding:10px !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif !important;color:#0f172a !important;direction:rtl !important;width:1050px !important;box-sizing:border-box !important;position:relative !important}
 .print-target .pdf-header-zone{display:block !important}
-
-.print-target .pdf-hero{
-  background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%) !important;
-  color:#fff !important;
-  padding:12px 18px !important;
-  border-radius:12px !important;
-  margin-bottom:8px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
-}
+.print-target .pdf-hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%) !important;color:#fff !important;padding:12px 18px !important;border-radius:12px !important;margin-bottom:8px !important;display:flex !important;align-items:center !important;justify-content:space-between !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 .print-target .pdf-hero h1{margin:0 !important;font-size:20px !important;font-weight:900 !important;color:#fff !important}
 .print-target .pdf-hero .pdf-hero-sub{margin:3px 0 0 0 !important;font-size:10px !important;color:#cbd5e1 !important;font-weight:600 !important}
-.print-target .pdf-hero .pdf-hero-brand{
-  background:rgba(255,255,255,.15) !important;
-  border:1px solid rgba(255,255,255,.3) !important;
-  padding:6px 12px !important;
-  border-radius:8px !important;
-  font-size:10px !important;font-weight:800 !important;color:#fff !important;letter-spacing:2px !important;
-}
-.print-target .pdf-plan-strip{
-  background:linear-gradient(135deg,#0ea5e9,#14b8a6) !important;
-  color:#fff !important;
-  padding:8px 16px !important;
-  border-radius:10px !important;
-  margin-bottom:8px !important;
-  display:flex !important;
-  justify-content:space-between !important;
-  align-items:center !important;
-  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
-}
+.print-target .pdf-hero .pdf-hero-brand{background:rgba(255,255,255,.15) !important;border:1px solid rgba(255,255,255,.3) !important;padding:6px 12px !important;border-radius:8px !important;font-size:10px !important;font-weight:800 !important;color:#fff !important;letter-spacing:2px !important}
+.print-target .pdf-plan-strip{background:linear-gradient(135deg,#0ea5e9,#14b8a6) !important;color:#fff !important;padding:8px 16px !important;border-radius:10px !important;margin-bottom:8px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 .print-target .pdf-plan-strip .ps-name{font-size:14px !important;font-weight:900 !important;color:#fff !important;margin:0 !important}
 .print-target .pdf-plan-strip .ps-meta{display:flex !important;gap:6px !important;align-items:center !important}
-.print-target .pdf-plan-strip .ps-badge{
-  background:rgba(255,255,255,.25) !important;
-  padding:3px 10px !important;border-radius:999px !important;
-  font-size:10px !important;font-weight:800 !important;color:#fff !important;
-  border:1px solid rgba(255,255,255,.4) !important;
-}
-.print-target .pdf-kpi-row{display:grid !important;grid-template-columns:repeat(4,1fr) !important;gap:6px !important;margin-bottom:8px !important}
-.print-target .pdf-kpi{
-  background:linear-gradient(135deg,#f8fafc,#e2e8f0) !important;
-  border:1px solid #cbd5e1 !important;
-  border-radius:10px !important;
-  padding:8px 10px !important;
-  display:flex !important;flex-direction:column !important;gap:1px !important;
-  -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
-}
-.print-target .pdf-kpi .kpi-label{font-size:9px !important;color:#475569 !important;font-weight:800 !important}
-.print-target .pdf-kpi .kpi-value{font-size:14px !important;color:#0f172a !important;font-weight:900 !important}
-.print-target .pdf-kpi .kpi-cur{font-size:9px !important;font-weight:700 !important;color:#64748b !important;margin-inline-start:3px !important}
-.print-target .pdf-kpi.green{background:linear-gradient(135deg,#16a34a,#14b8a6) !important;border:0 !important}
-.print-target .pdf-kpi.green .kpi-label,.print-target .pdf-kpi.green .kpi-value{color:#fff !important}
-.print-target .pdf-kpi.green .kpi-cur{color:rgba(255,255,255,.85) !important}
-.print-target .pdf-kpi.sky{background:linear-gradient(135deg,#0ea5e9,#0284c7) !important;border:0 !important}
-.print-target .pdf-kpi.sky .kpi-label,.print-target .pdf-kpi.sky .kpi-value{color:#fff !important}
-.print-target .pdf-kpi.sky .kpi-cur{color:rgba(255,255,255,.85) !important}
-.print-target .pdf-kpi.teal{background:linear-gradient(135deg,#14b8a6,#0d9488) !important;border:0 !important}
-.print-target .pdf-kpi.teal .kpi-label,.print-target .pdf-kpi.teal .kpi-value{color:#fff !important}
-.print-target .pdf-kpi.teal .kpi-cur{color:rgba(255,255,255,.85) !important}
-.print-target .pdf-section-title{
-  font-size:13px !important;font-weight:900 !important;color:#0f172a !important;
-  padding:3px 0 !important;margin:10px 0 6px 0 !important;
-  border-bottom:3px solid #0ea5e9 !important;display:inline-block !important;
-}
+.print-target .pdf-plan-strip .ps-badge{background:rgba(255,255,255,.25) !important;padding:3px 10px !important;border-radius:999px !important;font-size:10px !important;font-weight:800 !important;color:#fff !important;border:1px solid rgba(255,255,255,.4) !important}
 
-/* ===== الجدول في الطباعة (الحل الجذري لمنع القطع) ===== */
-.print-target .table-wrap {
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  width: 100% !important;
-  display: block !important;
-}
-.print-target table {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  table-layout: fixed !important; /* تثبيت عرض الجدول لمنع الخروج عن الصفحة */
-  border-collapse: collapse !important;
-  border-spacing: 0 !important;
-  font-size: 9px !important;
-  border: 1.5px solid #0f172a !important;
-}
-.print-target thead th,
-.print-target tbody td {
-  box-sizing: border-box !important;
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  white-space: normal !important; /* السماح بالتفاف النص الطويل */
-  line-height: 1.2 !important;
-  vertical-align: middle !important;
-}
-.print-target thead th {
-  background: #0f172a !important;
-  color: #fff !important;
-  padding: 4px 2px !important;
-  font-size: 8px !important;
-  font-weight: 800 !important;
-  text-align: center !important;
-  border: 1px solid #0f172a !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
+/* حُذفت بطاقات KPI من هنا - لا حاجة لتعريفها */
 
-/* توزيع نسب الأعمدة الظاهرة لتساوي 100% بالضبط (بعد إخفاء العمودين الأول والأخير) */
-.print-target thead th:nth-child(2), .print-target tbody td:nth-child(2) { width: 8% !important; }  /* التاريخ */
-.print-target thead th:nth-child(3), .print-target tbody td:nth-child(3) { width: 22% !important; } /* البند */
-.print-target thead th:nth-child(4), .print-target tbody td:nth-child(4) { width: 10% !important; } /* التصنيف */
-.print-target thead th:nth-child(5), .print-target tbody td:nth-child(5) { width: 10% !important; } /* السعر */
-.print-target thead th:nth-child(6), .print-target tbody td:nth-child(6) { width: 12% !important; } /* العملة (إدخال) */
-.print-target thead th:nth-child(7), .print-target tbody td:nth-child(7) { width: 12% !important; } /* المعادل */
-.print-target thead th:nth-child(8), .print-target tbody td:nth-child(8) { width: 12% !important; } /* العملة (تحويل) */
-.print-target thead th:nth-child(9), .print-target tbody td:nth-child(9) { width: 6% !important; }  /* الأيام */
-.print-target thead th:nth-child(10), .print-target tbody td:nth-child(10){ width: 8% !important; } /* الإجمالي */
-
-.print-target tbody td {
-  padding: 4px 2px !important;
-  font-size: 9px !important;
-  border: 1px solid #0f172a !important;
-  text-align: center !important;
-  background: #fff !important;
-}
-.print-target .cell-inp {
-  background: transparent !important; border: 0 !important; box-shadow: none !important;
-  color: #0f172a !important; padding: 2px 3px !important; font-size: 9px !important;
-  font-weight: 700 !important; text-align: center !important; width: 100% !important;
-}
-.print-target .date-txt { text-align: center !important; }
-.print-target .bhd-cell, .print-target .cell-total {
-  background: rgba(255,255,255,.65) !important;
-  border: 1px solid rgba(15,23,42,.15) !important;
-  padding: 3px 4px !important; font-size: 9px !important; font-weight: 800 !important;
-  border-radius: 5px !important; white-space: nowrap !important; display: block !important;
-}
-.print-target .cell-total { color: #047857 !important; }
-.print-target .bhd-cell { color: #7c3aed !important; }
-.print-target .cat-pill {
-  display: inline-block !important; padding: 2px 7px !important; border-radius: 999px !important;
-  font-size: 8px !important; font-weight: 800 !important; border: 0 !important; color: #fff !important;
-}
-.print-target .cat-pill.air { background: #0ea5e9 !important; }
-.print-target .cat-pill.hotel { background: #14b8a6 !important; }
-.print-target .cat-pill.other { background: #f59e0b !important; }
-.print-target tfoot .row-grand td {
-  background: #0f172a !important; color: #fff !important;
-  padding: 7px 6px !important; font-size: 10px !important; font-weight: 800 !important;
-  border: 1px solid #0f172a !important;
-}
-.print-target tfoot .row-grand td.grand-label { color: #cbd5e1 !important; text-align: end !important; padding-inline-end: 10px !important; }
-.print-target tfoot .row-grand td.tf-total { color: #34d399 !important; font-size: 12px !important; }
-
-/* ===== الإحصائيات — أفقي ===== */
-.print-target .stats {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 6px 12px !important;
-  padding: 0 !important;
-  background: transparent !important;
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
-}
-.print-target .stat {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 8px 12px !important;
-  border-radius: 8px !important;
-  background: #f1f5f9 !important;
-  border: 1px solid #cbd5e1 !important;
-  min-height: 0 !important;
-  -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
-}
-.print-target .stat .s-label { color: #475569 !important; font-size: 10px !important; font-weight: 800 !important; line-height: 1.2 !important; }
-.print-target .stat .s-value { color: #0f172a !important; font-size: 12px !important; font-weight: 900 !important; display: inline !important; white-space: nowrap !important; }
-.print-target .stat .cur { color: inherit !important; opacity: .7 !important; font-size: 9px !important; font-weight: 700 !important; }
-.print-target .stat.hi { background: linear-gradient(135deg, #16a34a, #14b8a6) !important; border: 0 !important; }
-.print-target .stat.hi .s-label, .print-target .stat.hi .s-value { color: #fff !important; }
-.print-target .stat.purple { background: linear-gradient(135deg, #8b5cf6, #6366f1) !important; border: 0 !important; }
-.print-target .stat.purple .s-label, .print-target .stat.purple .s-value { color: #fff !important; }
-.print-target .stat.warn { background: linear-gradient(135deg, #f59e0b, #f97316) !important; border: 0 !important; }
-.print-target .stat.warn .s-label, .print-target .stat.warn .s-value { color: #fff !important; }
-.print-target .stat.bad { background: linear-gradient(135deg, #e11d48, #be123c) !important; border: 0 !important; }
-.print-target .stat.bad .s-label, .print-target .stat.bad .s-value { color: #fff !important; }
-.print-target .perday-row { display: inline !important; border: 0 !important; padding: 0 !important; margin: 0 !important; }
-.print-target .perday-row label { color: inherit !important; font-size: 9px !important; opacity: .85 !important; display: inline !important; }
-.print-target .perday-inp, .print-target .perday-reset { display: none !important; }
-
-/* ===== بطاقات العملات ===== */
-.print-target .totals-row {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 12px !important;
-  padding: 0 !important;
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
-}
-.print-target .currencies-card {
-  background: #f8fafc !important; border: 1px solid #e2e8f0 !important;
-  border-radius: 10px !important; padding: 10px 12px !important;
-}
-.print-target .currencies-card.in-card { border: 1.5px solid rgba(14,165,233,.4) !important; background: #f0f9ff !important; }
-.print-target .currencies-card.out-card { border: 1.5px solid rgba(139,92,246,.4) !important; background: #f5f3ff !important; }
-.print-target .currencies-card .cc-head { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 6px !important; }
-.print-target .currencies-card .cc-title { font-size: 11px !important; font-weight: 900 !important; color: #0ea5e9 !important; border-bottom: 2px solid #0ea5e9 !important; padding-bottom: 2px !important; display: inline-block !important; }
-.print-target .currencies-card.out-card .cc-title { color: #8b5cf6 !important; border-bottom-color: #8b5cf6 !important; }
-.print-target .currencies-card .cc-update { color: #94a3b8 !important; font-size: 9px !important; font-weight: 600 !important; }
-.print-target .currency-item {
-  display: grid !important; grid-template-columns: 60px 1fr 1.1fr 1fr !important;
-  gap: 6px !important; padding: 6px 8px !important; background: #fff !important;
-  border: 1px solid #e2e8f0 !important; border-radius: 6px !important; margin-bottom: 4px !important;
-  align-items: center !important;
-}
-.print-target .currency-item .ci-left, .print-target .currency-item .ci-right { display: contents !important; }
-.print-target .currency-item .ci-code {
-  color: #fff !important; padding: 2px 6px !important; border-radius: 5px !important;
-  font-size: 9px !important; font-weight: 800 !important; text-align: center !important;
-}
-.print-target .currency-item .ci-name { color: #334155 !important; font-size: 9.5px !important; font-weight: 600 !important; }
-.print-target .currency-item .ci-sub { color: #0f172a !important; font-size: 9.5px !important; font-weight: 800 !important; }
-.print-target .currency-item .ci-bhd { color: #047857 !important; font-size: 9.5px !important; font-weight: 800 !important; }
-.print-target .currency-item .ci-arrow { display: none !important; }
-.print-target .currencies-empty { color: #94a3b8 !important; font-size: 9.5px !important; text-align: center !important; }
-
-/* إخفاء العناصر التفاعلية */
+.print-target .table-wrap{padding:0 !important;margin:0 !important;overflow:visible !important;width:100% !important;display:block !important}
+.print-target table{table-layout:auto !important;width:100% !important;min-width:0 !important;max-width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border-spacing:0 !important;font-size:8.5px !important;border:2px solid #0f172a !important}
+.print-target thead th{background:#0f172a !important;color:#fff !important;padding:5px 2px !important;font-size:8px !important;font-weight:800 !important;text-align:center !important;border:1px solid #0f172a !important;white-space:normal !important;word-break:break-word !important;overflow-wrap:break-word !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target thead th.th-cur-in{background:#0ea5e9 !important;border-color:#0ea5e9 !important}
+.print-target thead th.th-cur-out{background:#8b5cf6 !important;border-color:#8b5cf6 !important}
+.print-target thead th .th-sub{display:block !important;font-size:7px !important;color:rgba(255,255,255,.85) !important;font-weight:600 !important}
+.print-target tbody td{padding:3px 2px !important;font-size:8.5px !important;border:1px solid #cbd5e1 !important;text-align:center !important;background:#fff !important;vertical-align:middle !important;word-break:break-word !important}
+.print-target tbody tr.cat-air td{background:#e0f2fe !important}
+.print-target tbody tr.cat-hotel td{background:#ccfbf1 !important}
+.print-target tbody tr.cat-other td{background:#fef3c7 !important}
+.print-target .cell-inp{background:transparent !important;border:0 !important;box-shadow:none !important;color:#0f172a !important;padding:1px 2px !important;font-size:8.5px !important;font-weight:700 !important;text-align:center !important;width:100% !important}
+.print-target .date-txt{text-align:center !important}
+.print-target .bhd-cell,.print-target .cell-total{background:rgba(255,255,255,.65) !important;border:1px solid rgba(15,23,42,.15) !important;padding:2px 3px !important;font-size:8.5px !important;font-weight:800 !important;border-radius:4px !important;white-space:nowrap !important;display:block !important}
+.print-target .cell-total{color:#047857 !important}
+.print-target .bhd-cell{color:#7c3aed !important}
+.print-target .cat-pill{display:inline-block !important;padding:2px 6px !important;border-radius:999px !important;font-size:7.5px !important;font-weight:800 !important;border:0 !important;color:#fff !important}
+.print-target .cat-pill.air{background:#0ea5e9 !important}
+.print-target .cat-pill.hotel{background:#14b8a6 !important}
+.print-target .cat-pill.other{background:#f59e0b !important}
+.print-target tfoot .row-grand td{background:#0f172a !important;color:#fff !important;padding:6px 4px !important;font-size:9px !important;font-weight:800 !important;border:1px solid #0f172a !important}
+.print-target tfoot .row-grand td.grand-label{color:#cbd5e1 !important;text-align:end !important;padding-inline-end:8px !important}
+.print-target tfoot .row-grand td.tf-total{color:#34d399 !important;font-size:11px !important}
+.print-target .stats{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px 12px !important;padding:0 !important;background:transparent !important;page-break-inside:avoid !important;break-inside:avoid !important}
+.print-target .stat{display:flex !important;flex-direction:row !important;justify-content:space-between !important;align-items:center !important;gap:8px !important;padding:8px 12px !important;border-radius:8px !important;background:#f1f5f9 !important;border:1px solid #cbd5e1 !important;min-height:0 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target .stat .s-label{color:#475569 !important;font-size:10px !important;font-weight:800 !important;line-height:1.2 !important}
+.print-target .stat .s-value{color:#0f172a !important;font-size:12px !important;font-weight:900 !important;display:inline !important;white-space:nowrap !important}
+.print-target .stat .cur{color:inherit !important;opacity:.7 !important;font-size:9px !important;font-weight:700 !important}
+.print-target .stat.hi{background:linear-gradient(135deg,#16a34a,#14b8a6) !important;border:0 !important}
+.print-target .stat.hi .s-label,.print-target .stat.hi .s-value{color:#fff !important}
+.print-target .stat.purple{background:linear-gradient(135deg,#8b5cf6,#6366f1) !important;border:0 !important}
+.print-target .stat.purple .s-label,.print-target .stat.purple .s-value{color:#fff !important}
+.print-target .stat.warn{background:linear-gradient(135deg,#f59e0b,#f97316) !important;border:0 !important}
+.print-target .stat.warn .s-label,.print-target .stat.warn .s-value{color:#fff !important}
+.print-target .stat.bad{background:linear-gradient(135deg,#e11d48,#be123c) !important;border:0 !important}
+.print-target .stat.bad .s-label,.print-target .stat.bad .s-value{color:#fff !important}
+.print-target .perday-row{display:flex !important;border:0 !important;padding:0 !important;margin:0 !important;gap:6px !important;align-items:center !important;flex-direction:row-reverse !important}
+.print-target .perday-row label{color:inherit !important;font-size:10px !important;font-weight:800 !important;display:inline !important;opacity:.9 !important}
+.print-target .perday-value{display:inline !important;font-weight:900 !important;font-size:11px !important;color:inherit !important;background:rgba(255,255,255,.35) !important;padding:2px 8px !important;border-radius:6px !important;border:1px solid rgba(255,255,255,.5) !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target .perday-inp,.print-target .perday-reset{display:none !important}
+.print-target .totals-row{display:grid !important;grid-template-columns:1fr 1fr !important;gap:12px !important;padding:0 !important;page-break-inside:avoid !important;break-inside:avoid !important}
+.print-target .currencies-card{background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;padding:10px 12px !important}
+.print-target .currencies-card.in-card{border:1.5px solid rgba(14,165,233,.4) !important;background:#f0f9ff !important}
+.print-target .currencies-card.out-card{border:1.5px solid rgba(139,92,246,.4) !important;background:#f5f3ff !important}
+.print-target .currencies-card .cc-head{display:flex !important;justify-content:space-between !important;align-items:center !important;margin-bottom:6px !important}
+.print-target .currencies-card .cc-title{font-size:11px !important;font-weight:900 !important;color:#0ea5e9 !important;border-bottom:2px solid #0ea5e9 !important;padding-bottom:2px !important;display:inline-block !important}
+.print-target .currencies-card.out-card .cc-title{color:#8b5cf6 !important;border-bottom-color:#8b5cf6 !important}
+.print-target .currencies-card .cc-update{color:#94a3b8 !important;font-size:9px !important;font-weight:600 !important}
+.print-target .currency-item{display:grid !important;grid-template-columns:60px 1fr 1.1fr 1fr !important;gap:6px !important;padding:6px 8px !important;background:#fff !important;border:1px solid #e2e8f0 !important;border-radius:6px !important;margin-bottom:4px !important;align-items:center !important}
+.print-target .currency-item .ci-left,.print-target .currency-item .ci-right{display:contents !important}
+.print-target .currency-item .ci-code{color:#fff !important;padding:2px 6px !important;border-radius:5px !important;font-size:9px !important;font-weight:800 !important;text-align:center !important}
+.print-target .currency-item .ci-name{color:#334155 !important;font-size:9.5px !important;font-weight:600 !important}
+.print-target .currency-item .ci-sub{color:#0f172a !important;font-size:9.5px !important;font-weight:800 !important}
+.print-target .currency-item .ci-bhd{color:#047857 !important;font-size:9.5px !important;font-weight:800 !important}
+.print-target .currency-item .ci-arrow{display:none !important}
+.print-target .currencies-empty{color:#94a3b8 !important;font-size:9.5px !important;text-align:center !important}
 .print-target .table-actions,
 .print-target .panel-remove,
 .print-target .cal-btn,
@@ -466,33 +287,17 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target tbody td:first-child,
 .print-target thead th:last-child,
 .print-target tbody td:last-child,
+.print-target .currency-sel,
 .print-target .empty-state,
-.print-target .panel-head { display: none !important; }
-.print-target tfoot .row-grand td:first-child { display: table-cell !important; }
-
-@media print {
-  @page {
-    size: A4 landscape !important; /* إجبار الطباعة على الوضع الأفقي */
-    margin: 10mm !important;
-  }
-  body {
-    padding: 0 !important;
-    margin: 0 !important;
-    background: #fff !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-  body * { visibility: hidden !important; }
+.print-target .panel-head{display:none !important}
+@media print{
+  @page{margin:8mm;size:A4 landscape}
+  body{padding:0 !important;margin:0 !important;background:#fff !important}
+  body *{visibility:hidden !important}
   body.printing .panel.print-target,
-  body.printing .panel.print-target * { visibility: visible !important; }
-  body.printing .panel.print-target {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-  .site-footer, .toolbar, .titles-panel, .add-plan-wrap, .page-head { display: none !important; }
+  body.printing .panel.print-target *{visibility:visible !important}
+  body.printing .panel.print-target{position:absolute;left:0;top:0;width:100%}
+  .site-footer,.toolbar,.titles-panel,.add-plan-wrap,.page-head{display:none !important}
 }
 </style>
 </head>
@@ -512,9 +317,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
   <button class="tb-btn primary" id="btnSave">💾 <span id="saveLabel">حفظ</span></button>
   <button class="tb-btn" id="btnExport">📤 <span id="exportLabel">تصدير</span></button>
   <button class="tb-btn" id="btnImport">📥 <span id="importLabel">استيراد</span></button>
-  <button class="tb-btn xlsx-export" id="btnExportXlsx">📊 <span id="exportXlsxLabel">تصدير Excel</span></button>
-  <button class="tb-btn xlsx-import" id="btnImportXlsx">📋 <span id="importXlsxLabel">استيراد Excel</span></button>
-  <input type="file" id="importXlsxFile" accept=".xlsx,.xls" style="display:none">
   <button class="tb-btn rates-btn" id="btnRefreshRates">🔄 <span id="ratesLabel">تحديث الأسعار</span></button>
   <button class="tb-btn help-btn" id="btnHelp"><span>📖</span> <span id="helpLabel">تعليمات</span></button>
   <span class="rates-status" id="ratesStatus"><span class="dot"></span><span id="ratesStatusText">…</span></span>
@@ -607,9 +409,9 @@ function toBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a
 function fromBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a*r;}
 function convert(a,fc,tc){return fromBHD(toBHD(a,fc),tc);}
 
-const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر لحساب ميزانية البرامج اليومية بدقة',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>عدّل حقل «عدد الأيام» في بطاقة «البرامج لكل يوم».</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Edit Days field.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
+const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>عدّل حقل «عدد الأيام» في بطاقة «البرامج لكل يوم».</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Edit Days field.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
 
-const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',exportXlsxLabel:'تصدير Excel',importXlsxLabel:'استيراد Excel',excelSuccess:'تم تصدير Excel 📊',excelImportSuccess:'تم استيراد Excel ✨',excelImportError:'تعذّر الاستيراد',excelNoSheets:'لا توجد بيانات',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',statPerDay:'📊 البرامج لكل يوم',statPerDayDays:'عدد الأيام:',perDayResetTitle:'استعادة',importSuccess:'تم الاستيراد',importError:'تعذّر الاستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات'},en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',exportXlsxLabel:'Export Excel',importXlsxLabel:'Import Excel',excelSuccess:'Excel exported 📊',excelImportSuccess:'Excel imported ✨',excelImportError:'Import failed',excelNoSheets:'No data',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',statPerDay:'📊 Program per Day',statPerDayDays:'Days:',perDayResetTitle:'Reset',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help'}};
+const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',excelSuccess:'تم تصدير Excel 📊',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',statPerDay:'📊 البرامج لكل يوم',statPerDayDays:'عدد الأيام:',perDayResetTitle:'استعادة',importSuccess:'تم الاستيراد',importError:'تعذّر الاستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات'},en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',excelSuccess:'Excel exported 📊',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',statPerDay:'📊 Program per Day',statPerDayDays:'Days:',perDayResetTitle:'Reset',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help'}};
 
 const TITLE_I18N={'flight':{ar:'رحلة طيران',en:'flight'},'lunch':{ar:'غداء',en:'lunch'},'dinner':{ar:'عشاء',en:'dinner'},'transport':{ar:'مواصلات',en:'transport'},'Laundry':{ar:'غسيل',en:'Laundry'},'Sweet & could store':{ar:'حلويات ومشروبات',en:'Sweet & could store'},'Hospital':{ar:'مستشفى',en:'Hospital'},'Others':{ar:'أخرى',en:'Others'},'hotels':{ar:'فنادق',en:'hotels'}};
 const DEFAULT_TITLE_KEYS={air:['flight'],hotel:['hotels'],other:['lunch','dinner','transport','Laundry','Sweet & could store','Hospital','Others']};
@@ -728,48 +530,6 @@ function exportToExcel(){
   showToast(t('excelSuccess'));
 }
 
-function importFromExcel(file){
-  if(typeof XLSX==='undefined'){showToast('Excel غير محمّل',true);return;}
-  const reader=new FileReader();
-  reader.onload=e=>{
-    try{
-      const data=new Uint8Array(e.target.result);
-      const wb=XLSX.read(data,{type:'array'});
-      const sheetNames=wb.SheetNames.filter(n=>n!=='ملخص'&&n!=='Summary');
-      if(!sheetNames.length){showToast(t('excelNoSheets'),true);return;}
-      const newPanels=[];
-      sheetNames.forEach((sheetName,pIdx)=>{
-        const ws=wb.Sheets[sheetName];
-        const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-        let days=14,budget=0,headerRowIdx=-1;
-        for(let r=0;r<Math.min(rows.length,10);r++){const firstCell=String(rows[r][0]||'').trim();if(/تفعيل|Active|نشط/i.test(firstCell)){headerRowIdx=r;break;}}
-        rows.slice(0,headerRowIdx>0?headerRowIdx:5).forEach(row=>{row.forEach((cell,ci)=>{const s=String(cell||'').trim();if(/عدد الأيام الكلي|Total Days/i.test(s)){const v=parseFloat(row[ci+1]);if(isFinite(v)&&v>0)days=v;}if(/الميزانية|Budget/i.test(s)){const v=parseFloat(row[ci+1]);if(isFinite(v))budget=v;}});});
-        const panelRows=[];
-        if(headerRowIdx>=0){
-          for(let r=headerRowIdx+1;r<rows.length;r++){
-            const row=rows[r];if(!row||row.length<3)continue;
-            const firstCell=String(row[0]||'').trim();
-            if(/الإجمالي الكلي|Grand Total|المتبقي|Remaining/i.test(firstCell))break;
-            const title=String(row[2]||'').trim();
-            const price=parseFloat(row[4]);const dd=parseFloat(row[8]);
-            if(!title&&!isFinite(price)&&!isFinite(dd))continue;
-            const activeCell=String(row[0]||'').trim().toLowerCase();
-            const ok=!/^(لا|no|false|0)$/i.test(activeCell);
-            let curIn=String(row[5]||'').trim().toUpperCase();let curOut=String(row[7]||'').trim().toUpperCase();
-            if(!CURRENCIES[curIn])curIn='BHD';if(!CURRENCIES[curOut])curOut='BHD';
-            panelRows.push({ok,date:String(row[1]||'').trim(),title,currency:curIn,currency2:curOut,price:isFinite(price)?price:null,days:isFinite(dd)?dd:null});
-          }
-        }
-        newPanels.push({id:'plan_'+Date.now()+'_'+pIdx+'_'+Math.random().toString(36).slice(2,6),index:pIdx,days,budget,perdayDays:null,rows:panelRows});
-      });
-      if(!newPanels.length){showToast(t('excelImportError'),true);return;}
-      STATE.panels=newPanels;saveState();renderEverything();showToast(t('excelImportSuccess'));
-    }catch(err){console.error(err);showToast(t('excelImportError'),true);}
-  };
-  reader.onerror=()=>showToast(t('excelImportError'),true);
-  reader.readAsArrayBuffer(file);
-}
-
 function applyTheme(){document.body.classList.toggle('dark',STATE.theme==='dark');const b=document.getElementById('btnTheme');if(b)b.textContent=STATE.theme==='dark'?'☀️':'🌙';}
 function applyFontScale(){document.body.style.setProperty('--fs',STATE.fontScale);}
 function applyLang(){
@@ -780,8 +540,6 @@ function applyLang(){
   document.getElementById('saveLabel').textContent=t('save');
   document.getElementById('exportLabel').textContent=t('export');
   document.getElementById('importLabel').textContent=t('import');
-  document.getElementById('exportXlsxLabel').textContent=t('exportXlsxLabel');
-  document.getElementById('importXlsxLabel').textContent=t('importXlsxLabel');
   document.getElementById('ratesLabel').textContent=t('ratesLabel');
   document.getElementById('helpLabel').textContent=t('helpLabel');
   document.getElementById('titlesPanelTitle').textContent=t('titlesPanelTitle');
@@ -855,14 +613,6 @@ function makeRowEl(row,maxDays){
 function buildPanelEl(panel,idx){
   const sec=document.createElement('section');sec.className='panel';sec.dataset.pid=panel.id;
   const ordinals=t('planOrdinals');const label=t('planLabelPrefix')+(ordinals[idx]||(idx+1));
-  let _sumBHD=0,_air=0,_hotel=0,_other=0;
-  (panel.rows||[]).forEach(r=>{
-    if(r.ok===false)return;
-    const cat=categoryOf(r.title);
-    const l=toBHD(Number(r.price)||0,r.currency||'BHD')*(Number(r.days)||0);
-    _sumBHD+=l;if(cat==='air')_air+=l;else if(cat==='hotel')_hotel+=l;else _other+=l;
-  });
-  const _hand=(panel.budget||0)-_sumBHD;
 
   sec.innerHTML=`
     <div class="panel-head">
@@ -874,6 +624,7 @@ function buildPanelEl(panel,idx){
       </div>
     </div>
 
+    <!-- pdf-header-zone: يحتوي فقط على الـ hero وشريط الخطة (لا بطاقات KPI) -->
     <div class="pdf-header-zone">
       <div class="pdf-hero">
         <div>
@@ -889,47 +640,28 @@ function buildPanelEl(panel,idx){
           <span class="ps-badge">💰 ${fmt(panel.budget||0)} ${t('currency')}</span>
         </div>
       </div>
-      <div class="pdf-kpi-row">
-        <div class="pdf-kpi sky">
-          <div class="kpi-label">${esc(t('statAir'))}</div>
-          <div class="kpi-value">${fmt(_air)}<span class="kpi-cur">${t('currency')}</span></div>
-        </div>
-        <div class="pdf-kpi teal">
-          <div class="kpi-label">${esc(t('statHotel'))}</div>
-          <div class="kpi-value">${fmt(_hotel)}<span class="kpi-cur">${t('currency')}</span></div>
-        </div>
-        <div class="pdf-kpi green">
-          <div class="kpi-label">${esc(t('statHand'))}</div>
-          <div class="kpi-value">${fmt(_hand)}<span class="kpi-cur">${t('currency')}</span></div>
-        </div>
-        <div class="pdf-kpi">
-          <div class="kpi-label">${esc(t('statOther'))}</div>
-          <div class="kpi-value">${fmt(_other)}<span class="kpi-cur">${t('currency')}</span></div>
-        </div>
-      </div>
     </div>
 
     <div class="table-wrap">
       <table>
         <thead><tr>
             <th style="width:80px">${t('thToggle')}</th>
-            <th style="width:9%">${t('thDate')}</th>
-            <th style="width:21%">${t('thTitle')}</th>
-            <th style="width:8%">${t('thCat')}</th>
-            <th style="width:9%">${t('thPrice')}</th>
-            <th class="th-cur-in" style="width:11%">${t('thCurrencyIn')}<span class="th-sub">${t('thCurrencyInSub')}</span></th>
-            <th style="width:12%">${t('thBHD')}</th>
-            <th class="th-cur-out" style="width:11%">${t('thCurrencyOut')}<span class="th-sub">${t('thCurrencyOutSub')}</span></th>
-            <th style="width:7%">${t('thDays')}</th>
-            <th style="width:12%">${t('thTotal')}</th>
+            <th>${t('thDate')}</th>
+            <th>${t('thTitle')}</th>
+            <th>${t('thCat')}</th>
+            <th>${t('thPrice')}</th>
+            <th class="th-cur-in">${t('thCurrencyIn')}<span class="th-sub">${t('thCurrencyInSub')}</span></th>
+            <th>${t('thBHD')}</th>
+            <th class="th-cur-out">${t('thCurrencyOut')}<span class="th-sub">${t('thCurrencyOutSub')}</span></th>
+            <th>${t('thDays')}</th>
+            <th>${t('thTotal')}</th>
             <th style="width:40px">${t('thDelete')}</th>
         </tr></thead>
         <tbody></tbody>
         <tfoot><tr class="row-grand">
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             <td class="grand-label">${t('grandTotal')}</td>
             <td class="num tf-total">0.00 ${curSym('BHD')}</td>
-            <td></td>
         </tr></tfoot>
       </table>
       <div class="empty-state"><div class="icon">📝</div><div class="txt">${t('emptyTxt')}</div><div class="sub">${t('emptySub')}</div></div>
@@ -1057,15 +789,9 @@ function recalcPanel(panel,sec){
   const emptyState=sec.querySelector('.empty-state');if(emptyState)emptyState.style.display=(rowCount===0)?'block':'none';
   setStat(sec,'budget',budget);setStat(sec,'airOnly',airSum);setStat(sec,'hotelOnly',hotelSum);setStat(sec,'airHotel',airHotel);setStat(sec,'otherOnly',otherSum);setStat(sec,'hand',hand,{bad:true});setStat(sec,'perDay',perDay,{bad:true});
   renderInCurrenciesCard(sec,totalsIn);renderOutCurrenciesCard(sec,totalsOut);
+  /* تحديث شارات strip فقط (لا بطاقات KPI) */
   const zone=sec.querySelector('.pdf-header-zone');
   if(zone){
-    const kpis=zone.querySelectorAll('.pdf-kpi .kpi-value');
-    if(kpis.length>=4){
-      kpis[0].innerHTML=fmt(airSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
-      kpis[1].innerHTML=fmt(hotelSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
-      kpis[2].innerHTML=fmt(hand)+'<span class="kpi-cur">'+t('currency')+'</span>';
-      kpis[3].innerHTML=fmt(otherSum)+'<span class="kpi-cur">'+t('currency')+'</span>';
-    }
     const stripBadges=zone.querySelectorAll('.ps-badge');
     if(stripBadges.length>=2){
       stripBadges[0].textContent='📅 '+days+' '+(STATE.lang==='ar'?'يوم':'days');
@@ -1077,8 +803,63 @@ function recalcPanel(panel,sec){
 function recalcAllPanels(){document.querySelectorAll('.panel').forEach(sec=>{const panel=STATE.panels.find(p=>p.id===sec.dataset.pid);if(panel)recalcPanel(panel,sec);});}
 function renderPanels(){const container=document.getElementById('panels');container.innerHTML='';STATE.panels.forEach((p,i)=>container.appendChild(buildPanelEl(p,i)));document.getElementById('addPlanWrap').style.display='flex';}
 function renderEverything(){renderTitlesUI();renderPanels();}
-function printPlan(panelEl){document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));document.body.classList.add('printing');panelEl.classList.add('print-target');window.print();}
-window.addEventListener('afterprint',()=>{document.body.classList.remove('printing');document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));});
+
+function printPlan(panelEl){
+  const originalPerday = [];
+  panelEl.querySelectorAll('.perday-inp').forEach(inp => {
+    const span = document.createElement('span');
+    span.className = 'perday-value';
+    span.textContent = inp.value || inp.max || '0';
+    inp.parentNode.insertBefore(span, inp);
+    inp.style.setProperty('display','none','important');
+    originalPerday.push({inp, span});
+  });
+  const originalCurrency = [];
+  panelEl.querySelectorAll('td.currency-cell').forEach(td => {
+    const sel = td.querySelector('select');
+    if (!sel) return;
+    const code = sel.value || 'BHD';
+    const cur = CURRENCIES[code];
+    const isIn = td.classList.contains('cur-in');
+    const bg = isIn ? '#0ea5e9' : '#8b5cf6';
+    const originalHTML = td.innerHTML;
+    const originalStyle = td.getAttribute('style') || '';
+    td.innerHTML = code + (cur ? ' ' + cur.sym : '');
+    td.setAttribute('style',
+      originalStyle +
+      'background:' + bg + ' !important;' +
+      'color:#ffffff !important;' +
+      'font-weight:900 !important;' +
+      'font-size:8.5px !important;' +
+      'text-align:center !important;' +
+      'padding:5px 3px !important;' +
+      'border:1px solid ' + bg + ' !important;' +
+      'white-space:nowrap !important;'
+    );
+    originalCurrency.push({td, originalHTML, originalStyle});
+  });
+
+  document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));
+  document.body.classList.add('printing');
+  panelEl.classList.add('print-target');
+  setTimeout(()=>window.print(), 80);
+
+  const restore = () => {
+    originalPerday.forEach(({inp, span}) => {
+      if (span.parentNode) span.parentNode.removeChild(span);
+      inp.style.removeProperty('display');
+    });
+    originalCurrency.forEach(({td, originalHTML, originalStyle}) => {
+      td.innerHTML = originalHTML;
+      if (originalStyle) td.setAttribute('style', originalStyle);
+      else td.removeAttribute('style');
+    });
+    document.body.classList.remove('printing');
+    document.querySelectorAll('.panel.print-target').forEach(p=>p.classList.remove('print-target'));
+    window.removeEventListener('afterprint', restore);
+  };
+  window.addEventListener('afterprint', restore);
+}
 
 async function sharePlanPDF(panelEl,label,idx){
   if(typeof html2pdf==='undefined'){showToast(t('importError'),true);return;}
@@ -1086,42 +867,60 @@ async function sharePlanPDF(panelEl,label,idx){
   const clone=panelEl.cloneNode(true);
   clone.querySelectorAll('.table-actions, .panel-remove, .cal-btn, .del-btn, .perday-reset').forEach(el=>el.remove());
   clone.querySelectorAll('input').forEach(inp=>{
-    const span=document.createElement('span');
-    if(inp.type==='checkbox') span.textContent=inp.checked?'✔':'—';
-    else span.textContent=inp.value||'—';
-    inp.parentNode.replaceChild(span,inp);
+    if (inp.type === 'checkbox') {
+      const span=document.createElement('span');
+      span.textContent=inp.checked?'✔':'—';
+      inp.parentNode.replaceChild(span,inp);
+    } else if (inp.classList.contains('perday-inp')) {
+      const span=document.createElement('span');
+      span.className='perday-value';
+      span.textContent = inp.value || inp.max || '0';
+      inp.parentNode.replaceChild(span, inp);
+    } else {
+      const span=document.createElement('span');
+      span.textContent=inp.value||'—';
+      inp.parentNode.replaceChild(span,inp);
+    }
   });
-  clone.querySelectorAll('select').forEach(sel=>{
-    const span = document.createElement('span');
-    const code = sel.value || 'BHD';
-    const cur  = CURRENCIES[code];
-    const isIn = sel.dataset.f === 'currency';
-    const bg   = isIn ? '#0ea5e9' : '#8b5cf6';
-    span.textContent = code + (cur ? '  ' + cur.sym : '');
-    span.setAttribute('style',
-      'display:inline-block;' +
-      'padding:3px 8px;' +
-      'border-radius:5px;' +
-      'font-size:9px;' +
-      'font-weight:900;' +
-      'color:#ffffff;' +
-      'letter-spacing:.3px;' +
-      'white-space:nowrap;' +
-      'background:' + bg + ';' +
-      'text-align:center;' +
-      'min-width:56px;'
+  clone.querySelectorAll('td.currency-cell').forEach(td => {
+    const sel = td.querySelector('select');
+    const code = sel ? (sel.value || 'BHD') : 'BHD';
+    const cur = CURRENCIES[code];
+    const isIn = td.classList.contains('cur-in');
+    const bg = isIn ? '#0ea5e9' : '#8b5cf6';
+    td.innerHTML = '';
+    td.textContent = code + (cur ? ' ' + cur.sym : '');
+    td.setAttribute('style',
+      'background:' + bg + ' !important;' +
+      'color:#ffffff !important;' +
+      'font-weight:900 !important;' +
+      'font-size:8.5px !important;' +
+      'text-align:center !important;' +
+      'padding:5px 3px !important;' +
+      'border:1px solid ' + bg + ' !important;' +
+      'white-space:nowrap !important;' +
+      'vertical-align:middle !important;'
     );
-    sel.parentNode.replaceChild(span, sel);
+  });
+  clone.querySelectorAll('thead th').forEach(th => {
+    th.removeAttribute('width');
+    th.removeAttribute('style');
   });
   clone.querySelectorAll('button').forEach(b=>b.remove());
   clone.classList.add('print-target');
+
   const wrap = document.createElement('div');
-  wrap.style.cssText='position:fixed;top:0;left:0;width:1120px;background:#ffffff;z-index:99999;pointer-events:none;opacity:0;';
+  wrap.style.cssText =
+    'position:fixed;top:0;left:-99999px;' +
+    'width:1050px;' +
+    'background:#ffffff;z-index:99999;pointer-events:none;';
   wrap.appendChild(clone);
   document.body.appendChild(wrap);
-  await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,150)));
+
+  await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,200)));
+
   const opt={
-    margin:[5,5,5,5],
+    margin:[6,6,6,6],
     filename:(label||'plan').replace(/\s+/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf',
     image:{type:'jpeg',quality:0.98},
     html2canvas:{
@@ -1129,12 +928,12 @@ async function sharePlanPDF(panelEl,label,idx){
       backgroundColor:'#ffffff',
       useCORS:true,
       logging:false,
-      windowWidth:1120,
-      width:1120,
-      onclone:(doc)=>{const el=doc.querySelector('.print-target');if(el){el.style.opacity='1';el.style.width='1120px';}}
+      windowWidth:1050,
+      width:1050
     },
     jsPDF:{unit:'mm',format:'a4',orientation:'landscape'}
   };
+
   try{
     const blob=await html2pdf().set(opt).from(clone).outputPdf('blob');
     if(wrap.parentNode)document.body.removeChild(wrap);
@@ -1155,9 +954,6 @@ document.getElementById('btnSave').addEventListener('click',()=>{syncFromDOM();p
 document.getElementById('btnExport').addEventListener('click',()=>exportData());
 document.getElementById('btnImport').addEventListener('click',()=>{document.getElementById('importFile').click();});
 document.getElementById('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)importData(f);e.target.value='';});
-document.getElementById('btnExportXlsx').addEventListener('click',()=>exportToExcel());
-document.getElementById('btnImportXlsx').addEventListener('click',()=>{document.getElementById('importXlsxFile').click();});
-document.getElementById('importXlsxFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)importFromExcel(f);e.target.value='';});
 document.getElementById('btnRefreshRates').addEventListener('click',async()=>{const btn=document.getElementById('btnRefreshRates');const statusTxt=document.getElementById('ratesStatusText');btn.disabled=true;statusTxt.textContent=t('ratesLoading');const ok=await fetchRatesFromInternet();btn.disabled=false;if(ok){showToast(t('ratesUpdated'));recalcAllPanels();}else{showToast(t('ratesFailed'),true);}updateRatesStatusUI();});
 document.getElementById('btnAddPlan').addEventListener('click',()=>{syncFromDOM();STATE.panels.push(createDefaultPanel(STATE.panels.length));saveState();renderPanels();setTimeout(()=>{const panels=document.querySelectorAll('.panel');panels[panels.length-1].scrollIntoView({behavior:'smooth',block:'center'});},100);});
 document.getElementById('resetTitles').addEventListener('click',()=>{showModal({title:t('resetConfirmTitle'),message:t('resetConfirmMsg'),onSave:()=>{exportData();setTimeout(()=>doResetTitles(),400);},onConfirm:()=>doResetTitles()});});
