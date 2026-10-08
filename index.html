@@ -41,46 +41,6 @@
     color:var(--ink); min-height:100vh; padding:22px 16px 40px;
     font-size:calc(14px * var(--fs,1));
     transition:background .3s, color .3s;
-    position:relative;
-  }
-
-  /* شارة حقوق الملكية */
-  .copyright-badge{
-    position:fixed;top:14px;inset-inline-start:14px;z-index:900;
-    display:inline-flex;align-items:center;gap:8px;
-    padding:8px 14px 8px 12px;
-    background:linear-gradient(135deg,rgba(15,23,42,.85),rgba(30,58,95,.85));
-    border:1px solid rgba(255,255,255,.15);border-radius:999px;
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.05) inset;
-    transition:.25s;cursor:default;
-  }
-  .copyright-badge:hover{
-    transform:translateY(-1px);
-    box-shadow:0 12px 30px rgba(0,0,0,.45), 0 0 20px rgba(14,165,233,.2);
-    border-color:rgba(14,165,233,.4);
-  }
-  .copyright-badge .cb-icon{
-    width:22px;height:22px;border-radius:50%;
-    background:linear-gradient(135deg,#0ea5e9,#14b8a6);
-    display:flex;align-items:center;justify-content:center;
-    color:#fff;font-size:11px;font-weight:900;
-    box-shadow:0 0 12px rgba(14,165,233,.5);
-  }
-  .copyright-badge .cb-text{display:flex;flex-direction:column;line-height:1.1}
-  .copyright-badge .cb-text small{font-size:9px;color:#94a3b8;letter-spacing:1px;font-weight:700;text-transform:uppercase}
-  .copyright-badge .cb-text strong{
-    font-size:13px;
-    background:linear-gradient(135deg,#7dd3fc,#5eead4 50%,#a78bfa);
-    -webkit-background-clip:text;background-clip:text;
-    -webkit-text-fill-color:transparent;color:transparent;
-    font-weight:900;letter-spacing:.5px;
-  }
-  body.dark .copyright-badge{background:linear-gradient(135deg,rgba(5,8,16,.9),rgba(15,23,42,.9))}
-  @media(max-width:640px){
-    .copyright-badge{top:10px;inset-inline-start:10px;padding:6px 10px 6px 9px}
-    .copyright-badge .cb-text strong{font-size:11px}
-    .copyright-badge .cb-icon{width:18px;height:18px;font-size:10px}
   }
 
   /* التذييل */
@@ -746,9 +706,7 @@
   .help-intro strong{color:#0369a1}
   body.dark .help-intro strong{color:#7dd3fc}
 
-  .help-section{
-    margin-bottom:22px;
-  }
+  .help-section{margin-bottom:22px}
   .help-section-title{
     display:flex;align-items:center;gap:10px;
     font-size:1em;font-weight:900;
@@ -779,10 +737,7 @@
     padding-inline-start:40px;
   }
   .help-text p{margin:0 0 8px}
-  .help-text ul{
-    margin:6px 0 10px;
-    padding-inline-start:20px;
-  }
+  .help-text ul{margin:6px 0 10px;padding-inline-start:20px}
   .help-text li{margin-bottom:5px}
   .help-text b, .help-text strong{color:#0369a1;font-weight:800}
   body.dark .help-text b, body.dark .help-text strong{color:#7dd3fc}
@@ -866,12 +821,6 @@
     box-shadow:0 6px 16px rgba(14,165,233,.35);
   }
   .help-foot .hf-btn.ok:hover{transform:translateY(-1px);filter:brightness(1.05)}
-  .help-foot .hf-btn.print-help{
-    background:transparent;
-    color:var(--muted);
-    border:1.5px solid var(--line2);
-  }
-  .help-foot .hf-btn.print-help:hover{background:var(--line)}
 
   @media(max-width:640px){
     .help-modal{max-height:calc(100vh - 20px);border-radius:16px}
@@ -943,19 +892,11 @@
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
     @page { margin: 12mm; size: A4 landscape; }
-    .copyright-badge, .site-footer{ display: none !important; }
+    .site-footer{ display: none !important; }
   }
 </style>
 </head>
 <body>
-
-  <div class="copyright-badge" title="حقوق الملكية © Muharraqi">
-    <span class="cb-icon">©</span>
-    <span class="cb-text">
-      <small>Owned by</small>
-      <strong>Muharraqi</strong>
-    </span>
-  </div>
 
   <div class="page-head">
     <h1 id="appTitle">ترتيب ميزانية السفر 💰</h1>
@@ -1014,9 +955,7 @@
     </div>
   </footer>
 
-  <!-- ============================================================
-       نافذة التعليمات
-  ============================================================ -->
+  <!-- نافذة التعليمات -->
   <div class="help-overlay" id="helpOverlay">
     <div class="help-modal">
       <div class="help-head">
@@ -1030,7 +969,7 @@
         <button class="help-close" id="helpClose" title="إغلاق">✕</button>
       </div>
 
-      <div class="help-body" id="helpBody"><!-- يُبنى ديناميكيًا حسب اللغة --></div>
+      <div class="help-body" id="helpBody"></div>
 
       <div class="help-foot">
         <div class="hf-note">
@@ -1156,7 +1095,7 @@ function convert(amount, fromCode, toCode){
 }
 
 /* ============================================================
-   محتوى التعليمات (عربي/إنجليزي)
+   محتوى التعليمات
 ============================================================ */
 const HELP_CONTENT = {
   ar: {
@@ -1290,7 +1229,7 @@ const HELP_CONTENT = {
 };
 
 /* ============================================================
-   الترجمات العامة
+   الترجمات
 ============================================================ */
 const I18N = {
   ar: {
@@ -1492,7 +1431,7 @@ function getDefaultTitles(lang){
 /* ============================================================
    الحالة
 ============================================================ */
-const STORAGE_KEY = 'travel_budget_v12';
+const STORAGE_KEY = 'travel_budget_v13';
 
 function createDefaultPanel(idx){
   return {
@@ -1688,7 +1627,6 @@ function applyLang(){
   document.getElementById('addBtn').textContent      = t('addBtn');
   document.getElementById('addPlanLabel').textContent = t('addPlanLabel');
   updateRatesStatusUI();
-  /* إعادة بناء محتوى التعليمات */
   renderHelpContent();
 }
 
@@ -1713,9 +1651,6 @@ function updateRatesStatusUI(){
   else { txt.textContent = '…'; }
 }
 
-/* ============================================================
-   بناء محتوى نافذة التعليمات
-============================================================ */
 function renderHelpContent(){
   const C = HELP_CONTENT[STATE.lang] || HELP_CONTENT.ar;
   document.getElementById('helpTitle').textContent = C.title;
@@ -1724,11 +1659,9 @@ function renderHelpContent(){
   document.getElementById('helpOk').textContent = C.okBtn;
 
   const body = document.getElementById('helpBody');
-
   let html = `<div class="help-intro">${C.intro}</div>`;
 
   C.sections.forEach((sec, i) => {
-    /* استخدم رقمًا تسلسليًا بالعربية أو الإنجليزية */
     const num = STATE.lang === 'ar'
       ? ['١','٢','٣','٤','٥'][i] || (i+1)
       : (i+1);
@@ -1766,7 +1699,6 @@ function renderHelpContent(){
   body.innerHTML = html;
 }
 
-/* فتح/إغلاق نافذة التعليمات */
 function openHelp(){
   renderHelpContent();
   document.getElementById('helpOverlay').classList.add('show');
@@ -1789,9 +1721,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ============================================================
-   لوحة البنود
-============================================================ */
 function renderTitlesUI(){
   const tabsEl = document.getElementById('tabs');
   const chipListEl = document.getElementById('chipList');
