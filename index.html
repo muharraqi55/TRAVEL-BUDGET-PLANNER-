@@ -161,10 +161,35 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .currency-item .ci-bhd{font-weight:800;color:#047857;font-size:.95em}
 .currency-item .ci-arrow{color:var(--muted)}
 .currencies-empty{text-align:center;color:var(--muted);font-size:.85em;padding:10px;font-style:italic}
-.perday-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px dashed rgba(245,158,11,.4);flex-wrap:wrap}
-.perday-row label{font-size:.72em;font-weight:800;color:#92400e;white-space:nowrap}
-.perday-inp{width:56px;border:1.5px solid #fcd34d;background:var(--input-bg);border-radius:6px;padding:4px 6px;font-family:inherit;font-size:.85em;font-weight:800;color:#78350f;text-align:center}
-.perday-reset{background:transparent;border:0;cursor:pointer;font-size:.78em;color:#a16207;padding:2px 5px;border-radius:5px;font-family:inherit;font-weight:800}
+/* ===== قسم حسابة البرامج السياحية ===== */
+.programs-section{margin:0 15px 15px;background:var(--panel2);border:1.5px solid rgba(139,92,246,.35);border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(139,92,246,.08)}
+.programs-head{background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.programs-head h3{margin:0;font-size:1.05em;display:flex;align-items:center;gap:8px;color:#fff}
+.programs-summary{display:flex;gap:10px;flex-wrap:wrap}
+.psm-item{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:7px 13px;min-width:130px}
+.psm-item .psm-label{font-size:.7em;font-weight:700;color:rgba(255,255,255,.88)}
+.psm-item .psm-value{font-size:1.02em;font-weight:900;font-variant-numeric:tabular-nums;color:#fff}
+.psm-item.hi{background:linear-gradient(135deg,rgba(22,163,74,.45),rgba(20,184,166,.35));border-color:rgba(74,222,128,.6)}
+.psm-item.bad{background:linear-gradient(135deg,rgba(225,29,72,.45),rgba(190,18,60,.35));border-color:rgba(248,113,113,.6)}
+/* شريط ميزانية الرحلات لكل يوم */
+.perday-strip{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(99,102,241,.06));border-bottom:1px dashed rgba(139,92,246,.35)}
+.perday-block{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.perday-title{font-size:.88em;font-weight:900;color:#6d28d9}
+.perday-val-wrap{display:flex;align-items:baseline;gap:5px;background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;padding:6px 14px;border-radius:10px;box-shadow:0 6px 18px rgba(124,58,237,.35)}
+.perday-val{font-size:1.15em;font-weight:900;font-variant-numeric:tabular-nums}
+.perday-cur{font-size:.72em;font-weight:800;opacity:.9}
+.perday-block label{font-size:.8em;font-weight:800;color:#6d28d9}
+.prog-days-inp{width:70px;border:1.5px solid rgba(139,92,246,.5);background:var(--input-bg);border-radius:8px;padding:6px 8px;font-family:inherit;font-size:.9em;font-weight:900;color:#6d28d9;text-align:center}
+.prog-days-inp:focus{outline:none;border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.18)}
+.perday-info{font-size:.78em;color:var(--muted);font-weight:700;background:var(--panel);border:1px dashed rgba(139,92,246,.4);border-radius:8px;padding:4px 10px}
+.perday-info b{color:#6d28d9;font-weight:900}
+.perday-info .used{color:#b45309}
+.programs-section .table-wrap{padding:10px 12px 0;overflow-x:auto}
+.programs-section table{min-width:1180px;width:100%}
+.programs-section .table-actions{padding:10px 12px 12px;margin-top:10px;background:transparent;border-top:1px dashed var(--line2)}
+.programs-section .empty-state{padding:20px}
+.programs-section .btn-add-prog{background:linear-gradient(135deg,#7c3aed,#6366f1);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.9em;padding:9px 18px;border-radius:9px;cursor:pointer}
+.programs-section .btn-clear-prog{background:transparent;border:1.5px solid rgba(225,29,72,.3);color:var(--red);font-family:inherit;font-weight:700;font-size:.88em;padding:9px 13px;border-radius:9px;cursor:pointer}
 .add-plan-wrap{max-width:1500px;margin:18px auto 0;display:flex;justify-content:center}
 .btn-add-plan{background:linear-gradient(135deg,#0ea5e9,#14b8a6);border:0;color:#fff;font-family:inherit;font-weight:800;font-size:.95em;padding:12px 26px;border-radius:12px;cursor:pointer}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
@@ -220,9 +245,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .pdf-plan-strip .ps-name{font-size:14px !important;font-weight:900 !important;color:#fff !important;margin:0 !important}
 .print-target .pdf-plan-strip .ps-meta{display:flex !important;gap:6px !important;align-items:center !important}
 .print-target .pdf-plan-strip .ps-badge{background:rgba(255,255,255,.25) !important;padding:3px 10px !important;border-radius:999px !important;font-size:10px !important;font-weight:800 !important;color:#fff !important;border:1px solid rgba(255,255,255,.4) !important}
-
-/* حُذفت بطاقات KPI من هنا - لا حاجة لتعريفها */
-
 .print-target .table-wrap{padding:0 !important;margin:0 !important;overflow:visible !important;width:100% !important;display:block !important}
 .print-target table{table-layout:auto !important;width:100% !important;min-width:0 !important;max-width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border-spacing:0 !important;font-size:8.5px !important;border:2px solid #0f172a !important}
 .print-target thead th{background:#0f172a !important;color:#fff !important;padding:5px 2px !important;font-size:8px !important;font-weight:800 !important;text-align:center !important;border:1px solid #0f172a !important;white-space:normal !important;word-break:break-word !important;overflow-wrap:break-word !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
@@ -258,10 +280,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .stat.warn .s-label,.print-target .stat.warn .s-value{color:#fff !important}
 .print-target .stat.bad{background:linear-gradient(135deg,#e11d48,#be123c) !important;border:0 !important}
 .print-target .stat.bad .s-label,.print-target .stat.bad .s-value{color:#fff !important}
-.print-target .perday-row{display:flex !important;border:0 !important;padding:0 !important;margin:0 !important;gap:6px !important;align-items:center !important;flex-direction:row-reverse !important}
-.print-target .perday-row label{color:inherit !important;font-size:10px !important;font-weight:800 !important;display:inline !important;opacity:.9 !important}
-.print-target .perday-value{display:inline !important;font-weight:900 !important;font-size:11px !important;color:inherit !important;background:rgba(255,255,255,.35) !important;padding:2px 8px !important;border-radius:6px !important;border:1px solid rgba(255,255,255,.5) !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
-.print-target .perday-inp,.print-target .perday-reset{display:none !important}
 .print-target .totals-row{display:grid !important;grid-template-columns:1fr 1fr !important;gap:12px !important;padding:0 !important;page-break-inside:avoid !important;break-inside:avoid !important}
 .print-target .currencies-card{background:#f8fafc !important;border:1px solid #e2e8f0 !important;border-radius:10px !important;padding:10px 12px !important}
 .print-target .currencies-card.in-card{border:1.5px solid rgba(14,165,233,.4) !important;background:#f0f9ff !important}
@@ -290,6 +308,26 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .currency-sel,
 .print-target .empty-state,
 .print-target .panel-head{display:none !important}
+/* قسم البرامج في الطباعة */
+.print-target .programs-section{margin:6px 0 8px 0 !important;border:2px solid #7c3aed !important;background:#f5f3ff !important;border-radius:8px !important;overflow:hidden !important;page-break-inside:avoid !important;break-inside:avoid !important}
+.print-target .programs-head{background:linear-gradient(135deg,#7c3aed,#6366f1) !important;padding:8px 14px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;gap:10px !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target .programs-head h3{color:#fff !important;font-size:12px !important;margin:0 !important}
+.print-target .programs-summary{display:flex !important;gap:8px !important;flex-wrap:wrap !important}
+.print-target .psm-item{background:rgba(255,255,255,.2) !important;border:1px solid rgba(255,255,255,.4) !important;padding:4px 10px !important;border-radius:8px !important;display:flex !important;flex-direction:column !important;min-width:0 !important}
+.print-target .psm-item .psm-label{font-size:8px !important;color:rgba(255,255,255,.9) !important;font-weight:700 !important}
+.print-target .psm-item .psm-value{font-size:10px !important;color:#fff !important;font-weight:900 !important}
+.print-target .psm-item.hi{background:linear-gradient(135deg,#16a34a,#14b8a6) !important;border:0 !important}
+.print-target .psm-item.bad{background:linear-gradient(135deg,#e11d48,#be123c) !important;border:0 !important}
+.print-target .perday-strip{background:linear-gradient(135deg,#ede9fe,#e0e7ff) !important;padding:8px 12px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;gap:8px !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target .perday-title{color:#6d28d9 !important;font-size:10px !important;font-weight:900 !important}
+.print-target .perday-val-wrap{background:linear-gradient(135deg,#7c3aed,#6366f1) !important;padding:4px 10px !important;border-radius:8px !important;display:inline-flex !important;gap:4px !important;align-items:baseline !important;color:#fff !important}
+.print-target .perday-val{color:#fff !important;font-size:11px !important;font-weight:900 !important}
+.print-target .perday-cur{color:#fff !important;font-size:8px !important;opacity:.9 !important}
+.print-target .perday-block label{color:#6d28d9 !important;font-size:10px !important;font-weight:800 !important}
+.print-target .perday-info{background:#fff !important;border:1px dashed rgba(124,58,237,.5) !important;color:#334155 !important;font-size:9px !important;padding:3px 8px !important;border-radius:6px !important;font-weight:700 !important}
+.print-target .perday-info b{color:#6d28d9 !important}
+.print-target .perday-info .used{color:#b45309 !important}
+.print-target .prog-days-inp{background:#fff !important;border:1px solid #7c3aed !important;color:#6d28d9 !important;font-size:10px !important;font-weight:900 !important;width:50px !important;padding:2px 4px !important;border-radius:5px !important;text-align:center !important}
 @media print{
   @page{margin:8mm;size:A4 landscape}
   body{padding:0 !important;margin:0 !important;background:#fff !important}
@@ -409,9 +447,36 @@ function toBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a
 function fromBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a*r;}
 function convert(a,fc,tc){return fromBHD(toBHD(a,fc),tc);}
 
-const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>عدّل حقل «عدد الأيام» في بطاقة «البرامج لكل يوم».</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Edit Days field.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
+const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>أضف بنود البرامج في جدول «حسابة البرامج السياحية» أسفل كل خطة. المعدل اليومي يتحدث تلقائيًا حسب الأيام المتبقية.</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Add program items in the "Tourist Programs Calculator" table below each plan. The per-day rate updates automatically based on remaining days.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
 
-const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',excelSuccess:'تم تصدير Excel 📊',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',statPerDay:'📊 البرامج لكل يوم',statPerDayDays:'عدد الأيام:',perDayResetTitle:'استعادة',importSuccess:'تم الاستيراد',importError:'تعذّر الاستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات'},en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',excelSuccess:'Excel exported 📊',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',statPerDay:'📊 Program per Day',statPerDayDays:'Days:',perDayResetTitle:'Reset',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help'}};
+const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',excelSuccess:'تم تصدير Excel 📊',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thNotes:'ملاحظات',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',importSuccess:'تم الاستيراد',importError:'تعذّر الاستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات',
+  programsSectionTitle:'🧮 حسابة البرامج السياحية',
+  programsHandLabel:'💰 المتبقي في اليد',
+  programsTotalLabel:'📊 إجمالي البرامج',
+  programsRemainLabel:'✅ المتبقي بعد البرامج',
+  progAddRow:'➕ إضافة برنامج',
+  progClearRows:'🗑️ حذف الكل',
+  progDeleteAllTitle:'حذف البرامج؟',
+  progDeleteAllMsg:'سيتم حذف جميع بنود البرامج.',
+  perDayTitle:'💰 ميزانية للرحلات لكل يوم',
+  perDayDaysLabel:'عدد الأيام:',
+  perDayRemainInfo:'الأيام المتبقية:',
+  perDayUsedInfo:'الأيام المستهلكة:',
+  perDayAllocated:'الأيام الكلية:'},
+ en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',excelSuccess:'Excel exported 📊',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thNotes:'Notes',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help',
+  programsSectionTitle:'🧮 Tourist Programs Calculator',
+  programsHandLabel:'💰 Remaining in Hand',
+  programsTotalLabel:'📊 Programs Total',
+  programsRemainLabel:'✅ Remaining after Programs',
+  progAddRow:'➕ Add Program',
+  progClearRows:'🗑️ Clear All',
+  progDeleteAllTitle:'Delete programs?',
+  progDeleteAllMsg:'All program rows will be deleted.',
+  perDayTitle:'💰 Daily Travel Budget',
+  perDayDaysLabel:'Days:',
+  perDayRemainInfo:'Remaining Days:',
+  perDayUsedInfo:'Used Days:',
+  perDayAllocated:'Total Days:'}};
 
 const TITLE_I18N={'flight':{ar:'رحلة طيران',en:'flight'},'lunch':{ar:'غداء',en:'lunch'},'dinner':{ar:'عشاء',en:'dinner'},'transport':{ar:'مواصلات',en:'transport'},'Laundry':{ar:'غسيل',en:'Laundry'},'Sweet & could store':{ar:'حلويات ومشروبات',en:'Sweet & could store'},'Hospital':{ar:'مستشفى',en:'Hospital'},'Others':{ar:'أخرى',en:'Others'},'hotels':{ar:'فنادق',en:'hotels'}};
 const DEFAULT_TITLE_KEYS={air:['flight'],hotel:['hotels'],other:['lunch','dinner','transport','Laundry','Sweet & could store','Hospital','Others']};
@@ -420,9 +485,9 @@ function translateStr(str,toLang){const k=findKey(str);if(k&&TITLE_I18N[k])retur
 function getDefaultTitles(lang){const o={air:[],hotel:[],other:[]};['air','hotel','other'].forEach(c=>{o[c]=DEFAULT_TITLE_KEYS[c].map(k=>TITLE_I18N[k]?TITLE_I18N[k][lang]:k);});return o;}
 
 const STORAGE_KEY='travel_budget_v14';
-function createDefaultPanel(idx){return{id:'plan_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),index:idx,days:14,budget:0,perdayDays:null,rows:[]};}
+function createDefaultPanel(idx){return{id:'plan_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),index:idx,days:14,budget:0,perdayDays:null,programsDays:null,rows:[],programs:[]};}
 function createDefaultState(){return{lang:'ar',theme:'light',fontScale:1,titles:getDefaultTitles('ar'),panels:[createDefaultPanel(0)],activeCat:'air'};}
-function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const s=JSON.parse(raw);if(!s||typeof s!=='object'||!Array.isArray(s.panels))return null;if(!s.titles||typeof s.titles!=='object')s.titles=getDefaultTitles(s.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(s.titles[c]))s.titles[c]=[];});s.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];if(typeof p.days!=='number')p.days=14;if(typeof p.budget!=='number')p.budget=0;if(p.perdayDays===undefined)p.perdayDays=null;p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});if(typeof s.fontScale!=='number')s.fontScale=1;if(!s.lang)s.lang='ar';if(!s.theme)s.theme='light';if(!s.activeCat)s.activeCat='air';return s;}catch(e){return null;}}
+function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const s=JSON.parse(raw);if(!s||typeof s!=='object'||!Array.isArray(s.panels))return null;if(!s.titles||typeof s.titles!=='object')s.titles=getDefaultTitles(s.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(s.titles[c]))s.titles[c]=[];});s.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];if(!Array.isArray(p.programs))p.programs=[];if(typeof p.days!=='number')p.days=14;if(typeof p.budget!=='number')p.budget=0;if(p.perdayDays===undefined)p.perdayDays=null;if(p.programsDays===undefined)p.programsDays=null;p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});p.programs.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});if(typeof s.fontScale!=='number')s.fontScale=1;if(!s.lang)s.lang='ar';if(!s.theme)s.theme='light';if(!s.activeCat)s.activeCat='air';return s;}catch(e){return null;}}
 
 let STATE=loadState()||createDefaultState();
 function t(key){const d=I18N[STATE.lang]||I18N.ar;return d[key]!==undefined?d[key]:key;}
@@ -444,7 +509,7 @@ function showToast(msg,isError){const toast=document.getElementById('toast');doc
 function showModal({title,message,onSave,onConfirm}){document.getElementById('modalTitle').textContent=title;document.getElementById('modalMessage').textContent=message;document.getElementById('modalSave').textContent=t('modalSaveFirst');document.getElementById('modalConfirm').textContent=t('modalConfirm');document.getElementById('modalCancel').textContent=t('modalCancel');document.getElementById('modalOverlay').style.display='flex';const close=()=>{document.getElementById('modalOverlay').style.display='none';};document.getElementById('modalCancel').onclick=close;document.getElementById('modalSave').onclick=()=>{if(onSave)onSave();close();};document.getElementById('modalConfirm').onclick=()=>{if(onConfirm)onConfirm();close();};}
 
 function exportData(){syncFromDOM();const blob=new Blob([JSON.stringify(STATE,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const ts=new Date().toISOString().slice(0,10);a.download=`travel-budget-${ts}.json`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
-function importData(file){const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);if(!data||!Array.isArray(data.panels))throw new Error('bad');STATE=data;if(!STATE.titles)STATE.titles=getDefaultTitles(STATE.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(STATE.titles[c]))STATE.titles[c]=[];});if(!STATE.lang)STATE.lang='ar';if(!STATE.theme)STATE.theme='light';if(typeof STATE.fontScale!=='number')STATE.fontScale=1;if(!STATE.activeCat)STATE.activeCat='air';STATE.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});applyTheme();applyFontScale();applyLang();renderEverything();saveState();showToast(t('importSuccess'));}catch(err){showToast(t('importError'),true);}};reader.onerror=()=>showToast(t('importError'),true);reader.readAsText(file);}
+function importData(file){const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);if(!data||!Array.isArray(data.panels))throw new Error('bad');STATE=data;if(!STATE.titles)STATE.titles=getDefaultTitles(STATE.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(STATE.titles[c]))STATE.titles[c]=[];});if(!STATE.lang)STATE.lang='ar';if(!STATE.theme)STATE.theme='light';if(typeof STATE.fontScale!=='number')STATE.fontScale=1;if(!STATE.activeCat)STATE.activeCat='air';STATE.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];if(!Array.isArray(p.programs))p.programs=[];if(p.programsDays===undefined)p.programsDays=null;p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});p.programs.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});applyTheme();applyFontScale();applyLang();renderEverything();saveState();showToast(t('importSuccess'));}catch(err){showToast(t('importError'),true);}};reader.onerror=()=>showToast(t('importError'),true);reader.readAsText(file);}
 
 function exportToExcel(){
   if(typeof XLSX==='undefined'){showToast('Excel غير محمّل',true);return;}
@@ -491,11 +556,8 @@ function exportToExcel(){
     aoa.push([C('📊 '+(isAr?'ملخص الإحصائيات':'Statistics Summary'),S.sectionIn),...Array(9).fill(C('',S.sectionIn))]);
     merges.push({s:{r:statsTitleRow,c:0},e:{r:statsTitleRow,c:9}});
     const airHotel=airSum+hotelSum;
-    const perdayDays=panel.perdayDays||panel.days||1;
-    const perDay=perdayDays>0?hand/perdayDays:0;
-    const perDayLabel=t('statPerDay')+(panel.perdayDays?` (${panel.perdayDays} ${isAr?'يوم':'d'})`:'');
     const handStyle=hand<0?S.statValueRed:S.statValueGreen;
-    const statsRows=[[{label:t('statBudget'),value:panel.budget||0,style:S.statValue},{label:t('statOther'),value:otherSum,style:S.statValuePurple}],[{label:t('statAir'),value:airSum,style:S.statValue},{label:t('statHand'),value:hand,style:handStyle}],[{label:t('statHotel'),value:hotelSum,style:S.statValue},{label:perDayLabel,value:perDay,style:S.statValueAmber}],[{label:t('statAirHotel'),value:airHotel,style:S.statValueGreen},null]];
+    const statsRows=[[{label:t('statBudget'),value:panel.budget||0,style:S.statValue},{label:t('statOther'),value:otherSum,style:S.statValuePurple}],[{label:t('statAir'),value:airSum,style:S.statValue},{label:t('statHand'),value:hand,style:handStyle}],[{label:t('statHotel'),value:hotelSum,style:S.statValue},{label:'—',value:0,style:S.statValue}],[{label:t('statAirHotel'),value:airHotel,style:S.statValueGreen},null]];
     statsRows.forEach(([left,right])=>{const row=[];if(left){row.push(C(left.label,S.statLabel));row.push(C(Number(left.value.toFixed(2))+' '+(isAr?'د.ب':'BHD'),left.style));row.push(E(S.statLabel));}else{row.push(E(S.statLabel));row.push(E(S.statLabel));row.push(E(S.statLabel));}if(right){row.push(C(right.label,S.statLabel));row.push(E(S.statLabel));row.push(C(Number(right.value.toFixed(2))+' '+(isAr?'د.ب':'BHD'),right.style));}else{row.push(E(S.statLabel));row.push(E(S.statLabel));row.push(E(S.statLabel));}row.push(E(S.statLabel));aoa.push(row);});
     aoa.push(Array(10).fill(E()));aoa.push(Array(10).fill(E()));
     const inTitleRow=aoa.length;
@@ -511,6 +573,37 @@ function exportToExcel(){
     aoa.push([C(isAr?'العملة':'Currency',S.curHead),C(isAr?'الاسم':'Name',S.curHead),C(isAr?'المبلغ':'Amount',S.curHead),C(isAr?'المعادل (د.ب)':'Equivalent (BHD)',S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead),E(S.curHead)]);
     const outCodes=Object.keys(totalsOut).sort((a,b)=>totalsOut[b].foreign-totalsOut[a].foreign);
     if(!outCodes.length){aoa.push([C(t('currenciesCardEmpty'),S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);}else{outCodes.forEach(code=>{const c=CURRENCIES[code];aoa.push([C(code,S.curCodeOut),C(curName(code),S.curCell),C(Number(totalsOut[code].foreign.toFixed(2))+' '+(c?c.sym:code),S.curCell),C(Number(totalsOut[code].bhd.toFixed(2)),S.curCellGreen),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell),E(S.curCell)]);});}
+    /* ==== قسم حسابة البرامج السياحية ==== */
+    aoa.push(Array(10).fill(E()));
+    const progTitleRow=aoa.length;
+    aoa.push([C(t('programsSectionTitle'),S.sectionOut),...Array(9).fill(C('',S.sectionOut))]);
+    merges.push({s:{r:progTitleRow,c:0},e:{r:progTitleRow,c:9}});
+    aoa.push([C(isAr?'تفعيل':'Active',S.th),C(isAr?'التاريخ':'Date',S.th),C(isAr?'ملاحظات':'Notes',S.th),C(isAr?'التصنيف':'Category',S.th),C(isAr?'السعر':'Price',S.th),C(isAr?'العملة (إدخال)':'Currency (In)',S.thIn),C(isAr?'المعادل':'Equivalent',S.th),C(isAr?'العملة (تحويل)':'Currency (Out)',S.thOut),C(isAr?'الأيام':'Days',S.th),C(isAr?'الإجمالي (د.ب)':'Total (BHD)',S.th)]);
+    let progSum=0,usedDays=0;
+    (panel.programs||[]).forEach(row=>{
+      const cat=categoryOf(row.notes);
+      const catLabel=isAr?{air:'✈️ طيران',hotel:'🏨 فنادق',other:'📦 أخرى'}[cat]:{air:'✈️ Flights',hotel:'🏨 Hotels',other:'📦 Other'}[cat];
+      const curIn=row.currency||'BHD';const curOut=row.currency2||'BHD';
+      const priceIn=Number(row.price)||0;const d=Number(row.days)||0;
+      const equiv=convert(priceIn,curIn,curOut);const priceInBHD=toBHD(priceIn,curIn);const lineBHD=priceInBHD*d;
+      const isOn=row.ok!==false;
+      const baseStyle=!isOn?S.rowOff:(cat==='air'?S.rowAir:cat==='hotel'?S.rowHotel:S.rowOther);
+      const titleStyle=!isOn?S.rowOffTitle:(cat==='air'?S.rowAirTitle:cat==='hotel'?S.rowHotelTitle:S.rowOtherTitle);
+      if(isOn){progSum+=lineBHD;usedDays+=d;}
+      aoa.push([C(isOn?(isAr?'نعم':'Yes'):(isAr?'لا':'No'),baseStyle),C(row.date||'',baseStyle),C(row.notes||'',titleStyle),C(catLabel,baseStyle),C(priceIn,baseStyle),C(curIn,baseStyle),C(Number(equiv.toFixed(2)),baseStyle),C(curOut,baseStyle),C(d,baseStyle),C(Number(lineBHD.toFixed(2)),baseStyle)]);
+    });
+    aoa.push([...Array(8).fill(E()),C(isAr?'إجمالي البرامج':'Programs Total',S.grandLabel),C(Number(progSum.toFixed(2)),S.grandValue)]);
+    const remainAfter=hand-progSum;
+    aoa.push([...Array(8).fill(E()),C(t('programsRemainLabel'),S.handLabel),C(Number(remainAfter.toFixed(2)),remainAfter<0?S.statValueRed:S.handValue)]);
+    /* صف ميزانية الرحلات لكل يوم */
+    const progDays=(panel.programsDays!=null?panel.programsDays:(panel.days||0));
+    const remainingDays=Math.max(progDays-usedDays,0);
+    const perDay=remainingDays>0?remainAfter/remainingDays:0;
+    aoa.push([...Array(6).fill(E()),C(t('perDayTitle'),S.sectionOut),E(S.sectionOut),E(S.sectionOut)]);
+    aoa.push([...Array(6).fill(E()),C(isAr?'ميزانية لكل يوم':'Per Day',S.statLabel),E(S.statLabel),C(Number(perDay.toFixed(2))+' '+(isAr?'د.ب':'BHD'),perDay<0?S.statValueRed:S.statValueGreen)]);
+    aoa.push([...Array(6).fill(E()),C(isAr?'عدد الأيام الكلي':'Total Days',S.statLabel),E(S.statLabel),C(progDays,S.statLabel)]);
+    aoa.push([...Array(6).fill(E()),C(isAr?'الأيام المستهلكة':'Used Days',S.statLabel),E(S.statLabel),C(usedDays,S.statLabel)]);
+    aoa.push([...Array(6).fill(E()),C(isAr?'الأيام المتبقية':'Remaining Days',S.statLabel),E(S.statLabel),C(remainingDays,S.statLabel)]);
     const ws=XLSX.utils.aoa_to_sheet(aoa);
     ws['!cols']=[{wch:22},{wch:16},{wch:32},{wch:18},{wch:14},{wch:16},{wch:18},{wch:16},{wch:14},{wch:18}];
     ws['!rows']=[];ws['!rows'][0]={hpt:30};ws['!merges']=merges;ws['!views']=[{RTL:true}];
@@ -578,19 +671,25 @@ document.getElementById('addBtn').addEventListener('click',()=>{const inp=docume
 document.getElementById('newTitleInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addTitle(e.target.value);e.target.value='';}});
 function buildCurrencyOptions(selected){return Object.entries(CURRENCIES).map(([code,c])=>{const label=STATE.lang==='ar'?`${code} — ${c.ar}`:`${code} — ${c.en}`;return `<option value="${code}" ${code===selected?'selected':''}>${esc(label)}</option>`;}).join('');}
 function enforceMax(inp,getMax){
+  if(!inp)return;
   const clamp=()=>{const maxV=parseFloat(getMax())||0;const v=parseFloat(inp.value);if(isFinite(v)&&maxV>0&&v>maxV){inp.value=maxV;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);return true;}if(isFinite(v)&&v<0)inp.value=0;return false;};
   inp.addEventListener('beforeinput',e=>{if(e.data&&/[0-9]/.test(e.data)){const cur=inp.value||'';const future=cur+e.data;const maxV=parseFloat(getMax())||0;const fv=parseFloat(future);if(isFinite(fv)&&maxV>0&&fv>maxV){e.preventDefault();inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);}}});
   inp.addEventListener('input',clamp);inp.addEventListener('change',clamp);inp.addEventListener('blur',clamp);inp.addEventListener('paste',()=>setTimeout(clamp,0));
 }
 
-function makeRowEl(row,maxDays){
-  row=row||{ok:true,date:'',title:'',price:null,days:null,currency:'BHD',currency2:'BHD'};
+function makeRowEl(row, maxDays, opts){
+  opts = opts || {};
+  const fieldName = opts.fieldName || 'title';
+  const useDatalist = (fieldName === 'title');
+  if(!row) row = {ok:true, date:'', price:null, days:null, currency:'BHD', currency2:'BHD'};
+  if(row[fieldName] === undefined) row[fieldName] = '';
   const isOn=row.ok!==false;const curIn=row.currency||'BHD';const curOut=row.currency2||'BHD';
   const tr=document.createElement('tr');
+  const listAttr = useDatalist ? 'list="titlesList"' : '';
   tr.innerHTML=`
     <td class="toggle-cell"><label class="toggle-wrap" title="${t('thToggle')}"><input type="checkbox" class="ok-inp" ${isOn?'checked':''}><span class="toggle-track"></span><span class="toggle-label">${isOn?'✔':'—'}</span></label></td>
     <td><div class="date-wrap"><input type="text" class="cell-inp date-txt" data-f="date" value="${esc(row.date??'')}" placeholder="—"><button type="button" class="cal-btn" aria-label="cal">📅</button><input type="date" class="cal-native" tabindex="-1" aria-hidden="true"></div></td>
-    <td><input type="text" class="cell-inp title-inp" data-f="title" list="titlesList" autocomplete="off" value="${esc(row.title??'')}" placeholder="…"></td>
+    <td><input type="text" class="cell-inp title-inp" data-f="${fieldName}" ${listAttr} autocomplete="off" value="${esc(row[fieldName]??'')}" placeholder="…"></td>
     <td class="cat-cell"><span class="cat-pill">—</span></td>
     <td><input type="number" min="0" step="0.01" class="cell-inp n" data-f="price" value="${row.price??''}" placeholder="0.00"></td>
     <td class="currency-cell cur-in"><select class="currency-sel" data-f="currency" title="${t('currencyInTitle')}">${buildCurrencyOptions(curIn)}</select></td>
@@ -613,6 +712,7 @@ function makeRowEl(row,maxDays){
 function buildPanelEl(panel,idx){
   const sec=document.createElement('section');sec.className='panel';sec.dataset.pid=panel.id;
   const ordinals=t('planOrdinals');const label=t('planLabelPrefix')+(ordinals[idx]||(idx+1));
+  const progDaysDefault = (panel.programsDays!=null? panel.programsDays : panel.days);
 
   sec.innerHTML=`
     <div class="panel-head">
@@ -624,7 +724,7 @@ function buildPanelEl(panel,idx){
       </div>
     </div>
 
-    <!-- pdf-header-zone: يحتوي فقط على الـ hero وشريط الخطة (لا بطاقات KPI) -->
+    <!-- pdf-header-zone -->
     <div class="pdf-header-zone">
       <div class="pdf-hero">
         <div>
@@ -642,7 +742,7 @@ function buildPanelEl(panel,idx){
       </div>
     </div>
 
-    <div class="table-wrap">
+    <div class="table-wrap main-table-wrap">
       <table>
         <thead><tr>
             <th style="width:80px">${t('thToggle')}</th>
@@ -681,15 +781,6 @@ function buildPanelEl(panel,idx){
       <div class="stat hi"><span class="s-label">${t('statAirHotel')}</span><span class="s-value"><span data-k="airHotel">0.00</span><span class="cur">${t('currency')}</span></span></div>
       <div class="stat purple"><span class="s-label">${t('statOther')}</span><span class="s-value"><span data-k="otherOnly">0.00</span><span class="cur">${t('currency')}</span></span></div>
       <div class="stat"><span class="s-label">${t('statHand')}</span><span class="s-value"><span data-k="hand">0.00</span><span class="cur">${t('currency')}</span></span></div>
-      <div class="stat warn">
-        <span class="s-label">${t('statPerDay')}</span>
-        <span class="s-value"><span data-k="perDay">0.00</span><span class="cur">${t('currency')}</span></span>
-        <div class="perday-row">
-          <label>${t('statPerDayDays')}</label>
-          <input type="number" min="1" max="${panel.days}" step="1" class="perday-inp" value="${panel.perdayDays??panel.days}" ${panel.perdayDays?'data-user-edited="1"':''}>
-          <button type="button" class="perday-reset" title="${t('perDayResetTitle')}">↺</button>
-        </div>
-      </div>
     </div>
     <div class="totals-row">
       <div class="currencies-card in-card">
@@ -701,28 +792,102 @@ function buildPanelEl(panel,idx){
         <div class="currencies-list" data-k="ccListOut"><div class="currencies-empty">${t('currenciesCardEmpty')}</div></div>
       </div>
     </div>
+
+    <!-- ============ قسم حسابة البرامج السياحية ============ -->
+    <div class="programs-section">
+      <div class="programs-head">
+        <h3>${t('programsSectionTitle')}</h3>
+        <div class="programs-summary">
+          <div class="psm-item"><span class="psm-label">${t('programsHandLabel')}</span><span class="psm-value" data-k="progHand">0.00 ${curSym('BHD')}</span></div>
+          <div class="psm-item"><span class="psm-label">${t('programsTotalLabel')}</span><span class="psm-value" data-k="progTotal">0.00 ${curSym('BHD')}</span></div>
+          <div class="psm-item hi"><span class="psm-label">${t('programsRemainLabel')}</span><span class="psm-value" data-k="progRemain">0.00 ${curSym('BHD')}</span></div>
+        </div>
+      </div>
+      <div class="perday-strip">
+        <div class="perday-block">
+          <span class="perday-title">${t('perDayTitle')}</span>
+          <span class="perday-val-wrap">
+            <span class="perday-val" data-k="perDayValue">0.00</span>
+            <span class="perday-cur">${curSym('BHD')}</span>
+          </span>
+        </div>
+        <div class="perday-block">
+          <label>${t('perDayDaysLabel')}</label>
+          <input type="number" min="1" step="1" class="prog-days-inp" value="${progDaysDefault}">
+          <span class="perday-info" data-k="perDayInfo"></span>
+        </div>
+      </div>
+      <div class="table-wrap programs-table-wrap">
+        <table>
+          <thead><tr>
+              <th style="width:80px">${t('thToggle')}</th>
+              <th>${t('thDate')}</th>
+              <th>${t('thNotes')}</th>
+              <th>${t('thCat')}</th>
+              <th>${t('thPrice')}</th>
+              <th class="th-cur-in">${t('thCurrencyIn')}<span class="th-sub">${t('thCurrencyInSub')}</span></th>
+              <th>${t('thBHD')}</th>
+              <th class="th-cur-out">${t('thCurrencyOut')}<span class="th-sub">${t('thCurrencyOutSub')}</span></th>
+              <th>${t('thDays')}</th>
+              <th>${t('thTotal')}</th>
+              <th style="width:40px">${t('thDelete')}</th>
+          </tr></thead>
+          <tbody></tbody>
+          <tfoot><tr class="row-grand">
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              <td class="grand-label">${t('grandTotal')}</td>
+              <td class="num tf-total">0.00 ${curSym('BHD')}</td>
+          </tr></tfoot>
+        </table>
+        <div class="empty-state"><div class="icon">📊</div><div class="txt">${t('emptyTxt')}</div><div class="sub">${t('emptySub')}</div></div>
+      </div>
+      <div class="table-actions">
+        <button type="button" class="btn-add-prog">${t('progAddRow')}</button>
+        <button type="button" class="btn-clear-prog">${t('progClearRows')}</button>
+        <span class="info">${t('rowCount')}: <b class="prog-row-count">0</b><span class="prog-off-badge off-badge" style="display:none">0 ${t('offBadge')}</span></span>
+      </div>
+    </div>
   `;
-  const tbody=sec.querySelector('tbody');panel.rows.forEach(r=>tbody.appendChild(makeRowEl(r,panel.days)));
+  const tbody=sec.querySelector('.main-table-wrap tbody');
+  const progTbody=sec.querySelector('.programs-table-wrap tbody');
+  panel.rows.forEach(r=>tbody.appendChild(makeRowEl(r,panel.days)));
+  (panel.programs||[]).forEach(r=>progTbody.appendChild(makeRowEl(r,panel.days,{fieldName:'notes'})));
+
   const handler=()=>{syncPanelToState(sec);recalcPanel(panel,sec);saveState();};
   sec.addEventListener('input',handler);sec.addEventListener('change',handler);sec.addEventListener('keyup',handler);
-  const perdayInp=sec.querySelector('.perday-inp');const perdayReset=sec.querySelector('.perday-reset');const daysInp=sec.querySelector('.days-inp');
-  enforceMax(perdayInp,()=>perdayInp.max||daysInp.value);
-  perdayInp.addEventListener('input',()=>{perdayInp.dataset.userEdited='1';perdayInp.classList.add('user-edited');});
-  perdayReset.addEventListener('click',()=>{delete perdayInp.dataset.userEdited;perdayInp.classList.remove('user-edited');perdayInp.value=daysInp.value;handler();});
+
+  const daysInp=sec.querySelector('.days-inp');
   daysInp.addEventListener('input',()=>{
-    const pd=parseFloat(daysInp.value)||0;perdayInp.max=pd;let pv=parseFloat(perdayInp.value);
-    if(isFinite(pv)&&pv>pd){perdayInp.value=pd;perdayInp.classList.add('clamp-shake');setTimeout(()=>perdayInp.classList.remove('clamp-shake'),400);}
-    else if(!perdayInp.dataset.userEdited){perdayInp.value=pd;}
+    const pd=parseFloat(daysInp.value)||0;
     tbody.querySelectorAll('[data-f="days"]').forEach(inp=>{inp.max=pd;const v=parseFloat(inp.value);if(isFinite(v)&&v>pd){inp.value=pd;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);}});
+    progTbody.querySelectorAll('[data-f="days"]').forEach(inp=>{inp.max=pd;const v=parseFloat(inp.value);if(isFinite(v)&&v>pd){inp.value=pd;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);}});
   });
+
+  const progDaysInp=sec.querySelector('.prog-days-inp');
+  progDaysInp.addEventListener('input',()=>{
+    const p=STATE.panels.find(x=>x.id===panel.id);
+    if(p){p.programsDays=parseFloat(progDaysInp.value)||0;}
+    recalcPanel(panel,sec);
+    saveState();
+  });
+
   tbody.addEventListener('click',e=>{const b=e.target.closest('.del-btn');if(!b)return;const tr=b.closest('tr');if(!tr)return;tr.classList.add('row-removing');setTimeout(()=>{tr.remove();syncPanelToState(sec);recalcPanel(panel,sec);saveState();},260);});
+  progTbody.addEventListener('click',e=>{const b=e.target.closest('.del-btn');if(!b)return;const tr=b.closest('tr');if(!tr)return;tr.classList.add('row-removing');setTimeout(()=>{tr.remove();syncPanelToState(sec);recalcPanel(panel,sec);saveState();},260);});
+
   sec.querySelector('.btn-add').addEventListener('click',()=>{
     const newTr=makeRowEl(null,parseFloat(daysInp.value)||0);tbody.appendChild(newTr);newTr.classList.add('row-new');setTimeout(()=>newTr.classList.remove('row-new'),400);
     syncPanelToState(sec);recalcPanel(panel,sec);saveState();
     const titleInp=newTr.querySelector('[data-f="title"]');if(titleInp)titleInp.focus();
     newTr.scrollIntoView({behavior:'smooth',block:'center'});
   });
+  sec.querySelector('.btn-add-prog').addEventListener('click',()=>{
+    const newTr=makeRowEl(null,parseFloat(daysInp.value)||0,{fieldName:'notes'});progTbody.appendChild(newTr);newTr.classList.add('row-new');setTimeout(()=>newTr.classList.remove('row-new'),400);
+    syncPanelToState(sec);recalcPanel(panel,sec);saveState();
+    const notesInp=newTr.querySelector('[data-f="notes"]');if(notesInp)notesInp.focus();
+    newTr.scrollIntoView({behavior:'smooth',block:'center'});
+  });
   sec.querySelector('.btn-clear').addEventListener('click',()=>{if(!tbody.children.length)return;showModal({title:t('deleteAllTitle'),message:t('deleteAllMsg'),onSave:()=>{exportData();setTimeout(()=>doClearRows(tbody,sec,panel),400);},onConfirm:()=>doClearRows(tbody,sec,panel)});});
+  sec.querySelector('.btn-clear-prog').addEventListener('click',()=>{if(!progTbody.children.length)return;showModal({title:t('progDeleteAllTitle'),message:t('progDeleteAllMsg'),onSave:()=>{exportData();setTimeout(()=>doClearRows(progTbody,sec,panel),400);},onConfirm:()=>doClearRows(progTbody,sec,panel)});});
   sec.querySelector('.btn-print').addEventListener('click',()=>printPlan(sec));
   sec.querySelector('.btn-share').addEventListener('click',()=>sharePlanPDF(sec,label,idx));
   sec.querySelector('.btn-xlsx').addEventListener('click',()=>exportToExcel());
@@ -738,13 +903,19 @@ function syncPanelToState(sec){
   const pid=sec.dataset.pid;const panel=STATE.panels.find(p=>p.id===pid);if(!panel)return;
   panel.days=parseFloat(sec.querySelector('.days-inp').value)||0;
   panel.budget=parseFloat(sec.querySelector('.budget-inp').value)||0;
-  const perdayInp=sec.querySelector('.perday-inp');
-  panel.perdayDays=perdayInp.dataset.userEdited?(parseFloat(perdayInp.value)||panel.days):null;
+  const progDaysInp=sec.querySelector('.prog-days-inp');
+  if(progDaysInp)panel.programsDays=parseFloat(progDaysInp.value)||0;
   panel.rows=[];
-  sec.querySelectorAll('tbody tr').forEach(tr=>{
+  sec.querySelectorAll('.main-table-wrap tbody tr').forEach(tr=>{
     const pv=tr.querySelector('[data-f="price"]').value;const dv=tr.querySelector('[data-f="days"]').value;
     const curSel=tr.querySelector('[data-f="currency"]');const cur2Sel=tr.querySelector('[data-f="currency2"]');
     panel.rows.push({ok:tr.querySelector('.ok-inp').checked,date:tr.querySelector('[data-f="date"]').value,title:tr.querySelector('[data-f="title"]').value,currency:curSel?curSel.value:'BHD',currency2:cur2Sel?cur2Sel.value:'BHD',price:pv===''?null:(parseFloat(pv)||0),days:dv===''?null:(parseFloat(dv)||0)});
+  });
+  panel.programs=[];
+  sec.querySelectorAll('.programs-table-wrap tbody tr').forEach(tr=>{
+    const pv=tr.querySelector('[data-f="price"]').value;const dv=tr.querySelector('[data-f="days"]').value;
+    const curSel=tr.querySelector('[data-f="currency"]');const cur2Sel=tr.querySelector('[data-f="currency2"]');
+    panel.programs.push({ok:tr.querySelector('.ok-inp').checked,date:tr.querySelector('[data-f="date"]').value,notes:tr.querySelector('[data-f="notes"]').value,currency:curSel?curSel.value:'BHD',currency2:cur2Sel?cur2Sel.value:'BHD',price:pv===''?null:(parseFloat(pv)||0),days:dv===''?null:(parseFloat(dv)||0)});
   });
 }
 function syncFromDOM(){document.querySelectorAll('.panel').forEach(panelEl=>syncPanelToState(panelEl));}
@@ -756,10 +927,10 @@ function recalcPanel(panel,sec){
   const days=parseFloat(sec.querySelector('.days-inp').value)||0;
   const budget=parseFloat(sec.querySelector('.budget-inp').value)||0;
   sec.querySelector('.badge').textContent=days;
-  const perdayInp=sec.querySelector('.perday-inp');let perdayDays=parseFloat(perdayInp.value);if(!isFinite(perdayDays)||perdayDays<=0)perdayDays=days;
   let sumTotalBHD=0,airSum=0,hotelSum=0,otherSum=0;let rowCount=0,offCount=0;
   const totalsIn={};const totalsOut={};
-  sec.querySelectorAll('tbody tr').forEach(tr=>{
+  const tbody=sec.querySelector('.main-table-wrap tbody');
+  tbody.querySelectorAll('tr').forEach(tr=>{
     rowCount++;
     const okInp=tr.querySelector('.ok-inp');const isOn=okInp?okInp.checked:true;
     tr.classList.toggle('row-off',!isOn);
@@ -782,20 +953,73 @@ function recalcPanel(panel,sec){
     const lineIn=priceIn*d;if(!totalsIn[curIn])totalsIn[curIn]={foreign:0,bhd:0};totalsIn[curIn].foreign+=lineIn;totalsIn[curIn].bhd+=lineBHD;
     const lineOut=equiv*d;if(!totalsOut[curOut])totalsOut[curOut]={foreign:0,bhd:0};totalsOut[curOut].foreign+=lineOut;totalsOut[curOut].bhd+=lineBHD;
   });
-  const airHotel=airSum+hotelSum;const hand=budget-sumTotalBHD;const perDay=perdayDays>0?hand/perdayDays:0;
-  const tfTot=sec.querySelector('.tf-total');if(tfTot)tfTot.textContent=fmt(sumTotalBHD)+' '+curSym('BHD');
-  sec.querySelector('.row-count').textContent=rowCount;
-  const offBadge=sec.querySelector('.off-badge');if(offBadge){offBadge.style.display=offCount>0?'inline-block':'none';offBadge.textContent=offCount+' '+t('offBadge');}
-  const emptyState=sec.querySelector('.empty-state');if(emptyState)emptyState.style.display=(rowCount===0)?'block':'none';
-  setStat(sec,'budget',budget);setStat(sec,'airOnly',airSum);setStat(sec,'hotelOnly',hotelSum);setStat(sec,'airHotel',airHotel);setStat(sec,'otherOnly',otherSum);setStat(sec,'hand',hand,{bad:true});setStat(sec,'perDay',perDay,{bad:true});
+  const airHotel=airSum+hotelSum;const hand=budget-sumTotalBHD;
+  const tfTot=sec.querySelector('.main-table-wrap .tf-total');if(tfTot)tfTot.textContent=fmt(sumTotalBHD)+' '+curSym('BHD');
+  sec.querySelector('.main-table-wrap').parentNode.querySelector('.row-count').textContent=rowCount;
+  const offBadge=sec.querySelector('.main-table-wrap').parentNode.querySelector('.off-badge');
+  if(offBadge){offBadge.style.display=offCount>0?'inline-block':'none';offBadge.textContent=offCount+' '+t('offBadge');}
+  const emptyState=sec.querySelector('.main-table-wrap .empty-state');if(emptyState)emptyState.style.display=(rowCount===0)?'block':'none';
+  setStat(sec,'budget',budget);setStat(sec,'airOnly',airSum);setStat(sec,'hotelOnly',hotelSum);setStat(sec,'airHotel',airHotel);setStat(sec,'otherOnly',otherSum);setStat(sec,'hand',hand,{bad:true});
   renderInCurrenciesCard(sec,totalsIn);renderOutCurrenciesCard(sec,totalsOut);
-  /* تحديث شارات strip فقط (لا بطاقات KPI) */
   const zone=sec.querySelector('.pdf-header-zone');
   if(zone){
     const stripBadges=zone.querySelectorAll('.ps-badge');
     if(stripBadges.length>=2){
       stripBadges[0].textContent='📅 '+days+' '+(STATE.lang==='ar'?'يوم':'days');
       stripBadges[1].textContent='💰 '+fmt(budget)+' '+t('currency');
+    }
+  }
+  /* ===== حساب جدول البرامج + المعدل اليومي الديناميكي ===== */
+  const progTbody=sec.querySelector('.programs-table-wrap tbody');
+  if(progTbody){
+    let progTotal=0,progRowCount=0,progOffCount=0,usedDays=0;
+    progTbody.querySelectorAll('tr').forEach(tr=>{
+      progRowCount++;
+      const okInp=tr.querySelector('.ok-inp');const isOn=okInp?okInp.checked:true;
+      tr.classList.toggle('row-off',!isOn);
+      if(!isOn)progOffCount++;
+      const notesEl=tr.querySelector('[data-f="notes"]');const notes=notesEl?notesEl.value:'';
+      const cat=categoryOf(notes);
+      tr.classList.remove('cat-air','cat-hotel','cat-other');tr.classList.add('cat-'+cat);
+      const pill=tr.querySelector('.cat-pill');
+      if(pill){pill.className='cat-pill '+cat;const icons={air:'✈️',hotel:'🏨',other:'📦'};const labels={air:t('catAir'),hotel:t('catHotel'),other:t('catOther')};pill.textContent=icons[cat]+' '+labels[cat];}
+      const curInSel=tr.querySelector('[data-f="currency"]');const curOutSel=tr.querySelector('[data-f="currency2"]');
+      const curIn=curInSel?curInSel.value:'BHD';const curOut=curOutSel?curOutSel.value:'BHD';
+      const priceIn=parseFloat(tr.querySelector('[data-f="price"]').value)||0;
+      const d=parseFloat(tr.querySelector('[data-f="days"]').value)||0;
+      const equiv=convert(priceIn,curIn,curOut);
+      const equivEl=tr.querySelector('[data-k="equiv"]');if(equivEl){equivEl.textContent=t('approx')+' '+fmt(equiv)+' '+curSym(curOut);}
+      const priceInBHD=toBHD(priceIn,curIn);const lineBHD=priceInBHD*d;
+      const totEl=tr.querySelector('[data-k="lineBHD"]');if(totEl){totEl.textContent=fmt(lineBHD)+' '+curSym('BHD');}
+      if(!isOn)return;
+      progTotal+=lineBHD;
+      usedDays+=d;
+    });
+    const remainAfter=hand-progTotal;
+    const setPs=(k,v,bad)=>{const el=sec.querySelector(`.programs-section [data-k="${k}"]`);if(!el)return;el.textContent=fmt(v)+' '+curSym('BHD');const it=el.closest('.psm-item');if(it)it.classList.toggle('bad',!!bad&&v<0);};
+    setPs('progHand',hand,false);
+    setPs('progTotal',progTotal,false);
+    setPs('progRemain',remainAfter,true);
+    const progTf=sec.querySelector('.programs-section .tf-total');if(progTf)progTf.textContent=fmt(progTotal)+' '+curSym('BHD');
+    const progEmpty=sec.querySelector('.programs-section .empty-state');if(progEmpty)progEmpty.style.display=(progRowCount===0)?'block':'none';
+    const progRC=sec.querySelector('.programs-section .prog-row-count');if(progRC)progRC.textContent=progRowCount;
+    const progOB=sec.querySelector('.programs-section .prog-off-badge');if(progOB){progOB.style.display=progOffCount>0?'inline-block':'none';progOB.textContent=progOffCount+' '+t('offBadge');}
+
+    /* ===== ميزانية الرحلات لكل يوم ===== */
+    const progDaysInp=sec.querySelector('.prog-days-inp');
+    let progDays = progDaysInp ? (parseFloat(progDaysInp.value)||0) : (panel.days||0);
+    if(!progDays) progDays = days || 0;
+    const remainingDays = Math.max(progDays - usedDays, 0);
+    const perDay = remainingDays > 0 ? (remainAfter / remainingDays) : 0;
+
+    const perDayValEl = sec.querySelector('[data-k="perDayValue"]');
+    if(perDayValEl) perDayValEl.textContent = fmt(perDay);
+    const infoEl = sec.querySelector('[data-k="perDayInfo"]');
+    if(infoEl){
+      infoEl.innerHTML =
+        '<span>'+t('perDayAllocated')+' <b>'+progDays+'</b></span>' +
+        ' · <span>'+t('perDayUsedInfo')+' <b class="used">'+usedDays+'</b></span>' +
+        ' · <span>'+t('perDayRemainInfo')+' <b>'+remainingDays+'</b></span>';
     }
   }
 }
