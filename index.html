@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>ترتيب ميزانية السفر</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 <style>
@@ -10,6 +10,152 @@
 body.dark{--bg1:#0b1220;--bg2:#050810;--panel:#111827;--panel2:#0f172a;--ink:#e5e7eb;--muted:#94a3b8;--line:#1f2937;--line2:#334155;--soft:#0f172a;--input-bg:#1e293b;--input-border:#334155;--input-border-hover:#475569;--head-grad-1:#050810;--head-grad-2:#0f172a;--row-alt:#0f172a;--sky:#38bdf8;--teal:#2dd4bf;--amber:#fbbf24}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,var(--bg1),var(--bg2) 60%);color:var(--ink);min-height:100vh;padding:22px 16px 40px;font-size:calc(14px * var(--fs,1));transition:background .3s,color .3s}
+
+/* ============================================================
+   شاشة طلب تدوير الجهاز (تظهر فقط في الوضع الرأسي على الهاتف)
+   ============================================================ */
+.rotate-prompt{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%);color:#fff;z-index:99999;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:18px;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif}
+.rotate-prompt .rp-icon{width:100px;height:100px;border-radius:24px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:56px;animation:rotatePhone 2.6s ease-in-out infinite;box-shadow:0 15px 40px rgba(0,0,0,.35)}
+@keyframes rotatePhone{0%,25%{transform:rotate(0)}55%,100%{transform:rotate(90deg)}}
+.rotate-prompt h2{margin:0;font-size:22px;font-weight:900;max-width:340px;line-height:1.4}
+.rotate-prompt p{margin:0;font-size:14px;color:#cbd5e1;max-width:340px;line-height:1.7}
+.rotate-prompt .rp-actions{display:flex;flex-direction:column;gap:10px;margin-top:10px;width:100%;max-width:300px}
+.rotate-prompt .rp-btn{padding:13px 20px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:.2s;border:0}
+.rotate-prompt .rp-auto{background:linear-gradient(135deg,#0ea5e9,#14b8a6);color:#fff;box-shadow:0 8px 24px rgba(14,165,233,.45)}
+.rotate-prompt .rp-auto:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(14,165,233,.6)}
+.rotate-prompt .rp-skip{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.rotate-prompt .rp-skip:hover{background:rgba(255,255,255,.25)}
+
+/* يظهر التنبيه فقط إذا كان الهاتف في الوضع الرأسي */
+@media screen and (max-width: 932px) and (orientation: portrait){
+  body:not(.rotate-skipped) .rotate-prompt{display:flex}
+}
+
+/* زر الوضع الأفقي العائم (يظهر فقط في الوضع الرأسي) */
+.landscape-fab{
+  display:none;
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  z-index:9990;
+  padding:12px 20px;
+  background:linear-gradient(135deg,#0ea5e9,#14b8a6);
+  color:#fff;
+  border:0;
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(14,165,233,.55),0 0 0 4px rgba(14,165,233,.15);
+  font-family:inherit;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+  align-items:center;
+  gap:8px;
+  animation:pulseFab 2s ease-in-out infinite;
+}
+.landscape-fab .lf-icon{font-size:18px;line-height:1}
+@keyframes pulseFab{0%,100%{box-shadow:0 8px 24px rgba(14,165,233,.55),0 0 0 4px rgba(14,165,233,.15)}50%{box-shadow:0 8px 24px rgba(14,165,233,.55),0 0 0 10px rgba(14,165,233,.05)}}
+
+@media screen and (max-width: 932px) and (orientation: portrait){
+  body.rotate-skipped .landscape-fab{display:inline-flex}
+}
+
+/* ============================================================
+   تصميم الوضع الأفقي (Landscape) - يعمل بسلاسة
+   ============================================================ */
+@media screen and (max-width: 932px) and (orientation: landscape), body.force-landscape {
+  body{padding:6px 8px 16px;font-size:calc(13px * var(--fs,1))}
+  .page-head{margin:0 auto 6px}
+  .page-head h1{font-size:1.05em;margin-bottom:1px}
+  .page-head p{font-size:.72em}
+  .toolbar{gap:4px;padding:5px 7px;border-radius:10px;margin-bottom:8px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tb-btn{padding:5px 9px;font-size:.7em;flex:0 0 auto}
+  .rates-status{font-size:.65em;flex:0 0 auto}
+  .tb-sep{display:none}
+  .titles-panel{margin-bottom:8px;border-radius:10px}
+  .titles-head{padding:6px 10px}
+  .titles-head h3{font-size:.8em}
+  .titles-head .reset-btn{padding:4px 8px;font-size:.68em}
+  .tabs{padding:0 5px;gap:2px;flex-wrap:nowrap;overflow-x:auto}
+  .tab{padding:5px 9px;font-size:.72em;white-space:nowrap;flex:0 0 auto}
+  .tab .count{font-size:.65em;padding:1px 5px;min-width:16px}
+  .tab-body{padding:6px 10px}
+  .chip-list{gap:4px;min-height:22px;margin-bottom:6px}
+  .chip{font-size:.7em;padding:3px 6px 3px 8px}
+  .add-row{gap:5px}
+  .add-row input{font-size:14px;padding:6px 9px}
+  .add-row button{font-size:14px;padding:6px 12px}
+  .panels{grid-template-columns:1fr;gap:10px}
+  .panel{border-radius:10px}
+  .panel-head{padding:8px 12px;gap:8px;flex-wrap:nowrap;align-items:center}
+  .panel-head h2{font-size:.82em;gap:5px;white-space:nowrap}
+  .badge{font-size:.65em;padding:2px 7px}
+  .head-inputs{gap:6px;flex-wrap:nowrap}
+  .head-inputs label{font-size:.6em;white-space:nowrap}
+  .head-inputs .inp{width:70px;font-size:13px;padding:4px 5px}
+  .panel-remove{padding:4px 8px;font-size:.68em}
+  .table-wrap{padding:8px 8px 0}
+  table{font-size:10.5px;min-width:750px}
+  thead th{padding:4px 2px;font-size:8.5px}
+  thead th .th-sub{font-size:7px}
+  tbody td{padding:2px 1px}
+  .cell-inp{font-size:11px;padding:4px 3px;border-radius:5px}
+  .cell-inp.n{font-size:11px}
+  .currency-sel{font-size:.68em;padding:4px 1px;border-radius:5px}
+  .bhd-cell,.cell-total{font-size:.7em;padding:4px 2px;border-radius:5px}
+  .cat-pill{font-size:.6em;padding:2px 5px}
+  .date-txt{padding-inline-end:18px}
+  .cal-btn{font-size:.75em;padding:3px 3px}
+  .toggle-track{width:28px;height:16px}
+  .toggle-track::after{width:12px;height:12px;top:2px;left:2px}
+  .toggle-wrap input:checked + .toggle-track::after{left:14px}
+  .toggle-label{font-size:.55em;min-width:16px}
+  .del-btn{padding:4px 5px;font-size:.72em}
+  tfoot .row-grand td{padding:6px 4px;font-size:.78em}
+  tfoot .row-grand td.tf-total{font-size:.95em}
+  .table-actions{padding:6px 8px 7px;gap:5px;margin-top:8px}
+  .btn-add,.btn-clear,.btn-print,.btn-share,.btn-xlsx{padding:5px 9px;font-size:.68em}
+  .table-actions .info{font-size:.65em;margin-inline-start:4px}
+  .stats{grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
+  .stat{padding:6px 8px;border-radius:8px}
+  .stat .s-label{font-size:.62em}
+  .stat .s-value{font-size:.82em}
+  .stat .cur{font-size:.5em}
+  .totals-row{grid-template-columns:1fr 1fr;gap:8px;padding:0 8px 8px}
+  .currencies-card{padding:8px 10px;border-radius:8px}
+  .currencies-card .cc-title{font-size:.7em}
+  .currencies-card .cc-update{font-size:.6em}
+  .currencies-list{gap:4px}
+  .currency-item{padding:5px 8px;font-size:.7em;border-radius:6px}
+  .ci-code{font-size:.7em;padding:2px 5px}
+  .ci-name{font-size:.75em !important}
+  .ci-sub,.ci-bhd{font-size:.78em !important}
+  .programs-section{margin:0 8px 8px;border-radius:10px}
+  .programs-head{padding:8px 10px;gap:6px}
+  .programs-head h3{font-size:.78em}
+  .programs-summary{gap:6px}
+  .psm-item{padding:5px 9px;min-width:95px;border-radius:7px}
+  .psm-item .psm-label{font-size:.58em}
+  .psm-item .psm-value{font-size:.8em}
+  .perday-strip{padding:8px 10px;gap:8px}
+  .perday-title{font-size:.7em}
+  .perday-val-wrap{padding:4px 10px;border-radius:8px}
+  .perday-val{font-size:.85em}
+  .perday-block label{font-size:.65em}
+  .prog-days-inp{font-size:13px;width:55px;padding:4px 5px}
+  .perday-info{font-size:.62em;padding:3px 6px}
+  .programs-section table{min-width:700px;font-size:10.5px}
+  .programs-section .table-actions{padding:6px 8px 7px;margin-top:6px}
+  .btn-add-prog,.btn-clear-prog{padding:5px 9px;font-size:.68em}
+  .add-plan-wrap{margin-top:8px}
+  .btn-add-plan{font-size:.82em;padding:8px 18px}
+  .site-footer{display:none}
+  .toast{bottom:8px;padding:8px 16px;font-size:.78em}
+  .rotate-prompt, .landscape-fab{display:none !important}
+}
+
+/* ============================================================
+   باقي التنسيقات الأساسية (بدون تغيير)
+   ============================================================ */
 .site-footer{max-width:1500px;margin:48px auto 0;padding:24px 20px;text-align:center;position:relative}
 .site-footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#0ea5e9,#14b8a6,#8b5cf6,transparent);opacity:.7}
 .footer-inner{display:inline-flex;flex-direction:column;align-items:center;gap:10px;padding:18px 40px;background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(30,58,95,.5));border:1px solid rgba(255,255,255,.12);border-radius:20px;backdrop-filter:blur(12px);box-shadow:0 20px 45px rgba(2,6,23,.4);position:relative;overflow:hidden}
@@ -160,7 +306,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .currency-item .ci-bhd{font-weight:800;color:#047857;font-size:.95em}
 .currency-item .ci-arrow{color:var(--muted)}
 .currencies-empty{text-align:center;color:var(--muted);font-size:.85em;padding:10px;font-style:italic}
-/* ===== قسم حسابة البرامج السياحية ===== */
 .programs-section{margin:0 15px 15px;background:var(--panel2);border:1.5px solid rgba(139,92,246,.35);border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(139,92,246,.08)}
 .programs-head{background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .programs-head h3{margin:0;font-size:1.05em;display:flex;align-items:center;gap:8px;color:#fff}
@@ -231,8 +376,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 
 /* ============ pdf-header-zone ============ */
 .pdf-header-zone{display:none}
-
-/* ============ تصميم الطباعة و PDF ============ */
 .print-target{background:#fff !important;padding:10px !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif !important;color:#0f172a !important;direction:rtl !important;width:1050px !important;box-sizing:border-box !important;position:relative !important}
 .print-target .pdf-header-zone{display:block !important}
 .print-target .pdf-hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%) !important;color:#fff !important;padding:12px 18px !important;border-radius:12px !important;margin-bottom:8px !important;display:flex !important;align-items:center !important;justify-content:space-between !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
@@ -244,12 +387,16 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .pdf-plan-strip .ps-meta{display:flex !important;gap:6px !important;align-items:center !important}
 .print-target .pdf-plan-strip .ps-badge{background:rgba(255,255,255,.25) !important;padding:3px 10px !important;border-radius:999px !important;font-size:10px !important;font-weight:800 !important;color:#fff !important;border:1px solid rgba(255,255,255,.4) !important}
 .print-target .table-wrap{padding:0 !important;margin:0 !important;overflow:visible !important;width:100% !important;display:block !important}
-.print-target table{table-layout:auto !important;width:100% !important;min-width:0 !important;max-width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border-spacing:0 !important;font-size:8.5px !important;border:2px solid #0f172a !important}
-.print-target thead th{background:#0f172a !important;color:#fff !important;padding:5px 2px !important;font-size:8px !important;font-weight:800 !important;text-align:center !important;border:1px solid #0f172a !important;white-space:normal !important;word-break:break-word !important;overflow-wrap:break-word !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+.print-target table{display:table !important;table-layout:auto !important;width:100% !important;min-width:0 !important;max-width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border-spacing:0 !important;font-size:8.5px !important;border:2px solid #0f172a !important}
+.print-target thead{display:table-header-group !important}
+.print-target tbody{display:table-row-group !important}
+.print-target tfoot{display:table-footer-group !important}
+.print-target tr{display:table-row !important}
+.print-target thead th{display:table-cell !important;background:#0f172a !important;color:#fff !important;padding:5px 2px !important;font-size:8px !important;font-weight:800 !important;text-align:center !important;border:1px solid #0f172a !important;white-space:normal !important;word-break:break-word !important;overflow-wrap:break-word !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 .print-target thead th.th-cur-in{background:#0ea5e9 !important;border-color:#0ea5e9 !important}
 .print-target thead th.th-cur-out{background:#8b5cf6 !important;border-color:#8b5cf6 !important}
 .print-target thead th .th-sub{display:block !important;font-size:7px !important;color:rgba(255,255,255,.85) !important;font-weight:600 !important}
-.print-target tbody td{padding:3px 2px !important;font-size:8.5px !important;border:1px solid #cbd5e1 !important;text-align:center !important;background:#fff !important;vertical-align:middle !important;word-break:break-word !important}
+.print-target tbody td{display:table-cell !important;padding:3px 2px !important;font-size:8.5px !important;border:1px solid #cbd5e1 !important;text-align:center !important;background:#fff !important;vertical-align:middle !important;word-break:break-word !important}
 .print-target tbody tr.cat-air td{background:#e0f2fe !important}
 .print-target tbody tr.cat-hotel td{background:#ccfbf1 !important}
 .print-target tbody tr.cat-other td{background:#fef3c7 !important}
@@ -294,18 +441,9 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .currency-item .ci-bhd{color:#047857 !important;font-size:9.5px !important;font-weight:800 !important}
 .print-target .currency-item .ci-arrow{display:none !important}
 .print-target .currencies-empty{color:#94a3b8 !important;font-size:9.5px !important;text-align:center !important}
-.print-target .table-actions,
-.print-target .panel-remove,
-.print-target .cal-btn,
-.print-target .del-btn,
-.print-target .toggle-cell,
-.print-target thead th:first-child,
-.print-target tbody td:first-child,
-.print-target thead th:last-child,
-.print-target tbody td:last-child,
-.print-target .currency-sel,
-.print-target .empty-state,
-.print-target .panel-head{display:none !important}
+.print-target .table-actions,.print-target .panel-remove,.print-target .cal-btn,.print-target .del-btn,.print-target .toggle-cell,
+.print-target thead th:first-child,.print-target tbody td:first-child,.print-target thead th:last-child,.print-target tbody td:last-child,
+.print-target .currency-sel,.print-target .empty-state,.print-target .panel-head{display:none !important}
 .print-target .programs-section{margin:6px 0 8px 0 !important;border:2px solid #7c3aed !important;background:#f5f3ff !important;border-radius:8px !important;overflow:hidden !important;page-break-inside:avoid !important;break-inside:avoid !important}
 .print-target .programs-head{background:linear-gradient(135deg,#7c3aed,#6366f1) !important;padding:8px 14px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;gap:10px !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
 .print-target .programs-head h3{color:#fff !important;font-size:12px !important;margin:0 !important}
@@ -326,7 +464,6 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 .print-target .perday-info .used{color:#b45309 !important}
 .print-target .prog-days-inp{background:#fff !important;border:1px solid #7c3aed !important;color:#6d28d9 !important;font-size:10px !important;font-weight:900 !important;width:50px !important;padding:2px 4px !important;border-radius:5px !important;text-align:center !important}
 
-/* حاوية توليد PDF - الطبقة المعتمة + الرسالة */
 #pdfGenOverlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2147483647;display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;font-size:20px;font-weight:900;letter-spacing:1px;pointer-events:all}
 #pdfGenOverlay .spinner{width:52px;height:52px;border:5px solid rgba(255,255,255,.25);border-top-color:#7dd3fc;border-radius:50%;animation:pdfSpin 1s linear infinite;margin-inline-end:16px}
 @keyframes pdfSpin{to{transform:rotate(360deg)}}
@@ -338,11 +475,27 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
   body.printing .panel.print-target,
   body.printing .panel.print-target *{visibility:visible !important}
   body.printing .panel.print-target{position:absolute;left:0;top:0;width:100%}
-  .site-footer,.toolbar,.titles-panel,.add-plan-wrap,.page-head{display:none !important}
+  .site-footer,.toolbar,.titles-panel,.add-plan-wrap,.page-head,.landscape-fab{display:none !important}
 }
 </style>
 </head>
 <body>
+
+<!-- شاشة طلب التدوير -->
+<div class="rotate-prompt" id="rotatePrompt">
+  <div class="rp-icon">📱</div>
+  <h2 id="rpTitle">للحصول على أفضل تجربة، قم بتدوير جهازك</h2>
+  <p id="rpMessage">سيتم عرض جميع الأعمدة والبيانات بوضوح أكبر عند استخدام الوضع الأفقي (Landscape).</p>
+  <div class="rp-actions">
+    <button class="rp-btn rp-auto" id="rpAuto" type="button">🔄 تحويل تلقائي للوضع الأفقي</button>
+    <button class="rp-btn rp-skip" id="rpSkip" type="button">متابعة على أي حال (وضع رأسي)</button>
+  </div>
+</div>
+
+<button class="landscape-fab" id="btnLandscape" type="button">
+  <span class="lf-icon">🔄</span>
+  <span class="lf-text">وضع أفقي</span>
+</button>
 
 <div class="page-head">
   <h1 id="appTitle">ترتيب ميزانية السفر 💰</h1>
@@ -437,8 +590,60 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
 "use strict";
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
+let STATE_READY = false;
+const LANDSCAPE_PREF_KEY = 'landscape_pref_v1';
+
 /* ============================================================
-   محمّل سكربتات مع 3 CDN احتياطية (Cloudflare → jsDelivr → unpkg)
+   إدارة شاشة التدوير والوضع الأفقي
+   ============================================================ */
+function updateOrientationUI() {
+  // لا يظهر زر الوضع الأفقي أو الرسالة على الكمبيوتر أو في الوضع الأفقي
+  if (window.innerWidth > 932 || window.innerHeight > window.innerWidth) {
+    // Portrait
+  }
+}
+
+async function tryRealOrientationLock() {
+  try {
+    if (document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    }
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock('landscape');
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+document.getElementById('rpAuto').addEventListener('click', async () => {
+  const locked = await tryRealOrientationLock();
+  if (!locked) {
+    showToast('متصفحك لا يدعم التدوير التلقائي. يرجى إمالة الهاتف يدوياً 📱', true);
+  }
+});
+
+document.getElementById('rpSkip').addEventListener('click', () => {
+  document.body.classList.add('rotate-skipped');
+});
+
+document.getElementById('btnLandscape').addEventListener('click', async () => {
+  const locked = await tryRealOrientationLock();
+  if (!locked) {
+    showToast('متصفحك لا يدعم التدوير التلقائي. يرجى إمالة الهاتف يدوياً 📱', true);
+  }
+});
+
+// استرجاع التفضيل
+try {
+  if (localStorage.getItem(LANDSCAPE_PREF_KEY) === 'portrait') {
+    document.body.classList.add('rotate-skipped');
+  }
+} catch(e) {}
+
+
+/* ============================================================
+   محمّل سكربتات
    ============================================================ */
 function loadScriptWithFallbacks(urls){
   return new Promise(resolve=>{
@@ -447,8 +652,7 @@ function loadScriptWithFallbacks(urls){
       if(idx>=urls.length){resolve(false);return;}
       const url=urls[idx++];
       const s=document.createElement('script');
-      s.src=url;
-      s.async=true;
+      s.src=url;s.async=true;
       s.onload=()=>resolve(true);
       s.onerror=()=>{try{document.head.removeChild(s);}catch(e){}tryNext();};
       document.head.appendChild(s);
@@ -463,18 +667,10 @@ function ensurePdfLibs(){
   if(PDF_LIBS_PROMISE) return PDF_LIBS_PROMISE;
   PDF_LIBS_PROMISE=(async()=>{
     if(typeof html2canvas==='undefined'){
-      await loadScriptWithFallbacks([
-        'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
-        'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
-        'https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js'
-      ]);
+      await loadScriptWithFallbacks(['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js','https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js','https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js']);
     }
     if(!(window.jspdf && window.jspdf.jsPDF)){
-      await loadScriptWithFallbacks([
-        'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
-        'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
-        'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js'
-      ]);
+      await loadScriptWithFallbacks(['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js','https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js']);
     }
     PDF_LIBS_READY=(typeof html2canvas!=='undefined') && !!(window.jspdf && window.jspdf.jsPDF);
     return PDF_LIBS_READY;
@@ -495,36 +691,10 @@ function toBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a
 function fromBHD(a,c){const r=RATES.rates[c];if(!isFinite(a)||!r)return 0;return a*r;}
 function convert(a,fc,tc){return fromBHD(toBHD(a,fc),tc);}
 
-const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>اليوم الأول والأخير مشغولان بالسفر والإجراءات.</p>'},{title:'الرحلات الداخلية',text:'<p>يوم السفر الداخلي يحتسب كنصف يوم.</p>'},{title:'المعادلة البسيطة',text:'<p style="text-align:center;padding:10px;background:rgba(139,92,246,.08);border-radius:10px;border:1.5px dashed rgba(139,92,246,.35);"><b>أيام البرامج = إجمالي الأيام − (الوصول + المغادرة + الرحلات)</b></p>'},{title:'مثال تطبيقي',text:'<p>رحلة 14 يوماً:</p>',example:{title:'✈️ مثال',rows:[{label:'إجمالي',val:'14'},{label:'− الوصول والمغادرة',val:'2'},{label:'− رحلات داخلية',val:'2'},{label:'= البرامج',val:'10 أيام'}]}},{title:'التطبيق',text:'<p>أضف بنود البرامج في جدول «حسابة البرامج السياحية» أسفل كل خطة. المعدل اليومي يتحدث تلقائيًا حسب الأيام المتبقية.</p>'}],footNote:'عدّل عدد الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate tourist program days?',subtitle:'A short guide',intro:'Not every day counts as program day.',sections:[{title:'First/Last Day',text:'<p>Spent traveling.</p>'},{title:'Internal Trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program Days = Total − (Arrival + Departure + Internal)</b></p>'},{title:'Example',text:'<p>14 day trip:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Program',val:'10'}]}},{title:'Apply',text:'<p>Add program items in the "Tourist Programs Calculator" table below each plan. The per-day rate updates automatically based on remaining days.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
+const HELP_CONTENT={ar:{title:'كيف تحسب أيام البرامج السياحية؟',subtitle:'دليل مختصر',intro:'ليس كل يوم في رحلتك يُحسب كيوم برامج سياحية.',sections:[{title:'اليوم الأول والأخير',text:'<p>مشغولان بالسفر.</p>'},{title:'الرحلات الداخلية',text:'<p>نصف يوم.</p>'},{title:'المعادلة',text:'<p><b>البرامج = الإجمالي − (وصول + مغادرة + رحلات)</b></p>'},{title:'مثال',text:'<p>14 يوم:</p>',example:{title:'✈️',rows:[{label:'إجمالي',val:'14'},{label:'− وصول/مغادرة',val:'2'},{label:'− رحلات',val:'2'},{label:'= البرامج',val:'10'}]}},{title:'التطبيق',text:'<p>أضف بنود البرامج في الجدول أسفل كل خطة.</p>'}],footNote:'عدّل الأيام',okBtn:'فهمت 👍'},en:{title:'How to calculate program days?',subtitle:'Short guide',intro:'Not every day counts.',sections:[{title:'First/Last',text:'<p>Travel days.</p>'},{title:'Internal trips',text:'<p>Half day.</p>'},{title:'Equation',text:'<p><b>Program = Total − (Arr + Dep + Internal)</b></p>'},{title:'Example',text:'<p>14 days:</p>',example:{title:'✈️',rows:[{label:'Total',val:'14'},{label:'− Arr/Dep',val:'2'},{label:'− Internal',val:'2'},{label:'= Programs',val:'10'}]}},{title:'Apply',text:'<p>Add items in programs table.</p>'}],footNote:'Edit days',okBtn:'Got it 👍'}};
 
-const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',excelSuccess:'تم تصدير Excel 📊',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thNotes:'ملاحظات',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',importSuccess:'تم الاستيراد',importError:'تعذّر الإستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات',
-  programsSectionTitle:'🧮 حسابة البرامج السياحية',
-  programsHandLabel:'💰 المتبقي في اليد',
-  programsTotalLabel:'📊 إجمالي البرامج',
-  programsRemainLabel:'✅ المتبقي بعد البرامج',
-  progAddRow:'➕ إضافة برنامج',
-  progClearRows:'🗑️ حذف الكل',
-  progDeleteAllTitle:'حذف البرامج؟',
-  progDeleteAllMsg:'سيتم حذف جميع بنود البرامج.',
-  perDayTitle:'💰 ميزانية للرحلات لكل يوم',
-  perDayDaysLabel:'عدد الأيام:',
-  perDayRemainInfo:'الأيام المتبقية:',
-  perDayUsedInfo:'الأيام المستهلكة:',
-  perDayAllocated:'الأيام الكلية:'},
- en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',excelSuccess:'Excel exported 📊',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thNotes:'Notes',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating PDF…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help',
-  programsSectionTitle:'🧮 Tourist Programs Calculator',
-  programsHandLabel:'💰 Remaining in Hand',
-  programsTotalLabel:'📊 Programs Total',
-  programsRemainLabel:'✅ Remaining after Programs',
-  progAddRow:'➕ Add Program',
-  progClearRows:'🗑️ Clear All',
-  progDeleteAllTitle:'Delete programs?',
-  progDeleteAllMsg:'All program rows will be deleted.',
-  perDayTitle:'💰 Daily Travel Budget',
-  perDayDaysLabel:'Days:',
-  perDayRemainInfo:'Remaining Days:',
-  perDayUsedInfo:'Used Days:',
-  perDayAllocated:'Total Days:'}};
+const I18N={ar:{dir:'rtl',title:'ترتيب ميزانية السفر 💰',subtitle:'أضف صفوفك بنفسك — والمجاميع تُحسب تلقائيًا',langBtn:'EN',save:'حفظ',export:'تصدير',import:'استيراد',saved:'تم الحفظ',excelSuccess:'تم تصدير Excel 📊',titlesPanelTitle:'📋 إدارة البنود',resetLabel:'استعادة الافتراضي',resetConfirmTitle:'استعادة؟',resetConfirmMsg:'سيتم الاستبدال.',deleteAllTitle:'حذف الصفوف؟',deleteAllMsg:'سيتم الحذف.',removePlanTitle:'حذف الخطة؟',removePlanMsg:'سيتم الحذف.',modalSaveFirst:'💾 حفظ نسخة',modalConfirm:'⚠️ تأكيد',modalCancel:'إلغاء',addTitlePlaceholder:'اكتب اسم بند…',addBtn:'+ إضافة',addPlanLabel:'إضافة خطة جديدة',catAir:'الطيران',catHotel:'الفنادق',catOther:'أخرى',thToggle:'تفعيل',thDate:'التاريخ',thTitle:'البند',thNotes:'ملاحظات',thCat:'التصنيف',thCurrencyIn:'العملة',thCurrencyInSub:'(سعر الإدخال)',thPrice:'السعر',thCurrencyOut:'العملة',thCurrencyOutSub:'(تحويل)',thBHD:'المعادل',thDays:'الأيام',thTotal:'الإجمالي (د.ب)',thDelete:'حذف',grandTotal:'الإجمالي الكلي',btnAddRow:'➕ إضافة صف',btnClearRows:'🗑️ حذف الكل',btnPrint:'🖨️ طباعة',btnSharePDF:'📤 مشاركة PDF',btnXlsx:'📊 Excel',rowCount:'عدد الصفوف',offBadge:'ملغى',emptyTxt:'لا توجد صفوف',emptySub:'اضغط «إضافة صف»',planLabelPrefix:'الخطة ',planOrdinals:['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة'],daysLabel:'عدد الأيام الكلي',budgetLabel:'الميزانية',currency:'د.ب',statBudget:'💵 الميزانية الكلية',statAir:'✈️ مجموع الطيران',statHotel:'🏨 مجموع الفنادق',statAirHotel:'✈️🏨 الطيران + الفنادق',statOther:'📦 مجموع البنود الأخرى',statHand:'💰 المتبقي في اليد',importSuccess:'تم الاستيراد',importError:'تعذّر الإستيراد',tabAir:'✈️ الطيران',tabHotel:'🏨 الفنادق',tabOther:'📦 أخرى',planEmptyMsg:'لا توجد بنود في',addTitleTo:'أضف بندًا إلى',shareSuccess:'تم إنشاء PDF',shareCancelled:'تم الإلغاء',shareFallback:'تم التنزيل',generating:'جارٍ إنشاء PDF…',approx:'≈',currencyInTitle:'عملة السعر',currencyOutTitle:'العملة الهدف',ratesLabel:'تحديث الأسعار',ratesLoading:'جارٍ التحديث…',ratesOk:'أسعار حية',ratesCached:'مخزّنة',ratesFallback:'احتياطية',ratesError:'فشل',ratesUpdated:'تم التحديث',ratesFailed:'تعذّر',currenciesCardTitleIn:'💱 مجموع كل عملة (سعر الإدخال)',currenciesCardTitleOut:'💱 مجموع المعادل (التحويل)',currenciesCardEmpty:'لم تُستخدم أي عملة',currenciesCardUpdate:'آخر تحديث:',helpLabel:'تعليمات',programsSectionTitle:'🧮 حسابة البرامج السياحية',programsHandLabel:'💰 المتبقي في اليد',programsTotalLabel:'📊 إجمالي البرامج',programsRemainLabel:'✅ المتبقي بعد البرامج',progAddRow:'➕ إضافة برنامج',progClearRows:'🗑️ حذف الكل',progDeleteAllTitle:'حذف البرامج؟',progDeleteAllMsg:'سيتم حذف جميع بنود البرامج.',perDayTitle:'💰 ميزانية للرحلات لكل يوم',perDayDaysLabel:'عدد الأيام:',perDayRemainInfo:'الأيام المتبقية:',perDayUsedInfo:'الأيام المستهلكة:',perDayAllocated:'الأيام الكلية:'},
+ en:{dir:'ltr',title:'Travel Budget Planner 💰',subtitle:'Add your own rows',langBtn:'AR',save:'Save',export:'Export',import:'Import',saved:'Saved',excelSuccess:'Excel exported 📊',titlesPanelTitle:'📋 Titles Manager',resetLabel:'Reset',resetConfirmTitle:'Reset?',resetConfirmMsg:'Will be replaced.',deleteAllTitle:'Delete all?',deleteAllMsg:'Will be deleted.',removePlanTitle:'Delete plan?',removePlanMsg:'Will be deleted.',modalSaveFirst:'💾 Save first',modalConfirm:'⚠️ Confirm',modalCancel:'Cancel',addTitlePlaceholder:'Type a title…',addBtn:'+ Add',addPlanLabel:'Add plan',catAir:'Flights',catHotel:'Hotels',catOther:'Other',thToggle:'Active',thDate:'Date',thTitle:'Title',thNotes:'Notes',thCat:'Category',thCurrencyIn:'Currency',thCurrencyInSub:'(Input)',thPrice:'Price',thCurrencyOut:'Currency',thCurrencyOutSub:'(Convert)',thBHD:'Equivalent',thDays:'Days',thTotal:'Total (BHD)',thDelete:'Delete',grandTotal:'Grand Total',btnAddRow:'➕ Add Row',btnClearRows:'🗑️ Clear All',btnPrint:'🖨️ Print',btnSharePDF:'📤 Share PDF',btnXlsx:'📊 Excel',rowCount:'Rows',offBadge:'off',emptyTxt:'No rows',emptySub:'Click Add Row',planLabelPrefix:'Plan ',planOrdinals:['1','2','3','4','5','6','7','8','9','10'],daysLabel:'Total Days',budgetLabel:'Budget',currency:'BHD',statBudget:'💵 Total Budget',statAir:'✈️ Total Flights',statHotel:'🏨 Total Hotels',statAirHotel:'✈️🏨 Flights + Hotels',statOther:'📦 Total Other',statHand:'💰 Remaining',importSuccess:'Imported',importError:'Import failed',tabAir:'✈️ Flights',tabHotel:'🏨 Hotels',tabOther:'📦 Other',planEmptyMsg:'No titles in',addTitleTo:'Add to',shareSuccess:'PDF created',shareCancelled:'Cancelled',shareFallback:'Downloaded',generating:'Generating PDF…',approx:'≈',currencyInTitle:'Input currency',currencyOutTitle:'Target currency',ratesLabel:'Refresh',ratesLoading:'Updating…',ratesOk:'Live',ratesCached:'Cached',ratesFallback:'Fallback',ratesError:'Failed',ratesUpdated:'Updated',ratesFailed:'Failed',currenciesCardTitleIn:'💱 Total per Input Currency',currenciesCardTitleOut:'💱 Total per Converted Currency',currenciesCardEmpty:'No currency yet',currenciesCardUpdate:'Last update:',helpLabel:'Help',programsSectionTitle:'🧮 Tourist Programs Calculator',programsHandLabel:'💰 Remaining in Hand',programsTotalLabel:'📊 Programs Total',programsRemainLabel:'✅ Remaining after Programs',progAddRow:'➕ Add Program',progClearRows:'🗑️ Clear All',progDeleteAllTitle:'Delete programs?',progDeleteAllMsg:'All program rows will be deleted.',perDayTitle:'💰 Daily Travel Budget',perDayDaysLabel:'Days:',perDayRemainInfo:'Remaining Days:',perDayUsedInfo:'Used Days:',perDayAllocated:'Total Days:'}};
 
 const TITLE_I18N={'flight':{ar:'رحلة طيران',en:'flight'},'lunch':{ar:'غداء',en:'lunch'},'dinner':{ar:'عشاء',en:'dinner'},'transport':{ar:'مواصلات',en:'transport'},'Laundry':{ar:'غسيل',en:'Laundry'},'Sweet & could store':{ar:'حلويات ومشروبات',en:'Sweet & could store'},'Hospital':{ar:'مستشفى',en:'Hospital'},'Others':{ar:'أخرى',en:'Others'},'hotels':{ar:'فنادق',en:'hotels'}};
 const DEFAULT_TITLE_KEYS={air:['flight'],hotel:['hotels'],other:['lunch','dinner','transport','Laundry','Sweet & could store','Hospital','Others']};
@@ -538,7 +708,13 @@ function createDefaultState(){return{lang:'ar',theme:'light',fontScale:1,titles:
 function loadState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const s=JSON.parse(raw);if(!s||typeof s!=='object'||!Array.isArray(s.panels))return null;if(!s.titles||typeof s.titles!=='object')s.titles=getDefaultTitles(s.lang||'ar');['air','hotel','other'].forEach(c=>{if(!Array.isArray(s.titles[c]))s.titles[c]=[];});s.panels.forEach((p,i)=>{if(!p.id)p.id='plan_'+Date.now()+'_'+i;if(!Array.isArray(p.rows))p.rows=[];if(!Array.isArray(p.programs))p.programs=[];if(typeof p.days!=='number')p.days=14;if(typeof p.budget!=='number')p.budget=0;if(p.perdayDays===undefined)p.perdayDays=null;if(p.programsDays===undefined)p.programsDays=null;p.rows.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});p.programs.forEach(r=>{if(!r.currency)r.currency='BHD';if(!r.currency2)r.currency2='BHD';});});if(typeof s.fontScale!=='number')s.fontScale=1;if(!s.lang)s.lang='ar';if(!s.theme)s.theme='light';if(!s.activeCat)s.activeCat='air';return s;}catch(e){return null;}}
 
 let STATE=loadState()||createDefaultState();
-function t(key){const d=I18N[STATE.lang]||I18N.ar;return d[key]!==undefined?d[key]:key;}
+STATE_READY = true;
+
+function t(key){
+  if (!STATE_READY) return key;
+  const d=I18N[STATE.lang]||I18N.ar;
+  return d[key]!==undefined?d[key]:key;
+}
 function curSym(code){const c=CURRENCIES[code];return c?c.sym:code;}
 function curName(code){const c=CURRENCIES[code];if(!c)return code;return STATE.lang==='ar'?c.ar:c.en;}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -686,6 +862,11 @@ function applyLang(){
   document.getElementById('newTitleInput').placeholder=t('addTitlePlaceholder');
   document.getElementById('addBtn').textContent=t('addBtn');
   document.getElementById('addPlanLabel').textContent=t('addPlanLabel');
+  document.getElementById('rpTitle').textContent=STATE.lang==='ar'?'للحصول على أفضل تجربة، قم بتدوير جهازك':'For the best experience, rotate your device';
+  document.getElementById('rpMessage').textContent=STATE.lang==='ar'?'سيتم عرض جميع الأعمدة والبيانات بوضوح أكبر عند استخدام الوضع الأفقي (Landscape).':'All columns and data will be displayed clearly in landscape mode.';
+  document.getElementById('rpAuto').textContent=STATE.lang==='ar'?'🔄 تحويل تلقائي للوضع الأفقي':'🔄 Auto Landscape Mode';
+  document.getElementById('rpSkip').textContent=STATE.lang==='ar'?'متابعة على أي حال (وضع رأسي)':'Continue anyway (Portrait)';
+  
   updateRatesStatusUI();renderHelpContent();
 }
 function retranslateAll(toLang){['air','hotel','other'].forEach(cat=>{STATE.titles[cat]=STATE.titles[cat].map(x=>translateStr(x,toLang));});STATE.panels.forEach(p=>{p.rows.forEach(r=>{if(r.title)r.title=translateStr(r.title,toLang);});});}
@@ -719,8 +900,7 @@ function buildCurrencyOptions(selected){return Object.entries(CURRENCIES).map(([
 function enforceMax(inp,getMax){
   if(!inp)return;
   const clamp=()=>{const maxV=parseFloat(getMax())||0;const v=parseFloat(inp.value);if(isFinite(v)&&maxV>0&&v>maxV){inp.value=maxV;inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);return true;}if(isFinite(v)&&v<0)inp.value=0;return false;};
-  inp.addEventListener('beforeinput',e=>{if(e.data&&/[0-9]/.test(e.data)){const cur=inp.value||'';const future=cur+e.data;const maxV=parseFloat(getMax())||0;const fv=parseFloat(future);if(isFinite(fv)&&maxV>0&&fv>maxV){e.preventDefault();inp.classList.add('clamp-shake');setTimeout(()=>inp.classList.remove('clamp-shake'),400);}}});
-  inp.addEventListener('input',clamp);inp.addEventListener('change',clamp);inp.addEventListener('blur',clamp);inp.addEventListener('paste',()=>setTimeout(clamp,0));
+  inp.addEventListener('input',clamp);inp.addEventListener('change',clamp);inp.addEventListener('blur',clamp);
 }
 
 function makeRowEl(row, maxDays, opts){
@@ -1127,20 +1307,12 @@ function printPlan(panelEl){
   window.addEventListener('afterprint', restore);
 }
 
-/* ============================================================
-   توليد PDF عبر html2canvas + jsPDF مباشرة (بدون html2pdf.js)
-   ============================================================ */
 async function sharePlanPDF(panelEl, label, idx){
   showToast(t('generating'));
-
-  // 1) تأكد من تحميل المكتبات من CDNs الثلاثة الاحتياطية
   const ok = await ensurePdfLibs();
   if(!ok){ showToast(t('importError'), true); return; }
-
-  // 2) نسخ اللوحة وتنظيفها من العناصر التفاعلية
   const clone = panelEl.cloneNode(true);
   clone.querySelectorAll('.table-actions, .panel-remove, .cal-btn, .del-btn, .perday-reset, .prog-days-inp').forEach(el=>el.remove());
-  // استبدال الـ inputs بقيم نصية
   clone.querySelectorAll('input').forEach(inp=>{
     if(inp.type === 'checkbox'){
       const span=document.createElement('span');
@@ -1157,7 +1329,6 @@ async function sharePlanPDF(panelEl, label, idx){
       inp.parentNode.replaceChild(span, inp);
     }
   });
-  // عملات بصرية
   clone.querySelectorAll('td.currency-cell').forEach(td => {
     const sel = td.querySelector('select');
     const code = sel ? (sel.value || 'BHD') : 'BHD';
@@ -1172,11 +1343,9 @@ async function sharePlanPDF(panelEl, label, idx){
       'border:1px solid ' + bg + ' !important;white-space:nowrap !important;vertical-align:middle !important;'
     );
   });
-  // مسح الأزرار
   clone.querySelectorAll('button').forEach(b=>b.remove());
   clone.classList.add('print-target');
 
-  // 3) DOMParser: افصل <style> عن <body> ثم أعِد دمجهما داخل الحاوية
   const panelHtml = clone.outerHTML;
   const allStylesHtml = Array.from(document.querySelectorAll('style')).map(s=>s.outerHTML).join('\n');
   const parsed = new DOMParser().parseFromString(
@@ -1186,7 +1355,6 @@ async function sharePlanPDF(panelEl, label, idx){
   const headStylesHtml = Array.from(parsed.head.querySelectorAll('style')).map(s=>s.outerHTML).join('\n');
   const bodyContentHtml = parsed.body.innerHTML;
 
-  // 4) الحاوية المرئية فعلاً في DOM: position:fixed; top:0; left:0; z-index عالٍ
   const wrapper = document.createElement('div');
   wrapper.id = 'pdfGenWrapper';
   wrapper.style.cssText =
@@ -1195,22 +1363,16 @@ async function sharePlanPDF(panelEl, label, idx){
   wrapper.innerHTML = headStylesHtml + '<div style="width:1050px;padding:10px;box-sizing:border-box;background:#fff;">' + bodyContentHtml + '</div>';
   document.body.appendChild(wrapper);
 
-  // 5) طبقة معتمة برسالة "جاري إنشاء PDF..." بـ z-index أعلى من الحاوية
   const overlay = document.createElement('div');
   overlay.id = 'pdfGenOverlay';
   overlay.innerHTML = '<span class="spinner"></span><span>'+t('generating')+'</span>';
   document.body.appendChild(overlay);
 
   try{
-    // 6) انتظر 500ms (تحميل الخطوط/الأنماط)
     await new Promise(r=>setTimeout(r, 500));
-
-    // 7) احسب scale ديناميكياً
     const targetPx = 2100;
     const scrollWidth = wrapper.scrollWidth || 1050;
     const scale = Math.min(2, Math.max(0.8, targetPx / scrollWidth));
-
-    // 8) html2canvas مع scrollX:0, scrollY:0
     const canvas = await html2canvas(wrapper, {
       scale: scale,
       backgroundColor: '#ffffff',
@@ -1221,8 +1383,6 @@ async function sharePlanPDF(panelEl, label, idx){
       windowWidth: scrollWidth,
       windowHeight: wrapper.scrollHeight
     });
-
-    // 9) بناء PDF A4 landscape مع تقسيم تلقائي على عدة صفحات
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit:'mm', format:'a4', orientation:'landscape' });
     const pageWidth = pdf.internal.pageSize.getWidth();
@@ -1232,29 +1392,21 @@ async function sharePlanPDF(panelEl, label, idx){
     const imgWidth = usableWidth;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
     const imgData = canvas.toDataURL('image/jpeg', 0.95);
-
     let heightLeft = imgHeight;
     let position = margin;
-
     pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
     heightLeft -= (pageHeight - margin*2);
-
     while(heightLeft > 0){
       position = margin - (imgHeight - heightLeft);
       pdf.addPage();
       pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
       heightLeft -= (pageHeight - margin*2);
     }
-
     const blob = pdf.output('blob');
     const filename = (label||'plan').replace(/\s+/g,'_') + '_' + new Date().toISOString().slice(0,10) + '.pdf';
     const file = new File([blob], filename, {type:'application/pdf'});
-
-    // 10) نظّف DOM
     if(wrapper.parentNode) document.body.removeChild(wrapper);
     if(overlay.parentNode) document.body.removeChild(overlay);
-
-    // مشاركة أو تنزيل
     if(navigator.canShare && navigator.canShare({ files:[file] })){
       try{
         await navigator.share({ files:[file], title:label||'Travel Budget', text:label||'' });
