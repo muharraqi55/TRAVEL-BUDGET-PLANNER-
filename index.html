@@ -12,7 +12,7 @@ body.dark{--bg1:#0b1220;--bg2:#050810;--panel:#111827;--panel2:#0f172a;--ink:#e5
 body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,var(--bg1),var(--bg2) 60%);color:var(--ink);min-height:100vh;padding:22px 16px 40px;font-size:calc(14px * var(--fs,1));transition:background .3s,color .3s}
 
 /* ============================================================
-   شاشة طلب تدوير الجهاز (تظهر فقط في الوضع الرأسي على الهاتف)
+   شاشة طلب تدوير الجهاز
    ============================================================ */
 .rotate-prompt{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#4c1d95 100%);color:#fff;z-index:99999;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:18px;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif}
 .rotate-prompt .rp-icon{width:100px;height:100px;border-radius:24px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:56px;animation:rotatePhone 2.6s ease-in-out infinite;box-shadow:0 15px 40px rgba(0,0,0,.35)}
@@ -26,12 +26,11 @@ body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;backg
 .rotate-prompt .rp-skip{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)}
 .rotate-prompt .rp-skip:hover{background:rgba(255,255,255,.25)}
 
-/* يظهر التنبيه فقط إذا كان الهاتف في الوضع الرأسي */
 @media screen and (max-width: 932px) and (orientation: portrait){
   body:not(.rotate-skipped) .rotate-prompt{display:flex}
 }
 
-/* زر الوضع الأفقي العائم (يظهر فقط في الوضع الرأسي) */
+/* زر التبديل العائم */
 .landscape-fab{
   display:none;
   position:fixed;
@@ -55,14 +54,25 @@ body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;backg
 .landscape-fab .lf-icon{font-size:18px;line-height:1}
 @keyframes pulseFab{0%,100%{box-shadow:0 8px 24px rgba(14,165,233,.55),0 0 0 4px rgba(14,165,233,.15)}50%{box-shadow:0 8px 24px rgba(14,165,233,.55),0 0 0 10px rgba(14,165,233,.05)}}
 
-@media screen and (max-width: 932px) and (orientation: portrait){
-  body.rotate-skipped .landscape-fab{display:inline-flex}
+@media screen and (max-width: 932px) {
+  .landscape-fab { display: inline-flex; }
 }
 
 /* ============================================================
-   تصميم الوضع الأفقي (Landscape) - يعمل بسلاسة
+   تصميم الوضع الأفقي (Landscape)
    ============================================================ */
-@media screen and (max-width: 932px) and (orientation: landscape), body.force-landscape {
+@media screen and (max-width: 932px) and (orientation: landscape) {
+  .rotate-prompt { display: none !important; }
+  .landscape-fab { 
+    display: inline-flex !important; 
+    bottom: 15px; 
+    left: 15px; 
+    padding: 10px 16px; 
+    font-size: 13px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: none;
+  }
+  
   body{padding:6px 8px 16px;font-size:calc(13px * var(--fs,1))}
   .page-head{margin:0 auto 6px}
   .page-head h1{font-size:1.05em;margin-bottom:1px}
@@ -150,7 +160,6 @@ body{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;backg
   .btn-add-plan{font-size:.82em;padding:8px 18px}
   .site-footer{display:none}
   .toast{bottom:8px;padding:8px 16px;font-size:.78em}
-  .rotate-prompt, .landscape-fab{display:none !important}
 }
 
 /* ============================================================
@@ -475,7 +484,7 @@ tfoot .row-grand td.grand-label{color:#cbd5e1;padding-inline-start:14px;text-ali
   body.printing .panel.print-target,
   body.printing .panel.print-target *{visibility:visible !important}
   body.printing .panel.print-target{position:absolute;left:0;top:0;width:100%}
-  .site-footer,.toolbar,.titles-panel,.add-plan-wrap,.page-head,.landscape-fab{display:none !important}
+  .site-footer,.toolbar,.titles-panel,.add-plan-wrap,.page-head,.landscape-fab,.rotate-prompt{display:none !important}
 }
 </style>
 </head>
@@ -596,51 +605,64 @@ const LANDSCAPE_PREF_KEY = 'landscape_pref_v1';
 /* ============================================================
    إدارة شاشة التدوير والوضع الأفقي
    ============================================================ */
-function updateOrientationUI() {
-  // لا يظهر زر الوضع الأفقي أو الرسالة على الكمبيوتر أو في الوضع الأفقي
-  if (window.innerWidth > 932 || window.innerHeight > window.innerWidth) {
-    // Portrait
+async function toggleOrientation() {
+  if (document.fullscreenElement) {
+    // العودة للوضع الرأسي
+    try { await document.exitFullscreen(); } catch(e) {}
+    if (screen.orientation && screen.orientation.unlock) {
+      try { screen.orientation.unlock(); } catch(e) {}
+    }
+  } else {
+    // التحويل للوضع الأفقي
+    try {
+      if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch(e) {}
+
+    try {
+      if (screen.orientation && screen.orientation.lock) {
+        await screen.orientation.lock('landscape');
+      }
+    } catch(e) {
+      // تم تجاهل الخطأ بنجاح، الشاشة انقلبت بالفعل
+      console.log('Orientation lock rejected, but fullscreen succeeded.');
+    }
   }
 }
 
-async function tryRealOrientationLock() {
-  try {
-    if (document.documentElement.requestFullscreen) {
-      await document.documentElement.requestFullscreen();
-    }
-    if (screen.orientation && screen.orientation.lock) {
-      await screen.orientation.lock('landscape');
-      return true;
-    }
-  } catch(e) {}
-  return false;
+function updateFabUI() {
+  const lfText = document.querySelector('.landscape-fab .lf-text');
+  const lfIcon = document.querySelector('.landscape-fab .lf-icon');
+  if (!lfText || !lfIcon) return;
+
+  const isLandscape = window.innerHeight < window.innerWidth;
+  
+  if (isLandscape) {
+    lfText.textContent = STATE.lang === 'ar' ? 'وضع رأسي' : 'Portrait';
+    lfIcon.textContent = '📱';
+  } else {
+    lfText.textContent = STATE.lang === 'ar' ? 'وضع أفقي' : 'Landscape';
+    lfIcon.textContent = '🔄';
+  }
 }
 
-document.getElementById('rpAuto').addEventListener('click', async () => {
-  const locked = await tryRealOrientationLock();
-  if (!locked) {
-    showToast('متصفحك لا يدعم التدوير التلقائي. يرجى إمالة الهاتف يدوياً 📱', true);
-  }
-});
+window.addEventListener('resize', updateFabUI);
+window.addEventListener('orientationchange', () => setTimeout(updateFabUI, 200));
+
+document.getElementById('rpAuto').addEventListener('click', toggleOrientation);
+document.getElementById('btnLandscape').addEventListener('click', toggleOrientation);
 
 document.getElementById('rpSkip').addEventListener('click', () => {
   document.body.classList.add('rotate-skipped');
+  try { localStorage.setItem('zakat_landscape_skipped', '1'); } catch(e){}
 });
 
-document.getElementById('btnLandscape').addEventListener('click', async () => {
-  const locked = await tryRealOrientationLock();
-  if (!locked) {
-    showToast('متصفحك لا يدعم التدوير التلقائي. يرجى إمالة الهاتف يدوياً 📱', true);
-  }
-});
-
-// استرجاع التفضيل
 try {
-  if (localStorage.getItem(LANDSCAPE_PREF_KEY) === 'portrait') {
+  if (localStorage.getItem('zakat_landscape_skipped') === '1') {
     document.body.classList.add('rotate-skipped');
   }
 } catch(e) {}
-
 
 /* ============================================================
    محمّل سكربتات
@@ -745,7 +767,7 @@ function exportToExcel(){
   const AL=(h,extra={})=>Object.assign({horizontal:h,vertical:'center',readingOrder:2},extra);
   const rowStyle=(rgb,align)=>({fill:{fgColor:{rgb}},font:{color:{rgb:"0F172A"},sz:10,name:"Calibri"},alignment:AL(align||'center',align==='right'?{wrapText:true}:{}),border:bd("94A3B8")});
   const statValStyle=(color)=>({fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:color},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")});
-  const S={appTitle:{fill:{fgColor:{rgb:"0F172A"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:16,name:"Calibri"},alignment:AL('center')},planName:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},bold:true,sz:14,name:"Calibri"},alignment:AL('right')},headLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},headValueDays:{fill:{fgColor:{rgb:"E0F2FE"}},font:{color:{rgb:"0369A1"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},headValueBudget:{fill:{fgColor:{rgb:"FEF3C7"}},font:{color:{rgb:"92400E"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("F59E0B")},th:{fill:{fgColor:{rgb:"1E3A5F"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0F172A")},thIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0369A1")},thOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("6D28D9")},rowAir:rowStyle("E0F2FE",'center'),rowAirTitle:rowStyle("E0F2FE",'right'),rowHotel:rowStyle("CCFBF1",'center'),rowHotelTitle:rowStyle("CCFBF1",'right'),rowOther:rowStyle("FEF3C7",'center'),rowOtherTitle:rowStyle("FEF3C7",'right'),rowOff:rowStyle("F1F5F9",'center'),rowOffTitle:rowStyle("F1F5F9",'right'),grandLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},grandValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},handLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},handValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"8B5CF6"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},sectionIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("0EA5E9")},sectionOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("8B5CF6")},statLabel:{fill:{fgColor:{rgb:"F8FAFC"}},font:{color:{rgb:"334155"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("E5E9F0")},statValue:statValStyle("0F172A"),statValueGreen:statValStyle("047857"),statValuePurple:statValStyle("7C3AED"),statValueAmber:statValStyle("B45309"),statValueRed:statValStyle("E11D48"),curHead:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:10,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},curCodeIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},curCodeOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("8B5CF6")},curCell:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},sz:10,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},curCellGreen:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},emptyCell:{fill:{fgColor:{rgb:"FFFFFF"}}}};
+  const S={appTitle:{fill:{fgColor:{rgb:"0F172A"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:16,name:"Calibri"},alignment:AL('center')},planName:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},bold:true,sz:14,name:"Calibri"},alignment:AL('right')},headLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},headValueDays:{fill:{fgColor:{rgb:"E0F2FE"}},font:{color:{rgb:"0369A1"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},headValueBudget:{fill:{fgColor:{rgb:"FEF3C7"}},font:{color:{rgb:"92400E"},bold:true,sz:14,name:"Calibri"},alignment:AL('center'),border:bd("F59E0B")},th:{fill:{fgColor:{rgb:"1E3A5F"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0F172A")},thIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("0369A1")},thOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:10,name:"Calibri"},alignment:AL('center',{wrapText:true}),border:bd("6D28D9")},rowAir:rowStyle("E0F2FE",'center'),rowAirTitle:rowStyle("E0F2FE",'right'),rowHotel:rowStyle("CCFBF1",'center'),rowHotelTitle:rowStyle("CCFBF1",'right'),rowOther:rowStyle("FEF3C7",'center'),rowOtherTitle:rowStyle("FEF3C7",'right'),rowOff:rowStyle("F1F5F9",'center'),rowOffTitle:rowStyle("F1F5F9",'right'),grandLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},grandValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},handLabel:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"0F172A"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("0F172A")},handValue:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"8B5CF6"},bold:true,sz:12,name:"Calibri"},alignment:AL('center'),border:bd("0F172A")},sectionIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("0EA5E9")},sectionOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:12,name:"Calibri"},alignment:AL('right'),border:bd("8B5CF6")},statLabel:{fill:{fgColor:{rgb:"F8FAFC"}},font:{color:{rgb:"334155"},bold:true,sz:11,name:"Calibri"},alignment:AL('right'),border:bd("E5E9F0")},statValue:statValStyle("0F172A"),statValueGreen:statValStyle("047857"),statValuePurple:statValStyle("7C3AED"),statValueAmber:statValStyle("B45309"),statValueRed:statValStyle("E11D48"),curHead:{fill:{fgColor:{rgb:"F1F5F9"}},font:{color:{rgb:"64748B"},bold:true,sz:10,name:"Calibri"},alignment:AL('center'),border:bd("CBD5E1")},curCodeIn:{fill:{fgColor:{rgb:"0EA5E9"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("0EA5E9")},curCodeOut:{fill:{fgColor:{rgb:"8B5CF6"}},font:{color:{rgb:"FFFFFF"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("6D28D9")},curCell:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"0F172A"},sz:10,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},curCellGreen:{fill:{fgColor:{rgb:"FFFFFF"}},font:{color:{rgb:"047857"},bold:true,sz:11,name:"Calibri"},alignment:AL('center'),border:bd("E5E9F0")},emptyCell:{fill:{fgColor:{rgb:"FFFFFF"}}}};
   const C=(v,s)=>(s?{v,s}:{v});
   const E=(s)=>C('',s||S.emptyCell);
   STATE.panels.forEach((panel,idx)=>{
@@ -862,11 +884,14 @@ function applyLang(){
   document.getElementById('newTitleInput').placeholder=t('addTitlePlaceholder');
   document.getElementById('addBtn').textContent=t('addBtn');
   document.getElementById('addPlanLabel').textContent=t('addPlanLabel');
+  
+  // تحديث نصوص شاشة التدوير والزر العائم
   document.getElementById('rpTitle').textContent=STATE.lang==='ar'?'للحصول على أفضل تجربة، قم بتدوير جهازك':'For the best experience, rotate your device';
   document.getElementById('rpMessage').textContent=STATE.lang==='ar'?'سيتم عرض جميع الأعمدة والبيانات بوضوح أكبر عند استخدام الوضع الأفقي (Landscape).':'All columns and data will be displayed clearly in landscape mode.';
   document.getElementById('rpAuto').textContent=STATE.lang==='ar'?'🔄 تحويل تلقائي للوضع الأفقي':'🔄 Auto Landscape Mode';
   document.getElementById('rpSkip').textContent=STATE.lang==='ar'?'متابعة على أي حال (وضع رأسي)':'Continue anyway (Portrait)';
   
+  updateFabUI();
   updateRatesStatusUI();renderHelpContent();
 }
 function retranslateAll(toLang){['air','hotel','other'].forEach(cat=>{STATE.titles[cat]=STATE.titles[cat].map(x=>translateStr(x,toLang));});STATE.panels.forEach(p=>{p.rows.forEach(r=>{if(r.title)r.title=translateStr(r.title,toLang);});});}
